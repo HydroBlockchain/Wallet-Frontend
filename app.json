@@ -1,0 +1,12 @@
+{
+  "name": "hydro-wallet",
+  "displayName": "hydro-wallet",
+  "expo": {
+    "name": "hydro-wallet",
+    "slug": "hydro-wallet",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
