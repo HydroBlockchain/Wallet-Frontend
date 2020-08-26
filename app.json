@@ -1,9 +1,9 @@
 {
-  "name": "hydro-wallet",
-  "displayName": "hydro-wallet",
+  "name": "HydroPay",
+  "displayName": "HydroPay",
   "expo": {
-    "name": "hydro-wallet",
-    "slug": "hydro-wallet",
+    "name": "HydroPay",
+    "slug": "HydroPay",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
