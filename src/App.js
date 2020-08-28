@@ -1,27 +1,19 @@
 import React, { useEffect } from "react";
 import SplashScreen from "react-native-splash-screen";
 import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
+import AppContainer from "./navigation/AppContainer";
+import ThemeContextProvider from "./hooks/useTheme";
+import Theme from "./libs/Theme";
 
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle="light-content" setNetworkActivityIndicatorVisible />
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <ThemeContextProvider>
+      <AppContainer />
+    </ThemeContextProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    fontFamily: "Rubik-medium",
-  },
-});
 
 export default App;

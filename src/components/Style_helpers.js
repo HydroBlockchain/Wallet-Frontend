@@ -1,6 +1,6 @@
-import { Dimensions } from 'react-native';
-import { css } from 'styled-components/native';
-import { path } from 'lodash/fp';
+import { Dimensions } from "react-native";
+import { css } from "styled-components/native";
+import { path } from "lodash/fp";
 
 export const fullwidth = (a) => {
   return (
@@ -11,9 +11,10 @@ export const fullwidth = (a) => {
   );
 };
 
-export const fetchPropFromTheme = (prop) => (a) => path(['theme', prop, a]);
-export const colors = fetchPropFromTheme('colors');
-export const gutter = fetchPropFromTheme('gutter');
+export const fetchPropFromTheme = (prop) => (a) => path(["theme", prop, a]);
+export const lightTheme = fetchPropFromTheme("lightTheme");
+export const darkTheme = fetchPropFromTheme("darkTheme");
+export const gutter = fetchPropFromTheme("gutter");
 export const responsive = (values) => (a) => a.theme.responsive(values);
 
 export const isLarge = ({ width, height }) => width === 414 && height === 896;
@@ -24,7 +25,7 @@ export const _responsive = (values) => {
   if (values.length === 1) {
     return values[0];
   }
-  const dimen = Dimensions.get('window');
+  const dimen = Dimensions.get("window");
 
   // console.log(dimen);
 
