@@ -1,7 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import SplashScreen from "react-native-splash-screen";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
 
 const App = () => {
   useEffect(() => {
@@ -9,8 +8,8 @@ const App = () => {
   }, []);
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" setNetworkActivityIndicatorVisible />
       <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
     </View>
   );
 };
@@ -21,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    fontFamily:"Rubik-Regular"
+    fontFamily: "Rubik-medium",
   },
 });
 
