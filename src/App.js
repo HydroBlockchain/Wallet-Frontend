@@ -1,12 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import SplashScreen from "react-native-splash-screen";
 import { StyleSheet, Text, View } from "react-native";
 
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
-    setLoadingComplete(true);
   }, []);
   return (
     <View style={styles.container}>
@@ -22,5 +21,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    fontFamily:"Rubik-Regular"
   },
 });
+
+export default App;
