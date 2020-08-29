@@ -1,5 +1,3 @@
-import { _responsive } from "../components/style_helpers";
-
 export default {
   lightTheme: {
     basic: "rgba(0, 0, 0, 0.5)",
@@ -13,13 +11,5 @@ export default {
     secondary: "rgba(0, 45, 133, 0.5)",
     basic: "rgba(129, 217, 255, 0.5)",
     primary: "#000935",
-  },
-  responsive: _responsive,
-  gutter: {
-    sm: 10,
-    md: 25,
-    lg: 40,
-    statusBar: _responsive([20, 50]),
-    padded: _responsive([15, 30]),
   },
 };
