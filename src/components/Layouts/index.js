@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import t from "prop-types";
 import styled from "styled-components";
 import { SafeAreaView, Image, StatusBar, View, Platform } from "react-native";
-import { ThemeContext } from "../../hooks/useTheme";
+import ThemeContext from "../../hooks/useTheme";
 import { Header as Header_ } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
 
