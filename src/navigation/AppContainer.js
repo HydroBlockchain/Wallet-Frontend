@@ -8,11 +8,7 @@ const Stack = createStackNavigator();
 const AppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <Stack.Navigator>
         <Stack.Screen name="landing" component={Landing} />
         <Stack.Screen name="app" component={MainNavigation} />
       </Stack.Navigator>
