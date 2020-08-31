@@ -3,7 +3,7 @@ import t from "prop-types";
 import styled from "styled-components";
 import { SafeAreaView } from "react-native-safe-area-view";
 import { Image, StatusBar, View, Platform } from "react-native";
-import ThemeContext from "../../hooks/useTheme";
+import { ThemeContext } from "../../hooks/useTheme";
 import { Header as Header_ } from "react-native-elements";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -24,7 +24,7 @@ export const Header = (props) => {
     />
   );
 };
-const HeaderWithBack = ({ title, onBackPress, containerStyle }) => {
+export const HeaderWithBack = ({ title, onBackPress, containerStyle }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
 

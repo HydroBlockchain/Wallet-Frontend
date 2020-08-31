@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 import ThemeContext from "../../hooks/useTheme";
 import React, { useContext } from "react";
 
-const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
-const theme = isLightTheme ? lightTheme : darkTheme;
+// const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+// const theme = isLightTheme ? lightTheme : darkTheme;
 
 export const H1 = styled.Text`
   color: ${theme.basic};

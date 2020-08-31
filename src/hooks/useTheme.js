@@ -3,7 +3,7 @@ import { lightTheme, darkTheme } from "../libs/Theme";
 
 export const ThemeContext = createContext();
 
-const ThemeContextProvider = ({ children }) => {
+const ThemeContextProvider = (props) => {
   const [theme, setTheme] = useState({
     isLightTheme: true,
     lightTheme,
@@ -15,7 +15,7 @@ const ThemeContextProvider = ({ children }) => {
   };
   return (
     <ThemeContext.Provider value={{ ...theme, toggleTheme }}>
-      {children}
+      {props.children}
     </ThemeContext.Provider>
   );
 };
