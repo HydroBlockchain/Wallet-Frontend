@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text } from "react-native";
 import { BgView, Header } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
-const Landing = () => {
+const Login = () => {
   return (
     <BgView>
-      <Paragraph>Hey</Paragraph>
+      <Paragraph>Hey this is login screen</Paragraph>
     </BgView>
   );
 };
 
-export default Landing;
+export default Login;

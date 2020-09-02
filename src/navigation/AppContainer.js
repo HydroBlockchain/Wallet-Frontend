@@ -1,16 +1,21 @@
+//@@Dev this component is the entry point of navigation for the application
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import MainNavigation from "./MainNavigation";
+import AuthNavigation from "./AuthNavigation";
 import Landing from "../screens/Landing";
 const Stack = createStackNavigator();
 
 const AppContainer = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="landing" component={Landing} />
-        <Stack.Screen name="app" component={MainNavigation} />
+        <Stack.Screen name="auth" component={AuthNavigation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
