@@ -1,11 +1,8 @@
 import React, { useContext } from "react";
 import t from "prop-types";
-import styled from "styled-components";
-import { SafeAreaView } from "react-native-safe-area-view";
-import { Image, StatusBar, View, Platform } from "react-native";
+import { Image, StatusBar, SafeAreaView, View, Platform } from "react-native";
 import { ThemeContext } from "../../hooks/useTheme";
 import { Header as Header_ } from "react-native-elements";
-import Icon from "react-native-vector-icons/Ionicons";
 
 export const Header = (props) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -63,7 +60,7 @@ Header.Back = HeaderWithBack;
 export const BgView = ({ children, style }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
-  console.log(theme.primary);
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: theme.background, ...style }}

@@ -1,36 +1,44 @@
-import styled from "styled-components/native";
-import ThemeContext from "../../hooks/useTheme";
 import React, { useContext } from "react";
+import { Text } from "react-native";
+import { ThemeContext } from "../../hooks/useTheme";
 
-// const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
-// const theme = isLightTheme ? lightTheme : darkTheme;
+export const Paragraph = ({ children, style }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <React.Frgament>
+      <Text
+        style={{
+          fontSize: 16,
+          lineHeight: 26,
+          fontFamily: "Rubik-Regular",
+          color: theme.basic,
+          ...style,
+        }}
+      >
+        {children}
+      </Text>
+    </React.Frgament>
+  );
+};
 
-export const H1 = styled.Text`
-  color: ${theme.basic};
-  font-family: Rubik-Bold;
-  font-size: 41px;
-`;
-
-export const H2 = styled.Text`
-  color: ${theme.basic};
-  font-family: Rubik-Medium;
-  font-size: 32px;
-`;
-
-export const H3 = styled.Text`
-  color: ${theme.basic};
-  font-family: Rubik-Medium;
-  font-size: 24px;
-`;
-
-export const Paragraph = styled.Text`
-  color: ${theme.basic};
-  font-family: Rubik-Regular;
-  font-size: 16px;
-  line-height: 26px;
-`;
-
-export const Lead = styled(Paragraph)`
-  color: ${theme.basic};
-  font-weight: bold;
-`;
+export const Lead = ({ children, style }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <React.Frgament>
+      <Text
+        style={{
+          fontWeight: "bold",
+          fontFamily: "Rubik-Regular",
+          color: theme.basic,
+          fontSize: 16,
+          lineHeight: 26,
+          ...style,
+        }}
+      >
+        {children}
+      </Text>
+    </React.Frgament>
+  );
+};
