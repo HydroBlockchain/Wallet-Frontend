@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
-
+import { BgView, Header } from "../../components/Layouts";
+import { Paragraph, Lead } from "../../components/Typography";
 const Login = () => {
   return (
-    <View>
-      <Text>this is the login screen</Text>
-    </View>
+    <BgView>
+      <Paragraph>Hey this is login screen</Paragraph>
+    </BgView>
   );
 };
 
