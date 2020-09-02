@@ -63,7 +63,12 @@ export const BgView = ({ children, style }) => {
 
   return (
     <SafeAreaView
-      style={{ flex: 1, backgroundColor: theme.background, ...style }}
+      style={{
+        flex: 1,
+        backgroundColor: theme.background,
+        ...style,
+        paddingHorizontal: "5%",
+      }}
     >
       <StatusBar barStyle="light-content" backgroundColor={theme.primary} />
       {children}

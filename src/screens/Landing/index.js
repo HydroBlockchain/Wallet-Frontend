@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { BgView, Header } from "../../components/Layouts";
-import { Paragraph } from "../../components/Typography";
+import { Paragraph, Lead } from "../../components/Typography";
 const Landing = () => {
   return (
     <BgView>
