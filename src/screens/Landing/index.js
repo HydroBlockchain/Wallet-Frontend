@@ -1,12 +1,105 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { BgView, Header } from "../../components/Layouts";
-import { Paragraph, Lead } from "../../components/Typography";
-const Landing = () => {
+import React, { useContext, useState } from "react";
+import { View, Text, Image } from "react-native";
+import { BgView } from "../../components/Layouts";
+import { Paragraph } from "../../components/Typography";
+import AppIntroSlider from "react-native-app-intro-slider";
+import Icon from "react-native-vector-icons/Ionicons";
+import { ThemeContext } from "../../hooks/useTheme";
+import { styles } from "./style";
+
+const { buttonContainer } = styles;
+
+const slides = [
+  {
+    id: "1",
+
+    body:
+      "Using our snowflake protocol, we secure your unique identity on the blockchain",
+    image: require("../../assets/images/identity.png"),
+  },
+  {
+    id: "2",
+
+    body:
+      "All round security using our with Two factor authentication using our Raindrop Protocol",
+    image: require("../../assets/images/password.png"),
+  },
+  {
+    id: "3",
+
+    body:
+      "Store tokens and transfer Hydro Tokens to friends and family in Bitcon or Ether",
+    image: require("../../assets/images/transfer.png"),
+  },
+];
+
+const Landing = ({ navigation }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+
+  const renderDoneButton = () => {
+    return (
+      <View style={buttonContainer}>
+        <Icon
+          name="ios-checkmark"
+          color={theme.primary}
+          size={36}
+          style={{ backgroundColor: "transparent" }}
+        />
+      </View>
+    );
+  };
+  const renderNextButton = () => {
+    return (
+      <View style={buttonContainer}>
+        <Icon
+          name="ios-arrow-forward"
+          color={theme.primary}
+          size={30}
+          style={{ backgroundColor: "transparent" }}
+        />
+      </View>
+    );
+  };
+  const renderItem = ({ item: { image, body, id } }) => {
+    return (
+      <BgView style={{ justifyContent: "center" }} key={id}>
+        <Image
+          style={{
+            resizeMode: "contain",
+            width: "100%",
+            height: "40%",
+            marginBottom: "20%",
+            alignSelf: "center",
+          }}
+          source={image}
+        />
+
+        <View style={{ marginBottom: "30%" }}>
+          <Paragraph style={{ textAlign: "center", fontSize: 18 }}>
+            {body}
+          </Paragraph>
+        </View>
+      </BgView>
+    );
+  };
+
+  const [showApp, setShowApp] = useState(false);
+  const onDone = () => {
+    setShowApp(!showApp);
+    navigation.navigate("auth");
+  };
+
   return (
-    <BgView>
-      <Paragraph>Hey</Paragraph>
-    </BgView>
+    <AppIntroSlider
+      data={slides}
+      renderItem={renderItem}
+      onDone={onDone}
+      dotStyle={{ backgroundColor: theme.basic }}
+      activeDotStyle={{ backgroundColor: theme.primary }}
+      renderNextButton={renderNextButton}
+      renderDoneButton={renderDoneButton}
+    />
   );
 };
 
