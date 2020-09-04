@@ -27,7 +27,7 @@ const AuthLanding = ({ navigation }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "35%",
+          marginTop: "20%",
         }}
       >
         <Button

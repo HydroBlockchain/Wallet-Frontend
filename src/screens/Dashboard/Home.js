@@ -5,7 +5,7 @@ import { Paragraph, Lead } from "../../components/Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { ThemeContext } from "../../hooks/useTheme";
 import { TxFeedCard } from "../../components/cards";
-const Home = () => {
+const Home = ({ navigation }) => {
   const TxFeed = [
     {
       image: require("../../assets/images/emma.jpg"),
@@ -153,26 +153,28 @@ const Home = () => {
         </View>
       </ScrollView>
       <TouchableOpacity
+        onPress={() => navigation.navigate("transfer")}
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginLeft: '80%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginLeft: "80%",
           backgroundColor: theme.primary,
           width: 70,
           height: 70,
           borderRadius: 50,
-          shadowColor: '#3FAC9D',
+          shadowColor: "#3FAC9D",
           shadowOffset: {
             width: 0,
             height: 12,
           },
           shadowOpacity: 0.58,
           shadowRadius: 16.0,
-          marginTop: '-20%',
-          marginBottom: '10%',
+          marginTop: "-20%",
+          marginBottom: "10%",
           elevation: 24,
-        }}>
+        }}
+      >
         <Icon name="plus" color={theme.buttonColor} size={28} />
       </TouchableOpacity>
     </BgView>
