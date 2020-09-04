@@ -22,7 +22,7 @@ const Button = ({ onPress, text, style, ...props }) => {
           fontSize: 18,
           lineHeight: 26,
           fontFamily: "Rubik-Regular",
-          color: theme.background,
+          color: theme.white,
           textAlign: "center",
         }}
       >
