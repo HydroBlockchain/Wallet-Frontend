@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { View, Image, Text } from "react-native";
-import { BgView } from "../../components/Layouts";
+import React, { useState, useContext } from "react";
+import { View, Image, KeyboardAvoidingView } from "react-native";
+import { BgView, Header } from "../../components/Layouts";
 import Button from "../../components/Button";
 import { Paragraph, Lead } from "../../components/Typography";
 import { LabelInput } from "../../components/Forms";
@@ -13,24 +13,35 @@ const Register = ({ navigation }) => {
   const previousPage = () => {
     setPage(+page - 1);
   };
+
   return (
     <BgView>
-      <View style={{ marginTop: "10%" }}>
+      {pages !== 0 ? <Header.Back onBackPress={previousPage} /> : null}
+      <View style={{ marginTop: "2%" }}>
         <Image
-          style={{ resizeMode: "contain", width: "100%" }}
+          style={{ resizeMode: "contain" }}
           source={require("../../assets/images/logo.png")}
         />
       </View>
-      {pages[page]}
-      <Paragraph style={{ marginTop: "10%" }}>
+      <View style={{ marginTop: "10%" }}>{pages[page]}</View>
+      <Paragraph style={{ marginVertical: "10%", textAlign: "center" }}>
         Info text about what is happening on chain and off chain when creating
         account.
       </Paragraph>
-      {pages !== 1 ? (
-        <Button text="Next" onPress={nextPage} />
-      ) : (
-        <Button text="Done" onPress={() => navigation.navigate("login")} />
-      )}
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "10%",
+        }}
+      >
+        {pages !== 1 ? (
+          <Button text="Next" onPress={nextPage} />
+        ) : (
+          <Button text="Done" onPress={() => navigation.navigate("login")} />
+        )}
+      </View>
     </BgView>
   );
 };
@@ -92,7 +103,7 @@ export const StepTwo = () => {
         secureTextEntry={true}
         value={password}
         onChangeText={(value) => {
-          setStepOneDetails(value);
+          setStepTwoDetails(value);
         }}
       />
     </KeyboardAvoidingView>
