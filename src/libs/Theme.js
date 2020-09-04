@@ -6,6 +6,7 @@ export const lightTheme = {
   background: "#ffffff",
   primary: "#2960CA",
   buttonColor: "#ffffff",
+  white: "#ffffff",
 };
 
 export const darkTheme = {
@@ -14,4 +15,5 @@ export const darkTheme = {
   basic: "rgba(129, 217, 255, 0.5)",
   primary: "#000935",
   buttonColor: " #81D9FF",
+  white: "#ffffff",
 };

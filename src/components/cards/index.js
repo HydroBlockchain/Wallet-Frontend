@@ -18,11 +18,11 @@ export const TxFeedCard = ({
       style={{
         backgroundColor: theme.secondary,
         padding: 10,
-        width: "45%",
+        width: "47%",
         marginTop: "5%",
-        marginLeft: 15,
+        marginLeft: 10,
         marginRight: 1,
-        borderRadius: 5,
+        borderRadius: 10,
       }}
       {...props}
     >
