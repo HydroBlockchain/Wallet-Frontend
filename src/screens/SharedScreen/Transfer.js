@@ -8,8 +8,10 @@ import {
 } from "react-native";
 import { LabelInput } from "../../components/Forms";
 import { BgView, Header } from "../../components/Layouts";
+import { Paragraph, Lead } from "../../components/Typography";
 import { ThemeContext } from "../../hooks/useTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { HalfWay } from "../../components/Modals";
 import Button from "../../components/Button";
 
 const Transfer = ({ navigation }) => {
@@ -23,8 +25,69 @@ const Transfer = ({ navigation }) => {
   const { wallet, recepientAddress, amount, message, gasFee } = transferDetails;
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
+  const [modalVisible, setModalVisible] = useState(false);
+
   return (
     <BgView>
+      <HalfWay
+        visible={modalVisible}
+        onClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View>
+          <View>
+            <Lead style={{ marginBottom: 10 }}>Transfer Token</Lead>
+            {[
+              ["To:", "4b9b621d8e22E"],
+              ["Amount:", "40,000HYDRO"],
+              ["Message:", "Payment for Bug fixes"],
+            ].map(([key, value]) => (
+              <View
+                style={{
+                  paddingVertical: 15,
+                  borderBottomWidth: 0.5,
+                  borderColor: theme.primary,
+                  display: "flex",
+                  alignItems: "flex-start",
+                  flexDirection: key === "Message:" ? "column" : "row",
+                }}
+              >
+                <Paragraph style={{ flexShrink: 0 }}>{key}</Paragraph>
+                <Paragraph
+                  style={{
+                    flexGrow: 1,
+                    flexShrink: 1,
+
+                    width: "100%",
+                    fontSize: ["Amount:", "Message:"].includes(key) ? 20 : 16,
+                    textAlign: key === "Message:" ? "left" : "right",
+                  }}
+                >
+                  {value}
+                </Paragraph>
+              </View>
+            ))}
+          </View>
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              text="Proceed"
+              onPress={() => setModalVisible(false)}
+              style={{ marginVertical: "10%" }}
+            />
+            <Button.Cancel
+              text="Cancel"
+              onPress={() => setModalVisible(false)}
+            />
+          </View>
+        </View>
+      </HalfWay>
       <Header.Back title="Transfer" onBackPress={navigation.goBack} />
       <View
         style={{
@@ -121,7 +184,7 @@ const Transfer = ({ navigation }) => {
             marginTop: "10%",
           }}
         >
-          <Button text="Send" />
+          <Button text="Send" onPress={() => setModalVisible(true)} />
         </View>
       </ScrollView>
     </BgView>
