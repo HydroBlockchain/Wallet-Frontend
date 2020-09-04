@@ -1,28 +1,28 @@
 import React, { useState, useContext } from "react";
-import { View, Image, KeyboardAvoidingView } from "react-native";
+import { View, Image } from "react-native";
 import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
 import { Paragraph, Lead } from "../../../components/Typography";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 
+const pages = [<StepOne />, <StepTwo />];
 const Register = ({ navigation }) => {
-  const pages = [<StepOne />, <StepTwo />];
   const [page, setPage] = useState(0);
   const nextPage = () => {
     setPage(page + 1);
   };
   const previousPage = () => {
-    setPage(+page - 1);
+    setPage(page - 1);
   };
 
   return (
     <BgView>
-      {pages !== 0 ? <Header.Back onBackPress={previousPage} /> : null}
-      <View style={{ marginTop: "2%" }}>
+      {page !== 0 ? <Header.Back onBackPress={previousPage} /> : null}
+      <View style={{ marginTop: "10%" }}>
         <Image
           style={{ resizeMode: "contain" }}
-          source={require("../../assets/images/logo.png")}
+          source={require("../../../assets/images/logo.png")}
         />
       </View>
       <View style={{ marginTop: "10%" }}>{pages[page]}</View>
@@ -38,10 +38,10 @@ const Register = ({ navigation }) => {
           marginTop: "10%",
         }}
       >
-        {pages !== 1 ? (
+        {page !== 1 ? (
           <Button text="Next" onPress={nextPage} />
         ) : (
-          <Button text="Done" onPress={() => navigation.navigate("login")} />
+          <Button text="Done" onPress={() => navigation.navigate("app")} />
         )}
       </View>
     </BgView>
