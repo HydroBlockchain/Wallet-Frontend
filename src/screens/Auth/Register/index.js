@@ -41,7 +41,7 @@ const Register = ({ navigation }) => {
         {page !== 1 ? (
           <Button text="Next" onPress={nextPage} />
         ) : (
-          <Button text="Done" onPress={() => navigation.navigate("login")} />
+          <Button text="Done" onPress={() => navigation.navigate("app")} />
         )}
       </View>
     </BgView>

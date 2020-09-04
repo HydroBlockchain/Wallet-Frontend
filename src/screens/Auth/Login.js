@@ -5,7 +5,7 @@ import { Paragraph, Lead } from "../../components/Typography";
 const Login = () => {
   return (
     <BgView>
-      <Paragraph>Hey this is login screen</Paragraph>
+      <Paragraph>Hey this is register screen</Paragraph>
     </BgView>
   );
 };
