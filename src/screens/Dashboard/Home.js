@@ -113,12 +113,12 @@ const Home = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("notification")}>
             <Icon name="bell" color={theme.basic} solid={true} size={20} />
           </TouchableOpacity>
-          <Icon
-            name="cog"
-            color={theme.basic}
-            size={20}
+          <TouchableOpacity
             style={{ marginHorizontal: "5%", paddingLeft: "5%" }}
-          />
+            onPress={() => navigation.navigate("settings")}
+          >
+            <Icon name="cog" color={theme.basic} size={20} />
+          </TouchableOpacity>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>

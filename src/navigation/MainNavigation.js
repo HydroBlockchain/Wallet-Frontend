@@ -4,6 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Dashboard/Home";
 import Transfer from "../screens/SharedScreen/Transfer";
 import Notification from "../screens/SharedScreen/Notification";
+import Settings from "../screens/SharedScreen/Settings";
+import Success from "../screens/SharedScreen/Success";
+import TxCard from "../screens/SharedScreen/TransactionCard";
+import Contact from "../screens/SharedScreen/Contact";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +21,10 @@ const MainNavigation = () => {
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="transfer" component={Transfer} />
       <Stack.Screen name="notification" component={Notification} />
+      <Stack.Screen name="settings" component={Settings} />
+      <Stack.Screen name="success" component={Success} />
+      <Stack.Screen name="txCard" component={TxCard} />
+      <Stack.Screen name="contact" component={Contact} />
     </Stack.Navigator>
   );
 };
