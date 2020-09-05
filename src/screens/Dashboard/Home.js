@@ -110,7 +110,9 @@ const Home = ({ navigation }) => {
               style={{ paddingRight: "5%" }}
             />
           </TouchableOpacity>
-          <Icon name="bell" color={theme.basic} solid={true} size={20} />
+          <TouchableOpacity onPress={() => navigation.navigate("notification")}>
+            <Icon name="bell" color={theme.basic} solid={true} size={20} />
+          </TouchableOpacity>
           <Icon
             name="cog"
             color={theme.basic}
