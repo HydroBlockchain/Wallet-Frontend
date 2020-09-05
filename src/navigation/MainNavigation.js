@@ -5,7 +5,7 @@ import Home from "../screens/Dashboard/Home";
 import Transfer from "../screens/SharedScreen/Transfer";
 import Notification from "../screens/SharedScreen/Notification";
 import Settings from "../screens/SharedScreen/Settings";
-
+import Success from "../screens/SharedScreen/Success";
 const Stack = createStackNavigator();
 
 const MainNavigation = () => {
@@ -19,6 +19,7 @@ const MainNavigation = () => {
       <Stack.Screen name="transfer" component={Transfer} />
       <Stack.Screen name="notification" component={Notification} />
       <Stack.Screen name="settings" component={Settings} />
+      <Stack.Screen name="success" component={Success} />
     </Stack.Navigator>
   );
 };

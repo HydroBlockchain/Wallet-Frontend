@@ -78,7 +78,10 @@ const Transfer = ({ navigation }) => {
           >
             <Button
               text="Proceed"
-              onPress={() => setModalVisible(false)}
+              onPress={() => {
+                setModalVisible(false);
+                navigation.navigate("success");
+              }}
               style={{ marginVertical: "10%" }}
             />
             <Button.Cancel
