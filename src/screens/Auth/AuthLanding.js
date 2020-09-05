@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { BgView } from "../../components/Layouts";
-import { Paragraph } from "../../components/Typography";
+import { Paragraph, Lead } from "../../components/Typography";
 import Button from "../../components/Button";
 const AuthLanding = ({ navigation }) => {
   return (
@@ -12,7 +12,8 @@ const AuthLanding = ({ navigation }) => {
           source={require("../../assets/images/logo.png")}
         />
       </View>
-      <View style={{ marginTop: "20%" }}>
+      <Lead style={{ textAlign: "center" }}>(Alpha Test Version)</Lead>
+      <View style={{ marginTop: "10%" }}>
         <Image
           style={{ resizeMode: "contain", width: "100%" }}
           source={require("../../assets/images/mist.png")}
@@ -27,7 +28,7 @@ const AuthLanding = ({ navigation }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "20%",
+          marginVertical: "20%",
         }}
       >
         <Button

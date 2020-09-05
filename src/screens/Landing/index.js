@@ -20,7 +20,7 @@ const slides = [
   {
     id: "2",
 
-    body: "All round security with 2FA using our Raindrop Protocol",
+    body: "All around security with 2FA using our Raindrop Protocol",
     image: require("../../assets/images/password.png"),
   },
   {
