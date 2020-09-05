@@ -28,7 +28,10 @@ const Success = ({ navigation }) => {
           Great! Your Transaction is Being Processed
         </Paragraph>
 
-        <Button text="View Transaction Card" />
+        <Button
+          text="View Transaction Card"
+          onPress={() => navigation.navigate("txCard")}
+        />
       </View>
     </BgView>
   );

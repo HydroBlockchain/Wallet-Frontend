@@ -54,7 +54,7 @@ const Settings = ({ navigation }) => {
 
         <SettingsItemCard value="Change Password" />
         <SettingsItemCard value="Dark Mode" onPress={toggleTheme} />
-        <SettingsItemCard value="Security" />
+        <SettingsItemCard value="Contact Card" />
         <SettingsItemCard value="Rate Us" />
       </View>
     </SecondaryBgView>
