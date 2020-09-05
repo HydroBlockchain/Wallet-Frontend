@@ -3,6 +3,7 @@ import {
   View,
   ScrollView,
   Image,
+  Picker,
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
@@ -26,7 +27,11 @@ const Transfer = ({ navigation }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [walletDetails, setWalletDetails] = useState({
+    choosenLabel: "",
+    choosenIndex: "",
+  });
+  const { choosenLabel, choosenIndex } = walletDetails;
   return (
     <BgView>
       <HalfWay
@@ -140,13 +145,31 @@ const Transfer = ({ navigation }) => {
       </View>
       <ScrollView>
         <KeyboardAvoidingView>
-          <LabelInput
-            label="Wallet"
-            value={wallet}
-            onChangeText={(value) => {
-              setTransferDetails(value);
+          <View
+            style={{
+              borderRadius: 16,
+              marginBottom: 15,
+              backgroundColor: theme.secondary,
+              fontFamily: "Rubik-Regular",
+              color: theme.basic,
+              fontSize: 16,
+              padding: 10,
             }}
-          />
+          >
+            <Picker
+              selectedValue={choosenLabel}
+              onValueChange={(itemValue, itemIndex) =>
+                setWalletDetails({
+                  choosenLabel: itemValue,
+                  choosenIndex: itemIndex,
+                })
+              }
+            >
+              <Picker.Item label="Bitcoin Wallet" value="btcWallet" />
+              <Picker.Item label="Ethereum Wallet" value="etherWallet" />
+              <Picker.Item label="Hydro Wallet" value="hydWallet" />
+            </Picker>
+          </View>
           <LabelInput
             label="To"
             placeholder="Input Address"
