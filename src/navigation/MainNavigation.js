@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Dashboard/Home";
 import Transfer from "../screens/SharedScreen/Transfer";
 import Notification from "../screens/SharedScreen/Notification";
+import Settings from "../screens/SharedScreen/Settings";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ const MainNavigation = () => {
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="transfer" component={Transfer} />
       <Stack.Screen name="notification" component={Notification} />
+      <Stack.Screen name="settings" component={Settings} />
     </Stack.Navigator>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import { Paragraph, Lead } from "../Typography";
+import Icon from "react-native-vector-icons/FontAwesome5";
+
 import { ThemeContext } from "../../hooks/useTheme";
 
 export const TxFeedCard = ({
@@ -137,5 +139,126 @@ export const NotificationCard = ({
       </Lead>
       <Paragraph style={{ fontSize: 14 }}>{value}</Paragraph>
     </View>
+  );
+};
+
+export const SettingsCard = ({
+  hydroAddress,
+  onWalletPress,
+  onIdPress,
+  ...props
+}) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View
+      style={{
+        backgroundColor: theme.secondaryCard,
+        paddingVertical: 20,
+        width: "100%",
+        marginTop: "5%",
+        marginLeft: 10,
+        marginRight: 1,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+      }}
+      {...props}
+    >
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Lead>Choose Wallet to configure</Lead>
+
+        <TouchableOpacity>
+          <Icon name="question-circle" color={theme.basic} size={18} />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginVertical: "10%",
+          justifyContent: "space-between",
+        }}
+      >
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <TouchableOpacity onPress={onWalletPress}>
+            <Image source={require("../../assets/images/bitcoin.png")} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={onWalletPress}
+            style={{ marginHorizontal: "3%" }}
+          >
+            <Image source={require("../../assets/images/ethereum.png")} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onWalletPress}>
+            <Image source={require("../../assets/images/hydro.png")} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 20,
+              marginHorizontal: "3%",
+              borderColor: theme.basic,
+              borderWidth: 2,
+              backgroundColor: theme.background,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Icon name="plus" color={theme.basic} size={12} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View>
+        <Lead>Hydro Address</Lead>
+        <TouchableOpacity
+          onPress={onIdPress}
+          style={{
+            padding: 5,
+            backgroundColor: theme.secondary,
+            borderRadius: 5,
+          }}
+        >
+          <Paragraph>{hydroAddress}</Paragraph>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export const SettingsItemCard = ({ value, onPress, ...props }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        backgroundColor: theme.secondaryCard,
+        padding: 10,
+        width: "45%",
+        marginTop: "4%",
+        marginLeft: 15,
+        borderRadius: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      {...props}
+    >
+      <Paragraph style={{ textAlign: "center" }}>{value}</Paragraph>
+    </TouchableOpacity>
   );
 };
