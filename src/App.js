@@ -5,37 +5,41 @@ import AppContainer from "./navigation/AppContainer";
 import LottieView from "lottie-react-native";
 import ThemeContextProvider from "./hooks/useTheme";
 
+const ShowAnimation = () => {
+  return (
+    <View
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <LottieView
+        source={require("./assets/waves.json")}
+        autoPlay
+        key={1}
+        loop
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
+      />
+    </View>
+  );
+};
+
 const App = () => {
-  const [animationProgress, setAnimationProgress] = useState({
-    progress: new Animated.Value(0),
-  });
+  const [animationTime, setAnimationTime] = useState(false);
+
   useEffect(() => {
     SplashScreen.hide();
   }, []);
-  if (!showWave) {
-    return (
-      <View
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <LottieView
-          source={require("./assets/waves.json")}
-          autoPlay
-          loop
-          style={{
-            height: "100%",
-            width: "100%",
-          }}
-        />
-      </View>
-    );
-  }
+  setTimeout(() => {
+    setAnimationTime(true);
+  }, 5500);
   return (
     <ThemeContextProvider>
-      <AppContainer />
+      {animationTime ? <AppContainer /> : <ShowAnimation />}
     </ThemeContextProvider>
   );
 };
