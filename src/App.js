@@ -36,7 +36,7 @@ const App = () => {
   }, []);
   setTimeout(() => {
     setAnimationTime(true);
-  }, 5500);
+  }, 5200);
   return (
     <ThemeContextProvider>
       {animationTime ? <AppContainer /> : <ShowAnimation />}
