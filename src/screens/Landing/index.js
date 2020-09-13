@@ -4,6 +4,7 @@ import { BgView } from "../../components/Layouts";
 import { Paragraph } from "../../components/Typography";
 import AppIntroSlider from "react-native-app-intro-slider";
 import Icon from "react-native-vector-icons/Ionicons";
+import LottieView from "lottie-react-native";
 import { ThemeContext } from "../../hooks/useTheme";
 import { styles } from "./style";
 
