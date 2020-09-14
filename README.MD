@@ -3,11 +3,11 @@
 <img src="https://www.hydrogenplatform.com/images/logo_hydro.png">
 </p>
   <p>
-    ✨ Hydro Wallet for Storing and sharing Hudro Tokens 🍕 ✨
+    ✨ Hydro Wallet for Storing and sharing Hydro Tokens 🍕 ✨
   </p>
 <p>
-<img src="assets/images/appstore.png" width="150" >
-<img src="assets/images/playstore.png" width="150" >
+<img src="https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/play_store.svg" width="150" >
+<img src=https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/app_store.svg" width="150" >
   </p>
 
 [Project Hydro](http://www.projecthydro.com) enables developers to seamlessly deploy blockchain in their existing applications, without the need to create expensive infrastructure. We're at the cutting edge of fintech, and we're excited to have you involved!
