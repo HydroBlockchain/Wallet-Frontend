@@ -7,7 +7,7 @@
   </p>
 <p>
 <img src="https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/play_store.svg" width="150" >
-<img src=https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/app_store.svg" width="150" >
+<img src="https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/app_store.svg" width="150" >
   </p>
 
 [Project Hydro](http://www.projecthydro.com) enables developers to seamlessly deploy blockchain in their existing applications, without the need to create expensive infrastructure. We're at the cutting edge of fintech, and we're excited to have you involved!
