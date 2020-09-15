@@ -24,8 +24,8 @@ This repository contains the code that powers Hydro Wallet that features Snowfla
 ## Demo 🥑🥑
 
 <p>
-<img src="assets/images/readme1.png" />
-<img src="assets/images/readme2.png" />
+<img src="https://raw.githubusercontent.com/HydroBlockchain/Wallet-Frontend/master/src/assets/images/readme1.png" />
+<img src="https://raw.githubusercontent.com/HydroBlockchain/Wallet-Frontend/master/src/assets/images/readme2.png" />
 </p>
 
 ## Local development 🍐🍐
