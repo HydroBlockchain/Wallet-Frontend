@@ -32,7 +32,7 @@ const AuthLanding = ({ navigation }) => {
         }}
       >
         <Button
-          text="Register"
+          text="Create Wallet"
           onPress={() => navigation.navigate("register")}
         />
 
