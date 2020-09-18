@@ -1,8 +1,21 @@
-import { registerRootComponent } from 'expo';
+import React from "react";
+import { Drizzle, generateStore } from "@drizzle/store";
+import ProtectedWallet from "./build/contracts/ProtectedWallet.json";
+import ProtectedWalletFactory from "./build/contracts/ProtectedWalletFactory.json";
+import { AppRegistry } from "react-native";
+import App from "./src/App";
+import { name as appName } from "./app.json";
 
-import App from './src/App';
+const options = {
+  contracts: [ProtectedWallet, ProtectedWalletFactory],
+  web3: {
+    fallback: {
+      type: "ws",
+      url: "ws://localhost:8545",
+    },
+  },
+};
+const drizzleStore = generateStore(options);
+const drizzle = new Drizzle(options, drizzleStore);
 
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in the Expo client or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+AppRegistry.registerComponent(appName, () => () => <App drizzle={drizzle} />);
