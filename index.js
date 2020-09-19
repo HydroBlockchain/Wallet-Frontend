@@ -1,5 +1,5 @@
 import React from "react";
-import "./shim";
+import "./shims";
 import { Drizzle, generateStore } from "@drizzle/store";
 import ProtectedWallet from "./build/contracts/ProtectedWallet.json";
 import ProtectedWalletFactory from "./build/contracts/ProtectedWalletFactory.json";
@@ -12,7 +12,7 @@ const options = {
   web3: {
     fallback: {
       type: "ws",
-      url: "ws://127.0.0.1:8545",
+      url: "ws://192.168.43.185:8545",
     },
   },
 };
