@@ -88,6 +88,8 @@ target 'hydrowallet' do
   add_flipper_pods!
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'react-native-randombytes', :path => '../node_modules/react-native-randombytes'
+
   post_install do |installer|
     flipper_post_install(installer)
   end

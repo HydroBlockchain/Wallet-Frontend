@@ -19,4 +19,12 @@ const options = {
 const drizzleStore = generateStore(options);
 const drizzle = new Drizzle(options, drizzleStore);
 
+// let crypto;
+// try {
+//   crypto = require('crypto');
+//   console.log('Crypto is enabled');
+// } catch (err) {
+//   console.log('crypto support is disabled!');
+// }
+
 AppRegistry.registerComponent(appName, () => () => <App drizzle={drizzle} />);
