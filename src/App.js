@@ -4,6 +4,7 @@ import { Animated, Easing, View, StatusBar, Platform } from "react-native";
 import AppContainer from "./navigation/AppContainer";
 import LottieView from "lottie-react-native";
 import ThemeContextProvider from "./hooks/useTheme";
+import Web3 from 'web3'
 
 const ShowAnimation = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
   const [animationTime, setAnimationTime] = useState(false);
 
   useEffect(() => {
+    const web3 = new Web3(new Web3.providers.HttpProvider(`http://localhost:8545`))
+    console.log(web3);
     SplashScreen.hide();
   }, []);
   setTimeout(() => {

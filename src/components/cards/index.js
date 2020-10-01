@@ -262,3 +262,26 @@ export const SettingsItemCard = ({ value, onPress, ...props }) => {
     </TouchableOpacity>
   );
 };
+export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        backgroundColor: theme.secondaryCard,
+        padding: 10,
+        width: "100%",
+        marginTop: "4%",
+        marginLeft: 15,
+        borderRadius: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      {...props}
+    >
+      <Paragraph style={{ textAlign: "center" }}>{value}</Paragraph>
+    </TouchableOpacity>
+  );
+};

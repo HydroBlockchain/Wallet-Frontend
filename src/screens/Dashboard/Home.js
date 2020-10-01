@@ -5,6 +5,7 @@ import { Paragraph, Lead } from "../../components/Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { ThemeContext } from "../../hooks/useTheme";
 import { TxFeedCard } from "../../components/cards";
+import Button from "../../components/Button";
 const Home = ({ navigation }) => {
   const TxFeed = [
     {
@@ -119,6 +120,7 @@ const Home = ({ navigation }) => {
           >
             <Icon name="cog" color={theme.basic} size={20} />
           </TouchableOpacity>
+         
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -137,6 +139,7 @@ const Home = ({ navigation }) => {
             Your Balance
           </Paragraph>
           <Lead style={{ fontSize: 20 }}> &#36; 222.22</Lead>
+          <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} />
         </View>
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
