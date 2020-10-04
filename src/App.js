@@ -33,7 +33,7 @@ const App = () => {
   const [animationTime, setAnimationTime] = useState(false);
 
   useEffect(() => {
-    const web3 = new Web3(new Web3.providers.HttpProvider(`http://localhost:8545`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/75cc8cba22ab40b9bfa7406ae9b69a27`))
     console.log(web3);
     SplashScreen.hide();
   }, []);

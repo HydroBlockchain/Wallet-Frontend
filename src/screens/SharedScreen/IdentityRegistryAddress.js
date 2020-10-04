@@ -12,7 +12,7 @@ import w3s from '../../libs/Web3Service';
 
 class IdentityRegistryAddress extends Component {
     state = {
-        token: "",
+        address: "",
         isError: false,
         error: ""
     }
@@ -24,12 +24,12 @@ class IdentityRegistryAddress extends Component {
             console.log("[LOAD TOKEN]")
             const myContract = await w3s.createContract();
             console.log(myContract, "myContract");
-            let token = await myContract.methods.identityRegistryAddress().call()
-            console.log(token)
-            // this.setState({ token });
+            let address = await myContract.methods.identityRegistryAddress().call()
+            console.log(address)
+            // this.setState({ address });
         }
         catch (ex) {
-            console.log(ex)
+            console.log(`this is ex full error object ${ex}`)
             await this.setState({ isError: true })
             if (ex.message)
                 await this.setState({ error: ex.message })
@@ -51,13 +51,13 @@ class IdentityRegistryAddress extends Component {
                                 marginBottom: "10%",
                             }}
                         >
-                            <Button text="Load Token" onPress={this.loadToken} />
+                            <Button text="Get Address" onPress={this.loadToken} />
                         </View>
 
                         <LabelInput
                             label="Identity Registry Address"
-                            placeholder="Identity Registry Address"
-                            value={this.state.token}
+                            placeholder="dentity Registry Address"
+                            value={this.state.address}
                             onChangeText={(value) => {
                                 console.log(value)
                             }}
