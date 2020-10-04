@@ -1,45 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     View,
     ScrollView,
     KeyboardAvoidingView,
+    Clipboard, ToastAndroid,
     Text
 } from "react-native";
 import { LabelInput } from "../../components/Forms";
 import { BgView, Header } from "../../components/Layouts";
 import Button from "../../components/Button";
+import {Lead, Paragraph} from '../../components/Typography'
+import { ThemeContext } from "../../hooks/useTheme";
+import { SettingsCard, SettingsItemCard } from "../../components/cards";
 import w3s from '../../libs/Web3Service';
 
-class IdentityRegistryAddress extends Component {
-    state = {
-        address: "",
-        isError: false,
-        error: ""
-    }
-    componentDidMount() {
-        w3s.initContract()
-    }
-    loadToken = async () => {
+const  IdentityRegistryAddress = ({navigation}) => {
+
+    const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+
+    const theme = isLightTheme ? lightTheme : darkTheme;
+
+    const [state, setState] = useState({address: '', isError:false, error:''})
+    
+    const {address, isError, error} = state
+    
+
+    useEffect(() => {
+        w3s.initContract();
+        getIdentityAddress
+     },[] )
+        
+    
+
+  
+
+    const getIdentityAddress = async () => {
         try {
             console.log("[LOAD TOKEN]")
             const myContract = await w3s.createContract();
             console.log(myContract, "myContract");
-            let address = await myContract.methods.identityRegistryAddress().call()
-            console.log(address)
+            const address = await myContract.methods.identityRegistryAddress().call()
+            console.log(`identity : ${address}`)
             // this.setState({ address });
         }
         catch (ex) {
             console.log(`this is ex full error object ${ex}`)
-            await this.setState({ isError: true })
+            await setState({...state, isError: true })
             if (ex.message)
-                await this.setState({ error: ex.message })
+                await setState({...state, error: ex.message })
         }
 
     }
-    render() {
+    console.log(address)
+
+    const CopyToClipboard = async () => {
+        await Clipboard.setString(address);
+        ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+      };
+
+
+
         return (
             <BgView>
-                <Header.Back title="Identity Registry Address" onBackPress={this.props.navigation.goBack} />
+                <Header.Back title="Identity Registry Address" onBackPress={navigation.goBack} />
                 <ScrollView>
                     <KeyboardAvoidingView>
                         <View
@@ -51,21 +74,27 @@ class IdentityRegistryAddress extends Component {
                                 marginBottom: "10%",
                             }}
                         >
-                            <Button text="Get Address" onPress={this.loadToken} />
+                            <Button text="Get Address" onPress={getIdentityAddress} />
+                        </View>
+                        <Lead style={{ fontWeight: "300", fontSize: 14, marginBottom: 4 }}>
+        Identity Registry Address
+      </Lead>
+                        <View  style={{
+        borderRadius: 16,
+        marginBottom: 15,
+        backgroundColor: theme.secondary,
+        fontFamily: "Rubik-Regular",
+        color: theme.basic,
+        fontSize: 16,
+        padding: 15,
+                        }}> 
+                        <Paragraph style={{color:theme.basic}}> {address}</Paragraph>
+                            
                         </View>
 
-                        <LabelInput
-                            label="Identity Registry Address"
-                            placeholder="dentity Registry Address"
-                            value={this.state.address}
-                            onChangeText={(value) => {
-                                console.log(value)
-                            }}
-                        />
-
-                        {this.state.isError &&
+                        {isError &&
                             <Text style={{ color: 'red' }}>
-                                Error : {this.state.error}
+                                Error : {error}
                             </Text>
                         }
                     </KeyboardAvoidingView>
@@ -73,6 +102,6 @@ class IdentityRegistryAddress extends Component {
             </BgView>
         );
     }
-}
+
 
 export default IdentityRegistryAddress;
