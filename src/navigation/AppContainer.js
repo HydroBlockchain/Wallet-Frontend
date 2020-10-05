@@ -15,8 +15,8 @@ const AppContainer = () => {
           headerShown: false,
         }}
       >
-        {/* <Stack.Screen name="landing" component={Landing} />
-        <Stack.Screen name="auth" component={AuthNavigation} /> */}
+        <Stack.Screen name="landing" component={Landing} />
+        <Stack.Screen name="auth" component={AuthNavigation} />
         <Stack.Screen name="app" component={MainNavigation} />
       </Stack.Navigator>
     </NavigationContainer>

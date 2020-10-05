@@ -1,12 +1,31 @@
-import React, { useContext } from "react";
-import { View, Image, ScrollView, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect } from "react";
+import { View, Image, ScrollView, Clipboard, ToastAndroid, TouchableOpacity } from "react-native";
 import { BgView, Header } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { ThemeContext } from "../../hooks/useTheme";
 import { TxFeedCard, WalletCard } from "../../components/cards";
+import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
+
+
 const Home = ({ navigation }) => {
+
+  const snowflakeContext = useContext(SnowflakeContext);
+
+  const { getHydroAddress, getIdentityAddress, error, identityAddress, hydroAddress } = snowflakeContext;
+
+  useEffect(() => {
+    getHydroAddress;
+  }, [getHydroAddress]);
+
+  const CopyIdentityAddressClipboard = async () => {
+    await Clipboard.setString(identityAddress);
+    ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+  };
+
+  console.log(hydroAddress)
+
   const TxFeed = [
     {
       image: require("../../assets/images/emma.jpg"),
@@ -131,9 +150,20 @@ const Home = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-        <WalletCard balance='2500' address='ioqiwjd-0120' cardName='Hydro Card' />
+        <WalletCard balance='2500' address={hydroAddress} cardName='Hydro Card' />
           
-          <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} />
+          {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
+          
+          {identityAddress !== null ? (
+            <>
+            <Lead style={{textAlign:'left', color:theme.primary}}>Identity Address</Lead>
+
+              <TouchableOpacity onPress={CopyIdentityAddressClipboard} style={{padding:10, backgroundColor:theme.secondary, marginTop:'5%'}}>
+                
+                <Paragraph style={{ color: theme.basic }}> {identityAddress}</Paragraph>
+              </TouchableOpacity>
+              </>
+            ) : <Button style={{ marginTop: "10%" }} text="Get Identity Address" onPress={getIdentityAddress} />}
         </View>
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>

@@ -325,32 +325,27 @@ export const WalletCard = ({balance, address, cardName, ...props}) => {
         }}>
         <Image source={require('../../assets/images/hydro.png')} />
         <View style={{marginLeft: '40%'}}>
-          <Text
+          <Paragraph
             style={{
               fontWeight: 'bold',
               fontSize: 20,
-              fontFamily: 'Rubik-Regular',
             }}>
             {balance} HYDRO
-          </Text>
+          </Paragraph>
         </View>
       </View>
-      <Text
+      <Paragraph
         style={{
-          fontWeight: 'bold',
-          fontSize: 25,
-
-          letterSpacing: 5,
+          fontSize:21,
           paddingHorizontal: 10,
           marginBottom:'10%',
-          color: '#fff',
+          color: theme.white,
           textAlign: 'center',
-          fontFamily: 'Rubik-mono-one',
         }}>
         {address}
-      </Text>
+      </Paragraph>
      
-     
+        
     </View>
   );
 };
