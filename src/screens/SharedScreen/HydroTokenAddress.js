@@ -1,78 +1,87 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import {
-    View,
-    ScrollView,
-    KeyboardAvoidingView,
-    Text
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+  Clipboard,
+  ToastAndroid,
+  Text,
 } from "react-native";
 import { LabelInput } from "../../components/Forms";
+import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import { BgView, Header } from "../../components/Layouts";
 import Button from "../../components/Button";
-import w3s from '../../libs/Web3Service';
+import { Lead, Paragraph } from "../../components/Typography";
+import { ThemeContext } from "../../hooks/useTheme";
 
-class HydroTokenAddress extends Component {
-    state = {
-        token: "",
-        isError: false,
-        error: ""
-    }
-    componentDidMount() {
-        w3s.initContract()
-    }
-    loadToken = async () => {
-        try {
-            console.log("[LOAD TOKEN]")
-            const myContract = await w3s.createContract();
-            console.log(myContract, "myContract");
-            let token = await myContract.methods.hydroTokenAddress().call()
-            console.log(token)
-            // this.setState({ token });
-        }
-        catch (ex) {
-            console.log(ex)
-            await this.setState({ isError: true })
-            if (ex.message)
-                await this.setState({ error: ex.message })
-        }
+const HydroTokenAddress = ({ navigation }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
 
-    }
-    render() {
-        return (
-            <BgView>
-                <Header.Back title="Hydro Token Address" onBackPress={this.props.navigation.goBack} />
-                <ScrollView>
-                    <KeyboardAvoidingView>
-                        <View
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "10%",
-                                marginBottom: "10%",
-                            }}
-                        >
-                            <Button text="Load Token" onPress={this.loadToken} />
-                        </View>
+  const theme = isLightTheme ? lightTheme : darkTheme;
 
-                        <LabelInput
-                            label="Hydro Token Address"
-                            placeholder="Hydro Token Address"
-                            value={this.state.token}
-                            onChangeText={(value) => {
-                                console.log(value)
-                            }}
-                        />
+  const snowflakeContext = useContext(SnowflakeContext);
 
-                        {this.state.isError &&
-                            <Text style={{ color: 'red' }}>
-                                Error : {this.state.error}
-                            </Text>
-                        }
-                    </KeyboardAvoidingView>
-                </ScrollView>
-            </BgView>
-        );
-    }
-}
+  const { getHydroAddress, error, hydroAddress } = snowflakeContext;
+
+  useEffect(() => {
+    getHydroAddress;
+  }, []);
+
+  const CopyToClipboard = async () => {
+    await Clipboard.setString(hydroAddress);
+    ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+  };
+
+  console.log(hydroAddress)
+
+  return (
+    <BgView>
+      <Header.Back
+        title="Hydro Address"
+        onBackPress={navigation.goBack}
+      />
+      <ScrollView>
+        <KeyboardAvoidingView>
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "10%",
+              marginBottom: "10%",
+            }}
+          >
+            <Button text="Get Address" onPress={getHydroAddress} />
+          </View>
+          <Lead style={{ fontWeight: "300", fontSize: 14, marginBottom: 4 }}>
+            Hydro Address
+          </Lead>
+          <View
+            style={{
+              borderRadius: 16,
+              marginBottom: 15,
+              backgroundColor: theme.secondary,
+              fontFamily: "Rubik-Regular",
+              color: theme.basic,
+              fontSize: 16,
+              padding: 15,
+            }}
+          >
+            {hydroAddress !== null ? (
+              <TouchableOpacity onPress={CopyToClipboard}>
+                <Paragraph style={{ color: theme.basic }}> {hydroAddress}</Paragraph>
+              </TouchableOpacity>
+            ) : (
+              <Paragraph>Hydro Address</Paragraph>
+            )}
+          </View>
+
+          {error ? <Text style={{ color: "red" }}>Error : {error}</Text> : null}
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </BgView>
+  );
+};
 
 export default HydroTokenAddress;

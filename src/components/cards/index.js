@@ -285,3 +285,72 @@ export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
     </TouchableOpacity>
   );
 };
+
+export const WalletCard = ({balance, address, cardName, ...props}) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View style={{position: 'relative',
+    backgroundColor: theme.primary,
+    width: 380,
+    height: 220,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    shadowColor: '#56D5D0',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 13.35,}} {...props}>
+      <Image
+        style={{
+          position: 'absolute',
+          left: 10,
+          right: 0,
+          top: 0,
+          bottom: 0,
+        }}
+        source={require('../../assets/images/map.png')}
+      />
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Image source={require('../../assets/images/hydro.png')} />
+        <View style={{marginLeft: '40%'}}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              fontFamily: 'Rubik-Regular',
+            }}>
+            {balance} HYDRO
+          </Text>
+        </View>
+      </View>
+      <Text
+        style={{
+          fontWeight: 'bold',
+          fontSize: 25,
+
+          letterSpacing: 5,
+          paddingHorizontal: 10,
+          marginBottom:'10%',
+          color: '#fff',
+          textAlign: 'center',
+          fontFamily: 'Rubik-mono-one',
+        }}>
+        {address}
+      </Text>
+     
+     
+    </View>
+  );
+};

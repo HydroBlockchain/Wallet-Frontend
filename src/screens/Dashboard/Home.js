@@ -4,7 +4,7 @@ import { BgView, Header } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { ThemeContext } from "../../hooks/useTheme";
-import { TxFeedCard } from "../../components/cards";
+import { TxFeedCard, WalletCard } from "../../components/cards";
 import Button from "../../components/Button";
 const Home = ({ navigation }) => {
   const TxFeed = [
@@ -131,14 +131,8 @@ const Home = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <Image
-            source={require("../../assets/images/emma.jpg")}
-            style={{ borderRadius: 50, width: 100, height: 100 }}
-          />
-          <Paragraph style={{ marginTop: "2%", fontSize: 16 }}>
-            Your Balance
-          </Paragraph>
-          <Lead style={{ fontSize: 20 }}> &#36; 222.22</Lead>
+        <WalletCard balance='2500' address='ioqiwjd-0120' cardName='Hydro Card' />
+          
           <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} />
         </View>
 

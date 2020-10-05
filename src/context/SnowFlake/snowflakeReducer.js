@@ -20,10 +20,12 @@ export default (state, action) => {
         loading: false,
       };
     case GET_ADDRESS_FAIL:
+    case ADDRESS_ERROR:
       return {
         ...state,
         address: null,
         loading: false,
+        error: action.payload
       };
     case CLEAR_ERRORS:
       return {
