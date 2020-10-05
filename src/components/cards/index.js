@@ -292,10 +292,10 @@ export const WalletCard = ({balance, address, cardName, ...props}) => {
   return (
     <View style={{position: 'relative',
     backgroundColor: theme.primary,
-    width: 380,
+    
     height: 220,
-    borderRadius: 15,
-    paddingHorizontal: 10,
+    borderRadius: 25,
+    paddingHorizontal: 30,
     paddingVertical: 20,
     marginTop: 30,
     alignItems: 'center',

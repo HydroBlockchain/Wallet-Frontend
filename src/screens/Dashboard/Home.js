@@ -1,5 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { View, Image, ScrollView, Clipboard, ToastAndroid, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  ScrollView,
+  Clipboard,
+  ToastAndroid,
+  TouchableOpacity,
+} from "react-native";
 import { BgView, Header } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
@@ -8,12 +15,16 @@ import { TxFeedCard, WalletCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 
-
 const Home = ({ navigation }) => {
-
   const snowflakeContext = useContext(SnowflakeContext);
 
-  const { getHydroAddress, getIdentityAddress, error, identityAddress, hydroAddress } = snowflakeContext;
+  const {
+    getHydroAddress,
+    getIdentityAddress,
+    error,
+    identityAddress,
+    hydroAddress,
+  } = snowflakeContext;
 
   useEffect(() => {
     getHydroAddress;
@@ -24,7 +35,7 @@ const Home = ({ navigation }) => {
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
 
-  console.log(hydroAddress)
+  console.log(hydroAddress);
 
   const TxFeed = [
     {
@@ -113,7 +124,7 @@ const Home = ({ navigation }) => {
         />
         <View
           style={{
-            marginTop: "10%",
+            marginTop: "2%",
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
@@ -139,32 +150,60 @@ const Home = ({ navigation }) => {
           >
             <Icon name="cog" color={theme.basic} size={20} />
           </TouchableOpacity>
-         
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-        <WalletCard balance='2500' address={hydroAddress} cardName='Hydro Card' />
-          
-          {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
-          
-          {identityAddress !== null ? (
-            <>
-            <Lead style={{textAlign:'left', color:theme.primary}}>Identity Address</Lead>
-
-              <TouchableOpacity onPress={CopyIdentityAddressClipboard} style={{padding:10, backgroundColor:theme.secondary, marginTop:'5%'}}>
-                
-                <Paragraph style={{ color: theme.basic }}> {identityAddress}</Paragraph>
-              </TouchableOpacity>
-              </>
-            ) : <Button style={{ marginTop: "10%" }} text="Get Identity Address" onPress={getIdentityAddress} />}
+      <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+        <WalletCard
+          balance="2500"
+          address={hydroAddress}
+          cardName="Hydro Card"
+        />
         </View>
+
+        {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
+
+        {identityAddress !== null ? (
+          <>
+            <Lead style={{ textAlign: "left", color: theme.primary, fontSize:20, paddingTop:10 }}>
+              Identity Address
+            </Lead>
+
+            <TouchableOpacity
+              onPress={CopyIdentityAddressClipboard}
+              style={{
+                padding: 10,
+                backgroundColor: theme.secondary,
+                marginTop: "5%",
+              }}
+            >
+              <Paragraph style={{ color: theme.basic }}>
+                
+                {identityAddress}
+              </Paragraph>
+            </TouchableOpacity>
+          </>
+        ) : (
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              style={{ marginTop: "5%" }}
+              text="Get Identity Address"
+              onPress={getIdentityAddress}
+            />
+          </View>
+        )}
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
         <View

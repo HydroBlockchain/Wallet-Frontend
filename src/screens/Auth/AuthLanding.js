@@ -19,11 +19,13 @@ const AuthLanding = ({ navigation }) => {
     e.preventDefault();
 
     getHydroAddress;
-    if(!error && hydroAddress !== null){
+
     navigation.navigate('app')
-  }else{
-    console.log(error)
-  }
+  //   if(!error && hydroAddress !== null){
+  // 
+  // }else{
+  //   console.log(error)
+  // }
   }
   return (
     <BgView>
