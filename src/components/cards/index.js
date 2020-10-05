@@ -262,3 +262,90 @@ export const SettingsItemCard = ({ value, onPress, ...props }) => {
     </TouchableOpacity>
   );
 };
+export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={{
+        backgroundColor: theme.secondaryCard,
+        padding: 10,
+        width: "100%",
+        marginTop: "4%",
+        marginLeft: 15,
+        borderRadius: 10,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      {...props}
+    >
+      <Paragraph style={{ textAlign: "center" }}>{value}</Paragraph>
+    </TouchableOpacity>
+  );
+};
+
+export const WalletCard = ({balance, address, cardName, ...props}) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View style={{position: 'relative',
+    backgroundColor: theme.primary,
+    
+    height: 220,
+    borderRadius: 25,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    shadowColor: '#56D5D0',
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 13.35,}} {...props}>
+      <Image
+        style={{
+          position: 'absolute',
+          left: 10,
+          right: 0,
+          top: 0,
+          bottom: 0,
+        }}
+        source={require('../../assets/images/map.png')}
+      />
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}>
+        <Image source={require('../../assets/images/hydro.png')} />
+        <View style={{marginLeft: '40%'}}>
+          <Paragraph
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+            }}>
+            {balance} HYDRO
+          </Paragraph>
+        </View>
+      </View>
+      <Paragraph
+        style={{
+          fontSize:21,
+          paddingHorizontal: 10,
+          marginBottom:'10%',
+          color: theme.white,
+          textAlign: 'center',
+        }}>
+        {address}
+      </Paragraph>
+     
+        
+    </View>
+  );
+};

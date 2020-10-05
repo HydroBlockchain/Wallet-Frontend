@@ -88,6 +88,8 @@ target 'hydrowallet' do
   add_flipper_pods!
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'lottie-ios', :path => '../node_modules/lottie-ios'
+
   post_install do |installer|
     flipper_post_install(installer)
   end
