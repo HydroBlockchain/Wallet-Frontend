@@ -21,7 +21,6 @@ const SnowflakeState = ({ children }) => {
 
   useEffect(() => {
     w3s.initContract();
-    
   }, []);
   
   const getIdentityAddress = async () => {
@@ -30,6 +29,8 @@ const SnowflakeState = ({ children }) => {
         const myContract = await w3s.createContract();
         
         const address = await myContract.methods.identityRegistryAddress().call()
+
+        console.log(`identity address: ${address}`)
         
        dispatch({type: GET_IDENTITY_ADDRESS, payload: address})
         
@@ -49,6 +50,8 @@ const getHydroAddress = async () => {
       const myContract = await w3s.createContract();
       
       const address = await myContract.methods.hydroTokenAddress().call()
+
+      console.log(`hydro addrss: ${address}`)
       
      dispatch({type: GET_HYDRO_ADDRESS, payload: address})
       
