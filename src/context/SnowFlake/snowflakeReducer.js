@@ -23,7 +23,8 @@ export default (state, action) => {
     case ADDRESS_ERROR:
       return {
         ...state,
-        address: null,
+        hydroAddress: null,
+        identityAddress:null,
         loading: false,
         error: action.payload
       };

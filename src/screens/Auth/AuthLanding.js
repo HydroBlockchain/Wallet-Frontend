@@ -15,18 +15,19 @@ const AuthLanding = ({ navigation }) => {
     getHydroAddress;
   }, [getHydroAddress]);
 
-  const onGenerateAddress = (e) => {
-    e.preventDefault();
+  const onGenerateAddress = () => {
 
-    getHydroAddress;
+    getHydroAddress
 
     navigation.navigate('app')
-  //   if(!error && hydroAddress !== null){
-  // 
-  // }else{
-  //   console.log(error)
-  // }
+
+    if(!error && hydroAddress !== null){
+  
+  }else{
+    console.log(error)
   }
+  }
+  console.log(`this is the ${hydroAddress}`)
   return (
     <BgView>
       <View style={{ marginTop: "10%" }}>
@@ -56,7 +57,7 @@ const AuthLanding = ({ navigation }) => {
       >
         <Button
           text="Generate Address"
-          onPress={onGenerateAddress}
+          onPress={()=>{onGenerateAddress()}}
         />
 
         <Button text="Recover" style={{ marginTop: "10%" }} />
