@@ -26,16 +26,12 @@ const Home = ({ navigation }) => {
     hydroAddress,
   } = snowflakeContext;
 
-  useEffect(() => {
-    getHydroAddress;
-  }, [getHydroAddress]);
 
   const CopyIdentityAddressClipboard = async () => {
     await Clipboard.setString(identityAddress);
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
 
-  console.log(hydroAddress);
 
   const TxFeed = [
     {
