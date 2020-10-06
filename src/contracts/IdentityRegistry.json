@@ -1,5 +1,6 @@
 {
   "contractName": "IdentityRegistry",
+  "address" : "0xa7ba71305bE9b2DFEad947dc0E5730BA2ABd28EA",
   "abi": [
     {
       "constant": true,

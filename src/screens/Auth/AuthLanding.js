@@ -6,22 +6,6 @@ import Button from "../../components/Button";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 
 const AuthLanding = ({ navigation }) => {
-  const snowflakeContext = useContext(SnowflakeContext);
-
-  const { getHydroAddress, error, hydroAddress } = snowflakeContext;
-
-
-  // const onGenerateAddress = () => {
-  //   getHydroAddress;
-
-  //   navigation.navigate("app");
-
-  //   if (!error && hydroAddress !== null) {
-  //   } else {
-  //     console.log(error);
-  //   }
-  // };
-  console.log(`this is the ${hydroAddress}`);
   return (
     <BgView>
       <View style={{ marginTop: "10%" }}>
@@ -49,13 +33,7 @@ const AuthLanding = ({ navigation }) => {
           marginVertical: "20%",
         }}
       >
-        <Button
-          text="Generate Address"
-          onPress={() => {
-            getHydroAddress();
-            navigation.navigate("app", {hydroAddress});
-          }}
-        />
+        <Button text="Get Started" onPress={navigation.navigate("register")} />
 
         <Button text="Recover" style={{ marginTop: "10%" }} />
       </View>

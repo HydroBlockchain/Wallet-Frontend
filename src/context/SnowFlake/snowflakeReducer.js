@@ -1,6 +1,7 @@
 import {
   GET_HYDRO_ADDRESS,
   GET_IDENTITY_ADDRESS,
+  IS_HYDRO_ID_AVAILABLE,
   CLEAR_ERRORS,
   ADDRESS_ERROR,
 } from "../types";
@@ -19,14 +20,20 @@ export default (state, action) => {
         identityAddress: action.payload,
         loading: false,
       };
+    case IS_HYDRO_ID_AVAILABLE:
+      return {
+        ...state,
+        hydroIDAvaialble: action.payload,
+      };
     case GET_ADDRESS_FAIL:
     case ADDRESS_ERROR:
       return {
         ...state,
         hydroAddress: null,
-        identityAddress:null,
+        identityAddress: null,
+        hydroIDAvailable: false,
         loading: false,
-        error: action.payload
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

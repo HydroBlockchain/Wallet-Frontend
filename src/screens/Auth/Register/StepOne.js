@@ -1,31 +1,23 @@
 import React, { useState, useContext } from "react";
 import { View, Image, KeyboardAvoidingView } from "react-native";
 import { LabelInput } from "../../../components/Forms";
+import { Paragraph } from "../../../components/Typography";
 
-const StepOne = () => {
-  const [stepOneDetails, setStepOneDetails] = useState({
-    email: "",
-    phoneNumber: "",
-  });
-  const { email, phoneNumber } = stepOneDetails;
+const StepOne = ({ formData, handleChange, ...props }) => {
   return (
     <KeyboardAvoidingView>
       <LabelInput
-        label="Email"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={(value) => {
-          setStepOneDetails(value);
-        }}
+        label="Hydro ID"
+        value={formData.hydroId}
+        onChangeText={handleChange("hydroId")}
       />
-      <LabelInput
-        label="Phone Number"
-        keyboardType="phone-pad"
-        value={phoneNumber}
-        onChangeText={(value) => {
-          setStepOneDetails(value);
-        }}
-      />
+
+      <Paragraph>
+        Enter your Hydro ID below. This is a public, on-chain identifier that
+        will be linked to and identify your account while creating a wallet.
+        Think of it like a user ID. You can either make this up or use the ID
+        assigned to you in the Hydro mobile app
+      </Paragraph>
     </KeyboardAvoidingView>
   );
 };
