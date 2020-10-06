@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Image } from "react-native";
 import { BgView } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
@@ -6,7 +6,6 @@ import Button from "../../components/Button";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 
 const AuthLanding = ({ navigation }) => {
-
   const snowflakeContext = useContext(SnowflakeContext);
 
   const { getHydroAddress, error, hydroAddress } = snowflakeContext;
@@ -15,19 +14,17 @@ const AuthLanding = ({ navigation }) => {
     getHydroAddress;
   }, [getHydroAddress]);
 
-  const onGenerateAddress = () => {
+  // const onGenerateAddress = () => {
+  //   getHydroAddress;
 
-    getHydroAddress
+  //   navigation.navigate("app");
 
-    navigation.navigate('app')
-
-    if(!error && hydroAddress !== null){
-  
-  }else{
-    console.log(error)
-  }
-  }
-  console.log(`this is the ${hydroAddress}`)
+  //   if (!error && hydroAddress !== null) {
+  //   } else {
+  //     console.log(error);
+  //   }
+  // };
+  console.log(`this is the ${hydroAddress}`);
   return (
     <BgView>
       <View style={{ marginTop: "10%" }}>
@@ -57,7 +54,10 @@ const AuthLanding = ({ navigation }) => {
       >
         <Button
           text="Generate Address"
-          onPress={()=>{onGenerateAddress()}}
+          onPress={() => {
+            getHydroAddress;
+            navigation.navigate("app");
+          }}
         />
 
         <Button text="Recover" style={{ marginTop: "10%" }} />
