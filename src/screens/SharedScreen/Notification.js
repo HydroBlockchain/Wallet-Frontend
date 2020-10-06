@@ -11,38 +11,38 @@ import Button from "../../components/Button";
 const Notification = ({ navigation }) => {
   const NotificationDetails = [
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       value: "0.0001BTC",
       id: 1,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       amountEquivalent: "0.0001BTC",
       id: 2,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       amountEquivalent: "0.0001BTC",
       id: 3,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       notificationInfo: "Incoming Transaction Found",
       value: "0.0001BTC",
       id: 4,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       value: "0.0001BTC",
       id: 5,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       notificationInfo: "Incoming Transaction Found",
       value: "0.0001BTC",
       id: 6,
@@ -56,7 +56,7 @@ const Notification = ({ navigation }) => {
       />
 
       <NotificationProfileCard
-        image={require("../../assets/images/emma.jpg")}
+        image={require("../../assets/images/emma.png")}
         hydroId="4b9b621d8e22E"
         userInfo="Information about the users account"
       />

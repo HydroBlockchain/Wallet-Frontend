@@ -4,9 +4,15 @@ import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { ThemeContext } from "../../hooks/useTheme";
 import { Paragraph } from "../../components/Typography";
 import { SettingsCard, SettingsItemCard } from "../../components/cards";
+import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 
 const Settings = ({ navigation }) => {
+
+  const snowflakeContext = useContext(SnowflakeContext);
+
+  const { hydroAddress } = snowflakeContext;
+  console.log(hydroAddress)
   //This function generates a random number used for the generation of qr code
   //   function generateRandomString(length) {
   //     var result = "";
@@ -27,7 +33,6 @@ const Settings = ({ navigation }) => {
   //     setQrValue({ valueForQRCode: initialValue });
   //   };
 
-  const hydroAddress = "0x9F1CA7955D40FF9798472a4b9b621d8e";
   const CopyToClipboard = async () => {
     await Clipboard.setString(hydroAddress);
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);

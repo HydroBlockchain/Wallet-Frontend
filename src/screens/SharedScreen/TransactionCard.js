@@ -23,7 +23,7 @@ const TxCard = ({ navigation }) => {
       >
         <TouchableOpacity onPress={() => navigation.navigate("contact")}>
           <Image
-            source={require("../../assets/images/emma.jpg")}
+            source={require("../../assets/images/emma.png")}
             style={{ borderRadius: 50, width: 100, height: 100 }}
           />
         </TouchableOpacity>

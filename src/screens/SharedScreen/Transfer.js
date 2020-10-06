@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   View,
   ScrollView,
+  Alert,
   Image,
   Picker,
   TouchableOpacity,
@@ -23,6 +24,11 @@ const Transfer = ({ navigation }) => {
     message: "",
     gasFee: "",
   });
+
+  const getAlert = () => {
+    alert('This Feature will be available soon 🔥 🎉')
+  }
+
   const { wallet, recepientAddress, amount, message, gasFee } = transferDetails;
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
@@ -210,7 +216,8 @@ const Transfer = ({ navigation }) => {
             marginTop: "10%",
           }}
         >
-          <Button text="Send" onPress={() => setModalVisible(true)} />
+          {/* <Button text="Send" onPress={() => setModalVisible(true)} /> */}
+          <Button text="Send" onPress={getAlert} />
         </View>
       </ScrollView>
     </BgView>

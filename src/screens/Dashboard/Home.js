@@ -39,7 +39,7 @@ const Home = ({ navigation }) => {
 
   const TxFeed = [
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -47,7 +47,7 @@ const Home = ({ navigation }) => {
       id: 1,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -55,7 +55,7 @@ const Home = ({ navigation }) => {
       id: 2,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -63,7 +63,7 @@ const Home = ({ navigation }) => {
       id: 3,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -71,7 +71,7 @@ const Home = ({ navigation }) => {
       id: 4,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -79,7 +79,7 @@ const Home = ({ navigation }) => {
       id: 5,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -87,7 +87,7 @@ const Home = ({ navigation }) => {
       id: 6,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
@@ -95,7 +95,7 @@ const Home = ({ navigation }) => {
       id: 7,
     },
     {
-      image: require("../../assets/images/emma.jpg"),
+      image: require("../../assets/images/emma.png"),
       name: "Emma",
       amount: "10.091",
       currency: "bitcoin",
