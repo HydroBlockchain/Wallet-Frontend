@@ -10,9 +10,6 @@ const AuthLanding = ({ navigation }) => {
 
   const { getHydroAddress, error, hydroAddress } = snowflakeContext;
 
-  useEffect(() => {
-    getHydroAddress;
-  }, [getHydroAddress]);
 
   // const onGenerateAddress = () => {
   //   getHydroAddress;
@@ -55,8 +52,8 @@ const AuthLanding = ({ navigation }) => {
         <Button
           text="Generate Address"
           onPress={() => {
-            getHydroAddress;
-            navigation.navigate("app");
+            getHydroAddress();
+            navigation.navigate("app", {hydroAddress});
           }}
         />
 
