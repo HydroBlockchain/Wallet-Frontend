@@ -7,6 +7,8 @@ import w3s from "../../libs/Web3Service";
 import {
   CLEAR_ERRORS,
   GET_HYDRO_ADDRESS,
+  IDENTITY_ERROR,
+  CREATE_DEFAULT_ADDRESS,
   GET_IDENTITY_ADDRESS,
   ADDRESS_ERROR,
   CREATE_SIGNATURE,
@@ -18,6 +20,7 @@ const SnowflakeState = ({ children }) => {
     ein: null,
     hydroIDAvailable: false,
     hydroAddress: null,
+    defaultAddress: null,
     signature: null,
     loading: false,
     error: null,
@@ -47,7 +50,16 @@ const SnowflakeState = ({ children }) => {
     }
   };
 
-  
+  const createDefaultAddress = async () => {
+    try {
+      const myAccount = await w3s.web3.eth.accounts();
+
+      dispatch({ type: CREATE_DEFAULT_ADDRESS, payload: myAccount.address });
+    } catch (err) {
+      dispatch({ type: ADDRESS_ERROR, payload: err.message });
+    }
+  };
+
   const createSignature = async (address, timestamp) => {
     try {
       const signature = await w3s.web3.utils.soliditySha3(
@@ -67,29 +79,39 @@ const SnowflakeState = ({ children }) => {
         },
         timestamp
       );
-        console.log(`signature : ${signature}`)
+      console.log(`signature : ${signature}`);
       dispatch({ type: CREATE_SIGNATURE, payload: signature });
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
       dispatch({ type: ADDRESS_ERROR, payload: err.message });
     }
   };
+
   const createIdentity = async (signature, hydroId, timestamp) => {
-    try{
+    try {
       const myContract = await w3s.createSnowflakeContract();
 
-      const response = await myContract.methods.createIdentityDelegated(
-        signature.from, signature.from, [], hydroId, signature.v, signature.r, signature.s, timestamp,
-      ).send({
-        from: signature.from,
-      });
-      console.log(`ein : ${response}`)
+      const response = await myContract.methods
+        .createIdentityDelegated(
+          signature.address,
+          signature.address,
+          [],
+          hydroId,
+          signature.v,
+          signature.r,
+          signature.s,
+          timestamp
+        )
+        .send({
+          from: signature.from,
+        });
+      console.log(`ein : ${response}`);
       dispatch({ type: GET_IDENTITY_ADDRESS, payload: response });
-    }catch(err){
-      console.log(err.message)
-      dispatch({ type: ADDRESS_ERROR, payload: err.message });
+    } catch (err) {
+      console.log(`ein error: ${err}`);
+      dispatch({ type: IDENTITY_ERROR, payload: err.message });
     }
-  }
+  };
 
   return (
     <SnowflakeContext.Provider
@@ -97,12 +119,13 @@ const SnowflakeState = ({ children }) => {
         ein: state.ein,
         hydroAddress: state.hydroAddress,
         loading: state.loading,
+        defaultAddress: state.defaultAddress,
         signature: state.signature,
         hydroIDAvailable: state.hydroIDAvailable,
         error: state.error,
         isHydroIdAvailable,
         createSignature,
-        createIdentity
+        createIdentity,
       }}
     >
       {children}

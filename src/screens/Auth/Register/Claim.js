@@ -43,9 +43,7 @@ const Claim = ({ route }) => {
         />
       
       <Paragraph style={{textAlign:'center'}}>
-        This step is for you to give us permission to create your account on
-        the blockchain. This requires your signature of a hashed permission
-        string
+        Almost there, just click below to claim your new on-chain Snowflake identity (EIN)!
       </Paragraph>
       <Button style={{marginTop:'10%'}} text="Claim Identity" onPress={onSubmit} />
       </View>

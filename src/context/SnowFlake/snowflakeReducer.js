@@ -5,6 +5,7 @@ import {
   CLEAR_ERRORS,
   CREATE_SIGNATURE,
   ADDRESS_ERROR,
+  IDENTITY_ERROR,
 } from "../types";
 
 export default (state, action) => {
@@ -15,11 +16,17 @@ export default (state, action) => {
         hydroAddress: action.payload,
         loading: false,
       };
-      case CREATE_SIGNATURE: 
+    case CREATE_SIGNATURE:
       return {
         ...state,
-        signature:action.payload
-      }
+        signature: action.payload,
+      };
+    case CREATE_DEFAULT_ADDRESS:
+      return {
+        ...state,
+        defaultAddress: action.payload,
+        loading: false,
+      };
     case GET_IDENTITY_ADDRESS:
       return {
         ...state,
@@ -35,9 +42,16 @@ export default (state, action) => {
       return {
         ...state,
         hydroAddress: null,
-        ein: null,
         hydroIDAvailable: false,
-        signature:null,
+        signature: null,
+        defaultAddress: null,
+        loading: false,
+        error: action.payload,
+      };
+    case IDENTITY_ERROR:
+      return {
+        ...state,
+        ein: null,
         loading: false,
         error: action.payload,
       };
