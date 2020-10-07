@@ -125,6 +125,7 @@ const SnowflakeState = ({ children }) => {
         error: state.error,
         isHydroIdAvailable,
         createSignature,
+        createDefaultAddress,
         createIdentity,
       }}
     >

@@ -14,21 +14,25 @@ const Permissions = ({ route, navigation}) => {
     
     const snowflakeContext = useContext(SnowflakeContext);
 
-    const {createSignature, signature} = snowflakeContext
+    const {createSignature, signature, createDefaultAddress, defaultAddress} = snowflakeContext
     console.log(signature)
     console.log(hydroId);
     console.log(timestamp)
-    w3s.web3.eth.defaultAccount = '0x1E47686F5926ccfcc9eF69240fAa3B2f1CAE3902'
-    
-    console.log(w3s.web3.eth.defaultAccount = '0x1E47686F5926ccfcc9eF69240fAa3B2f1CAE3902')
+
     useEffect(() => {
         w3s.initContract();
+        createDefaultAddress;
       }, []);
+
+      console.log(`default address created ${defaultAddress}`)
 
     const onSubmit = (e) => {
         e.preventDefault()
-        let address = w3s.web3.eth.defaultAccount
+        
+        let address = defaultAddress;
+
         createSignature(timestamp, address)
+    
         navigation.navigate('claim', {hydroId, timestamp})
     }
   return (
