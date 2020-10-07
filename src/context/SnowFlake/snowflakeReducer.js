@@ -23,7 +23,7 @@ export default (state, action) => {
     case GET_IDENTITY_ADDRESS:
       return {
         ...state,
-        identityAddress: action.payload,
+        ein: action.payload,
         loading: false,
       };
     case IS_HYDRO_ID_AVAILABLE:
@@ -35,7 +35,7 @@ export default (state, action) => {
       return {
         ...state,
         hydroAddress: null,
-        identityAddress: null,
+        ein: null,
         hydroIDAvailable: false,
         signature:null,
         loading: false,

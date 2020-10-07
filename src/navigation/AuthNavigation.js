@@ -5,6 +5,7 @@ import AuthLanding from "../screens/Auth/AuthLanding";
 import Login from "../screens/Auth/Login";
 import Register from "../screens/Auth/Register";
 import Permissions from "../screens/Auth/Register/Permissions";
+import Claim from "../screens/Auth/Register/Claim";
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const AuthNavigation = () => {
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="register" component={Register} />
       <Stack.Screen name="permissions" component={Permissions}/>
+      <Stack.Screen name="claim" component={Claim}/>
     </Stack.Navigator>
   );
 };
