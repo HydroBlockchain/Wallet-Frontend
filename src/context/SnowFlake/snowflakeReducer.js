@@ -3,6 +3,7 @@ import {
   GET_IDENTITY_ADDRESS,
   IS_HYDRO_ID_AVAILABLE,
   CLEAR_ERRORS,
+  CREATE_SIGNATURE,
   ADDRESS_ERROR,
 } from "../types";
 
@@ -14,6 +15,11 @@ export default (state, action) => {
         hydroAddress: action.payload,
         loading: false,
       };
+      case CREATE_SIGNATURE: 
+      return {
+        ...state,
+        signature:action.payload
+      }
     case GET_IDENTITY_ADDRESS:
       return {
         ...state,
@@ -25,13 +31,13 @@ export default (state, action) => {
         ...state,
         hydroIDAvaialble: action.payload,
       };
-    case GET_ADDRESS_FAIL:
     case ADDRESS_ERROR:
       return {
         ...state,
         hydroAddress: null,
         identityAddress: null,
         hydroIDAvailable: false,
+        signature:null,
         loading: false,
         error: action.payload,
       };

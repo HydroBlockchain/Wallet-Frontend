@@ -6,8 +6,6 @@ import { BgView, Header } from "../../../components/Layouts";
 import { ThemeContext } from "../../../hooks/useTheme";
 import Button from "../../../components/Button";
 import { Paragraph, Lead } from "../../../components/Typography";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
 
 const Register = ({ navigation }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -29,12 +27,24 @@ const Register = ({ navigation }) => {
       isHydroIdAvailable(idToCheck)
         .then((hydroIDAvailable) => {
           setIsHydroIdValidated(hydroIDAvailable);
+          console.log(hydroId);
         })
         .catch((err) => {
           console.log(err);
         });
     }
   }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (hydroId === "") {
+      return (
+        <Paragraph style={{ color: theme.danger }}>enter id field</Paragraph>
+      );
+    } else {
+      navigation.navigate("permissions", { hydroId });
+    }
+  };
 
   return (
     <BgView>
@@ -51,7 +61,6 @@ const Register = ({ navigation }) => {
             value={hydroId}
             onChangeText={(hydroId) => updateAndCheck(hydroId)}
           />
-         
 
           <Paragraph>
             Enter your Hydro ID below. This is a public, on-chain identifier
@@ -70,7 +79,7 @@ const Register = ({ navigation }) => {
           marginTop: "10%",
         }}
       >
-        <Button text="Done" onPress={() => navigation.navigate("app")} />
+        <Button text="Done" onPress={onSubmit} />
       </View>
     </BgView>
   );

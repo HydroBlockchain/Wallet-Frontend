@@ -9,6 +9,7 @@ import {
   GET_HYDRO_ADDRESS,
   GET_IDENTITY_ADDRESS,
   ADDRESS_ERROR,
+  CREATE_SIGNATURE,
   IS_HYDRO_ID_AVAILABLE,
 } from "../types";
 
@@ -17,6 +18,7 @@ const SnowflakeState = ({ children }) => {
     identityAddress: null,
     hydroIDAvailable: false,
     hydroAddress: null,
+    signature: null,
     loading: false,
     error: null,
   };
@@ -46,24 +48,30 @@ const SnowflakeState = ({ children }) => {
   };
 
   const createSignature = async (address, timestamp) => {
-    const signature = await w3s.web3.utils.soliditySha3(
-      "0x19",
-      "0x00",
-      IdentityRegistry.address,
-      "I authorize the creation of an Identity on my behalf.",
-      address,
-      address,
-      {
-        t: "address[]",
-        v: [Snowflake.address],
-      },
-      {
-        t: "address[]",
-        v: [],
-      },
-      timestamp
-    );
-    return signature;
+    try {
+      const signature = await w3s.web3.utils.soliditySha3(
+        "0x19",
+        "0x00",
+        IdentityRegistry.address,
+        "I authorize the creation of an Identity on my behalf.",
+        address,
+        address,
+        {
+          t: "address[]",
+          v: [Snowflake.address],
+        },
+        {
+          t: "address[]",
+          v: [],
+        },
+        timestamp
+      );
+        console.log(signature.address)
+      dispatch({ type: CREATE_SIGNATURE, payload: signature });
+    } catch (err) {
+      console.log(err.message)
+      dispatch({ type: ADDRESS_ERROR, payload: err.message });
+    }
   };
 
   return (
@@ -72,9 +80,11 @@ const SnowflakeState = ({ children }) => {
         identityAddress: state.identityAddress,
         hydroAddress: state.hydroAddress,
         loading: state.loading,
+        signature: state.signature,
+        hydroIDAvailable: state.hydroIDAvailable,
         error: state.error,
         isHydroIdAvailable,
-        createSignature
+        createSignature,
       }}
     >
       {children}
