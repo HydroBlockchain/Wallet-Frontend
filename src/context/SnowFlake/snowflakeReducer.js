@@ -2,6 +2,8 @@ import {
   GET_HYDRO_ADDRESS,
   GET_IDENTITY_ADDRESS,
   IS_HYDRO_ID_AVAILABLE,
+  CREATE_DEFAULT_WALLET,
+  CREATE_DEFAULT_WALLET_ERROR,
   CLEAR_ERRORS,
   CREATE_SIGNATURE,
   ADDRESS_ERROR,
@@ -21,12 +23,20 @@ export default (state, action) => {
         ...state,
         signature: action.payload,
       };
-    case CREATE_DEFAULT_ADDRESS:
+    case CREATE_DEFAULT_WALLET:
       return {
         ...state,
-        defaultAddress: action.payload,
+        defaultWalletData: action.payload,
         loading: false,
+        walletError: null
       };
+      case CREATE_DEFAULT_WALLET_ERROR:
+        return {
+          ...state,
+          defaultWalletData:null,
+          loading:false,
+          walletError:action.payload
+        }
     case GET_IDENTITY_ADDRESS:
       return {
         ...state,

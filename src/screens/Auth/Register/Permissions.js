@@ -21,10 +21,11 @@ const Permissions = ({ route, navigation}) => {
 
     useEffect(() => {
         w3s.initContract();
-        createDefaultAddress;
+        
       }, []);
 
       console.log(`default address created ${defaultAddress}`)
+      
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -61,7 +62,7 @@ const Permissions = ({ route, navigation}) => {
         the blockchain. This requires your signature of a hashed permission
         string
       </Paragraph>
-      <Button style={{marginTop:'10%'}} text="Accept" onPress={onSubmit} />
+      <Button style={{marginTop:'10%'}} text="Accept" onPress={createDefaultAddress} />
       </View>
     </BgView>
   );

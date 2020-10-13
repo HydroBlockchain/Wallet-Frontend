@@ -2,15 +2,17 @@ import React, { useReducer, useEffect } from "react";
 import SnowflakeContext from "./snowflakeContext";
 import snowflakeReducer from "./snowflakeReducer";
 import IdentityRegistry from "../../contracts/IdentityRegistry.json";
+import Web3 from "web3";
 import Snowflake from "../../contracts/Snowflake.json";
 import w3s from "../../libs/Web3Service";
 import {
   CLEAR_ERRORS,
   GET_HYDRO_ADDRESS,
   IDENTITY_ERROR,
-  CREATE_DEFAULT_ADDRESS,
+  CREATE_DEFAULT_WALLET,
   GET_IDENTITY_ADDRESS,
   ADDRESS_ERROR,
+  CREATE_DEFAULT_WALLET_ERROR,
   CREATE_SIGNATURE,
   IS_HYDRO_ID_AVAILABLE,
 } from "../types";
@@ -20,7 +22,8 @@ const SnowflakeState = ({ children }) => {
     ein: null,
     hydroIDAvailable: false,
     hydroAddress: null,
-    defaultAddress: null,
+    defaultWalletData:null,
+    walletError:null,
     signature: null,
     loading: false,
     error: null,
@@ -28,10 +31,31 @@ const SnowflakeState = ({ children }) => {
 
   const [state, dispatch] = useReducer(snowflakeReducer, initialState);
 
+
+
   useEffect(() => {
     w3s.initContract();
-  }, []);
 
+    
+  }, []);
+  const generateRandomRef = () => {
+    var result = "";
+    var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.+++!!0123456789";
+
+    for (var i = 0; i < 32; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    return result;
+  };
+
+  
+  
+  
+
+
+  //check if hydro ID is available
   const isHydroIdAvailable = async (hydroId) => {
     try {
       const myContract = await w3s.createClientRaindropAddress();
@@ -50,16 +74,21 @@ const SnowflakeState = ({ children }) => {
     }
   };
 
+  // create default address
   const createDefaultAddress = async () => {
+    let entropy = generateRandomRef()
     try {
-      const myAccount = await w3s.web3.eth.accounts();
-
-      dispatch({ type: CREATE_DEFAULT_ADDRESS, payload: myAccount.address });
+      const myAccount = await w3s.web3.eth.accounts.wallet.create(1, entropy);
+      
+      dispatch({ type: CREATE_DEFAULT_WALLET, payload: myAccount });
     } catch (err) {
-      dispatch({ type: ADDRESS_ERROR, payload: err.message });
+      console.log(err.message)
+      dispatch({ type: CREATE_DEFAULT_WALLET_ERROR, payload: err.message });
     }
   };
 
+
+  // create signature
   const createSignature = async (address, timestamp) => {
     try {
       const signature = await w3s.web3.utils.soliditySha3(
@@ -87,6 +116,7 @@ const SnowflakeState = ({ children }) => {
     }
   };
 
+  // create ethereum identity
   const createIdentity = async (signature, hydroId, timestamp) => {
     try {
       const myContract = await w3s.createSnowflakeContract();
@@ -103,7 +133,7 @@ const SnowflakeState = ({ children }) => {
           timestamp
         )
         .send({
-          from: signature.from,
+          from: signature.address,
         });
       console.log(`ein : ${response}`);
       dispatch({ type: GET_IDENTITY_ADDRESS, payload: response });
@@ -119,7 +149,8 @@ const SnowflakeState = ({ children }) => {
         ein: state.ein,
         hydroAddress: state.hydroAddress,
         loading: state.loading,
-        defaultAddress: state.defaultAddress,
+        defaultWalletData: state.defaultWalletData,
+        walletError: state.walletError,
         signature: state.signature,
         hydroIDAvailable: state.hydroIDAvailable,
         error: state.error,
