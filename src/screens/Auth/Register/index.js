@@ -20,17 +20,25 @@ const Register = ({ navigation }) => {
     e.preventDefault()
 
     createDefaultAddress();
-
+    
+    
     if(!walletError){
-      navigation.navigate('app')
+
+      let data = defaultWalletData
+    
+      let address = data[0].address
+
+      console.log(address)
+
+      navigation.navigate('permissions', {address})
+    
     }else{
+
       Alert.alert(walletError)
+    
     }
 
   }
-
-  
-  console.log(defaultWalletData[0].address)
 
   return (
     <BgView>

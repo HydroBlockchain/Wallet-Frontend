@@ -9,6 +9,7 @@ import {
   ADDRESS_ERROR,
   IDENTITY_ERROR,
 } from "../types";
+import AsyncStorage from '@react-native-community/async-storage'
 
 export default (state, action) => {
   switch (action.type) {
@@ -24,13 +25,16 @@ export default (state, action) => {
         signature: action.payload,
       };
     case CREATE_DEFAULT_WALLET:
+      AsyncStorage.setItem('address', action.payload)
+      console.log(action.payload)
       return {
         ...state,
-        defaultWalletData: action.payload,
+        ...action.payload,
         loading: false,
         walletError: null
       };
       case CREATE_DEFAULT_WALLET_ERROR:
+        AsyncStorage.removeItem('address')
         return {
           ...state,
           defaultWalletData:null,

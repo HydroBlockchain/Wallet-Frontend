@@ -10,13 +10,13 @@ const Permissions = ({ route, navigation}) => {
 
     const [timestamp] = useState(Math.round(new Date() / 1000) - 120);
 
-    const { hydroId } = route.params;
+    const {address} = route.params
     
     const snowflakeContext = useContext(SnowflakeContext);
 
-    const {createSignature, signature, createDefaultAddress, defaultAddress} = snowflakeContext
+    const {createSignature, signature, createDefaultAddress, } = snowflakeContext
     console.log(signature)
-    console.log(hydroId);
+    
     console.log(timestamp)
 
     useEffect(() => {
@@ -24,21 +24,20 @@ const Permissions = ({ route, navigation}) => {
         
       }, []);
 
-      console.log(`default address created ${defaultAddress}`)
+      console.log(`default address created ${address}`)
       
 
     const onSubmit = (e) => {
         e.preventDefault()
         
-        let address = defaultAddress;
 
         createSignature(timestamp, address)
     
-        navigation.navigate('claim', {hydroId, timestamp})
+        // navigation.navigate('claim', {hydroId, timestamp})
     }
   return (
     <BgView>
-      <Header.Back title="Permission" />
+      <Header.Back onBackPress={navigation.goBack} title="Permission" />
       <View
         style={{
           display: "flex",

@@ -3,6 +3,7 @@ import SnowflakeContext from "./snowflakeContext";
 import snowflakeReducer from "./snowflakeReducer";
 import IdentityRegistry from "../../contracts/IdentityRegistry.json";
 import Web3 from "web3";
+import AsyncStorage from '@react-native-community/async-storage'
 import Snowflake from "../../contracts/Snowflake.json";
 import w3s from "../../libs/Web3Service";
 import {
@@ -22,7 +23,7 @@ const SnowflakeState = ({ children }) => {
     ein: null,
     hydroIDAvailable: false,
     hydroAddress: null,
-    defaultWalletData:null,
+    defaultWalletData:AsyncStorage.getItem('address'),
     walletError:null,
     signature: null,
     loading: false,
@@ -79,8 +80,8 @@ const SnowflakeState = ({ children }) => {
     let entropy = generateRandomRef()
     try {
       const myAccount = await w3s.web3.eth.accounts.wallet.create(1, entropy);
-      
-      dispatch({ type: CREATE_DEFAULT_WALLET, payload: myAccount });
+      let account = myAccount[0].address
+      dispatch({ type: CREATE_DEFAULT_WALLET, payload: account });
     } catch (err) {
       console.log(err.message)
       dispatch({ type: CREATE_DEFAULT_WALLET_ERROR, payload: err.message });
