@@ -223,7 +223,7 @@ export const SettingsCard = ({
         </View>
       </View>
       <View>
-        <Lead>Hydro Address</Lead>
+        <Lead>Wallet Address</Lead>
         <TouchableOpacity
           onPress={onIdPress}
           style={{

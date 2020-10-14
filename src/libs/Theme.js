@@ -8,6 +8,7 @@ export const lightTheme = {
   buttonColor: "#ffffff",
   white: "#ffffff",
   danger: "#EF1907",
+  success: '#3FAC9F',
   secondaryCard: "#ffffff",
   secondaryBackground: "#CFD6E2",
 };
@@ -18,6 +19,7 @@ export const darkTheme = {
   basic: "rgba(129, 217, 255, 0.5)",
   primary: "#000935",
   buttonColor: "#81D9FF",
+  success: '#3FAC9F',
   white: "#ffffff",
   danger: "#E96A5F",
   secondaryCard: "rgba(0, 45, 133, 0.5)",

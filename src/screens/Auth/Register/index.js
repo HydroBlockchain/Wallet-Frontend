@@ -1,35 +1,63 @@
 import React, { useState, useContext } from "react";
-import { View, Image } from "react-native";
+import { View, Image,Alert, KeyboardAvoidingView } from "react-native";
+import { LabelInput } from "../../../components/Forms";
+import SnowflakeContext from "../../../context/SnowFlake/snowflakeContext";
 import { BgView, Header } from "../../../components/Layouts";
+import { ThemeContext } from "../../../hooks/useTheme";
 import Button from "../../../components/Button";
 import { Paragraph, Lead } from "../../../components/Typography";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
 
-const pages = [<StepOne />, <StepTwo />];
 const Register = ({ navigation }) => {
-  const [page, setPage] = useState(0);
-  const nextPage = () => {
-    setPage(page + 1);
-  };
-  const previousPage = () => {
-    setPage(page - 1);
-  };
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+
+  const theme = isLightTheme ? lightTheme : darkTheme;
+
+  const snowflakeContext = useContext(SnowflakeContext);
+
+  const {createDefaultAddress, defaultWalletData, walletError} = snowflakeContext
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    createDefaultAddress();
+    
+    
+    if(!walletError){
+    
+      let data = defaultWalletData
+
+    // for (let property in data){
+    //   let address = data[property].address
+    //   console.log(address)
+    //   navigation.navigate('permissions', {address})
+    // }
+    let address = data[0].address
+      console.log(address)
+     navigation.navigate('permissions', {address})
+    }else{
+
+      Alert.alert(walletError)
+    
+    }
+
+  }
 
   return (
     <BgView>
-      {page !== 0 ? <Header.Back onBackPress={previousPage} /> : null}
-      <View style={{ marginTop: "10%" }}>
+      
         <Image
-          style={{ resizeMode: "contain" }}
-          source={require("../../../assets/images/logo.png")}
+          style={{ resizeMode: "center", width:"100%", height:"60%" }}
+          source={require("../../../assets/images/wallet.png")}
         />
+      
+      <View style={{ marginTop: "10%" }}>
+       
+          <Paragraph>
+           Create Default Wallet which would be used to create an ethereum Identity Number
+          </Paragraph>
+       
       </View>
-      <View style={{ marginTop: "10%" }}>{pages[page]}</View>
-      <Paragraph style={{ marginVertical: "10%", textAlign: "center" }}>
-        Info text about what is happening on chain and off chain when creating
-        account.
-      </Paragraph>
+
       <View
         style={{
           display: "flex",
@@ -38,11 +66,7 @@ const Register = ({ navigation }) => {
           marginTop: "10%",
         }}
       >
-        {page !== 1 ? (
-          <Button text="Next" onPress={nextPage} />
-        ) : (
-          <Button text="Done" onPress={() => navigation.navigate("app")} />
-        )}
+        <Button text="Create Wallet" onPress={onSubmit}/>
       </View>
     </BgView>
   );

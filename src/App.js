@@ -39,7 +39,7 @@ const App = () => {
         `https://rinkeby.infura.io/v3/75cc8cba22ab40b9bfa7406ae9b69a27`
       )
     );
-    console.log(web3);
+    console.log(web3)
     SplashScreen.hide();
   }, []);
   setTimeout(() => {

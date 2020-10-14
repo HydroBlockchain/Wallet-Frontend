@@ -7,7 +7,7 @@ import { SettingsCard, SettingsItemCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 
-const Settings = ({ navigation }) => {
+const Settings = ({ navigation, route }) => {
 
   const snowflakeContext = useContext(SnowflakeContext);
 
@@ -34,15 +34,17 @@ const Settings = ({ navigation }) => {
   //   };
 
   const CopyToClipboard = async () => {
-    await Clipboard.setString(hydroAddress);
+    await Clipboard.setString(address);
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
   const { toggleTheme } = useContext(ThemeContext);
 
+  const {address} = route.params
+
   return (
     <SecondaryBgView>
       <SecondaryHeader.Back title="Settings" onBackPress={navigation.goBack} />
-      <SettingsCard hydroAddress={hydroAddress} onIdPress={CopyToClipboard} />
+      <SettingsCard hydroAddress={address} onIdPress={CopyToClipboard} />
 
       <View
         style={{

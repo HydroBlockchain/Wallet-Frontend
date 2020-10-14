@@ -3,7 +3,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthLanding from "../screens/Auth/AuthLanding";
 import Login from "../screens/Auth/Login";
-import Register from "../screens/Auth/Register";
+import Register from "../screens/Auth/Register/index";
+// import Hydro from "../screens/Auth/Register/Hydro"
+import Permissions from "../screens/Auth/Register/Permissions";
+import Claim from "../screens/Auth/Register/Claim";
 
 const Stack = createStackNavigator();
 
@@ -14,9 +17,12 @@ const AuthNavigation = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="AuthLanding" component={AuthLanding} />
+      <Stack.Screen name="authLanding" component={AuthLanding} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="register" component={Register} />
+      <Stack.Screen name="permissions" component={Permissions}/>
+      <Stack.Screen name="claim" component={Claim}/>
+      {/* <Stack.Screen name="hydro" compopnent={Hydro}/>  */}
     </Stack.Navigator>
   );
 };
