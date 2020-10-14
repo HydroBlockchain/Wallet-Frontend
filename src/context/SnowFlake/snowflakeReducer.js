@@ -25,11 +25,11 @@ export default (state, action) => {
         signature: action.payload,
       };
     case CREATE_DEFAULT_WALLET:
-      AsyncStorage.setItem('address', action.payload)
-      console.log(action.payload)
+      // AsyncStorage.setItem('address', JSON.stringify(action.payload))
+      // console.log(action.payload)
       return {
         ...state,
-        ...action.payload,
+      defaultWalletData:action.payload,
         loading: false,
         walletError: null
       };

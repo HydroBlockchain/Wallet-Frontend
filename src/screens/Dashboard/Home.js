@@ -14,24 +14,19 @@ import { ThemeContext } from "../../hooks/useTheme";
 import { TxFeedCard, WalletCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
+import LottieView from 'lottie-react-native';
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
   const snowflakeContext = useContext(SnowflakeContext);
 
-  const {
-    getHydroAddress,
-    getIdentityAddress,
-    error,
-    identityAddress,
-    hydroAddress,
-  } = snowflakeContext;
+  const { address, hydroId } = route.params;
 
+  console.log(address)
 
-  const CopyIdentityAddressClipboard = async () => {
-    await Clipboard.setString(identityAddress);
-    ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
-  };
-
+  // const CopyIdentityAddressClipboard = async () => {
+  //   await Clipboard.setString(identityAddress);
+  //   ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+  // };
 
   const TxFeed = [
     {
@@ -137,35 +132,31 @@ const Home = ({ navigation }) => {
               style={{ paddingRight: "5%" }}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("notification")}>
+          <TouchableOpacity onPress={() => navigation.navigate("notification", {hydroId})}>
             <Icon name="bell" color={theme.basic} solid={true} size={20} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{ marginHorizontal: "5%", paddingLeft: "5%" }}
-            onPress={() => navigation.navigate("settings")}
+            onPress={() => navigation.navigate("settings", {address})}
           >
             <Icon name="cog" color={theme.basic} size={20} />
           </TouchableOpacity>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-      <View
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-        <WalletCard
-          balance="2500"
-          address={hydroAddress}
-          cardName="Hydro Card"
-        />
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <WalletCard balance="0" address={address} cardName="Hydro Card" />
         </View>
 
         {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
 
-        {identityAddress !== null ? (
+        {/* {identityAddress !== null ? (
           <>
             <Lead style={{ textAlign: "left", color: theme.primary, fontSize:20, paddingTop:10 }}>
               Identity Address
@@ -199,10 +190,31 @@ const Home = ({ navigation }) => {
               onPress={getIdentityAddress}
             />
           </View>
-        )}
+        )} */}
+        
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
         <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <LottieView
+            source={require('../../assets/tx.json')}
+            autoPlay
+            key={1}
+            loop
+            style={{ width: '60%', height: '100%', }}
+          />
+        </View>
+        <Paragraph
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 22,
+            marginTop: "30%",
+          }}
+        >
+          You have no transaction record.
+        </Paragraph>
+        {/* <View
           style={{
             flex: 1,
             flexWrap: "wrap",
@@ -214,7 +226,7 @@ const Home = ({ navigation }) => {
           {TxFeed.map((feedItem, id) => (
             <TxFeedCard {...feedItem} key={id} />
           ))}
-        </View>
+        </View> */}
       </ScrollView>
       <TouchableOpacity
         onPress={() => navigation.navigate("transfer")}

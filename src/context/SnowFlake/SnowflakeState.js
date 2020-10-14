@@ -23,7 +23,7 @@ const SnowflakeState = ({ children }) => {
     ein: null,
     hydroIDAvailable: false,
     hydroAddress: null,
-    defaultWalletData:AsyncStorage.getItem('address'),
+    defaultWalletData:null,
     walletError:null,
     signature: null,
     loading: false,
@@ -79,9 +79,10 @@ const SnowflakeState = ({ children }) => {
   const createDefaultAddress = async () => {
     let entropy = generateRandomRef()
     try {
-      const myAccount = await w3s.web3.eth.accounts.wallet.create(1, entropy);
-      let account = myAccount[0].address
-      dispatch({ type: CREATE_DEFAULT_WALLET, payload: account });
+      let myAccount = await w3s.web3.eth.accounts.wallet.create(1, entropy);
+
+      console.log(myAccount)
+      dispatch({ type: CREATE_DEFAULT_WALLET, payload: myAccount });
     } catch (err) {
       console.log(err.message)
       dispatch({ type: CREATE_DEFAULT_WALLET_ERROR, payload: err.message });
@@ -90,7 +91,7 @@ const SnowflakeState = ({ children }) => {
 
 
   // create signature
-  const createSignature = async (address, timestamp) => {
+  const createSignedMessage = async (address, timestamp) => {
     try {
       const signature = await w3s.web3.utils.soliditySha3(
         "0x19",
@@ -117,29 +118,76 @@ const SnowflakeState = ({ children }) => {
     }
   };
 
+  const signPersonal = async (address, signedMessage) => {
+    return new Promise((resolve, reject) => {
+      w3s.web3.currentProvider.sendAsync({
+        method: 'personal_sign',
+        params: [
+          address,
+          message,
+        ],
+        address,
+      },
+      (err, result) => {
+        if (result.err) {
+          return reject(err);
+        }
+  
+        const signature = result.result.substring(2);
+        const r = "0x" + signature.substring(0, 64);
+        const s = "0x" + signature.substring(64, 128);
+        const v = parseInt(signature.substring(128, 130), 16);
+  
+        const signatureObject = {};
+  
+        signatureObject.r = r;
+        signatureObject.s = s;
+        signatureObject.v = v;
+        signatureObject.from = address;
+        console.log(signatureObject)
+        return resolve(signatureObject);
+      });
+    });
+    
+  }
+
   // create ethereum identity
-  const createIdentity = async (signature, hydroId, timestamp) => {
+  const createIdentity = async (timestamp, signature, hydroId, address) => {
     try {
       const myContract = await w3s.createSnowflakeContract();
+      
+  
+        const r = "0x" + signature
+        const s = "0x" + signature;
+        const v = parseInt(signature);
 
-      const response = await myContract.methods
+        
+        const signatureObject = {};
+  
+        signatureObject.r = r;
+        signatureObject.s = s;
+        signatureObject.v = v;
+      
+        const response = await myContract.methods
         .createIdentityDelegated(
-          signature.address,
-          signature.address,
+          address,
+          address,
           [],
           hydroId,
-          signature.v,
-          signature.r,
-          signature.s,
+          signatureObject.v,
+          signatureObject.r,
+          signatureObject.s,
           timestamp
         )
         .send({
-          from: signature.address,
+          from: address,
         });
+
+        
       console.log(`ein : ${response}`);
       dispatch({ type: GET_IDENTITY_ADDRESS, payload: response });
     } catch (err) {
-      console.log(`ein error: ${err}`);
+      console.log(`ein error: ${err.message}`);
       dispatch({ type: IDENTITY_ERROR, payload: err.message });
     }
   };
@@ -156,9 +204,10 @@ const SnowflakeState = ({ children }) => {
         hydroIDAvailable: state.hydroIDAvailable,
         error: state.error,
         isHydroIdAvailable,
-        createSignature,
+        createSignedMessage,
         createDefaultAddress,
         createIdentity,
+        signPersonal
       }}
     >
       {children}

@@ -2,13 +2,16 @@ import React from "react";
 import { View, Image, ScrollView } from "react-native";
 import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { Paragraph } from "../../components/Typography";
+import LottieView from 'lottie-react-native';
 import {
   NotificationProfileCard,
   NotificationCard,
 } from "../../components/cards";
 import Button from "../../components/Button";
 
-const Notification = ({ navigation }) => {
+const Notification = ({ navigation, route }) => {
+
+  const {hydroId} = route.params
   const NotificationDetails = [
     {
       image: require("../../assets/images/emma.png"),
@@ -57,10 +60,30 @@ const Notification = ({ navigation }) => {
 
       <NotificationProfileCard
         image={require("../../assets/images/emma.png")}
-        hydroId="4b9b621d8e22E"
+        hydroId={hydroId}
         userInfo="Information about the users account"
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+       <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <LottieView
+            source={require('../../assets/notif.json')}
+            autoPlay
+            key={1}
+            loop
+            style={{ width: '40%', height: '100%', }}
+          />
+        </View>
+        <Paragraph
+          style={{
+            textAlign: "center",
+            fontWeight: "bold",
+            fontSize: 22,
+            
+          }}
+        >
+          You have no Notification
+        </Paragraph>
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
             flex: 1,
@@ -74,7 +97,7 @@ const Notification = ({ navigation }) => {
             <NotificationCard {...notificationItem} key={id} />
           ))}
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </SecondaryBgView>
   );
 };

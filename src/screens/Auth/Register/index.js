@@ -23,15 +23,17 @@ const Register = ({ navigation }) => {
     
     
     if(!walletError){
-
+    
       let data = defaultWalletData
-    
-      let address = data[0].address
 
+    // for (let property in data){
+    //   let address = data[property].address
+    //   console.log(address)
+    //   navigation.navigate('permissions', {address})
+    // }
+    let address = data[0].address
       console.log(address)
-
-      navigation.navigate('permissions', {address})
-    
+     navigation.navigate('permissions', {address})
     }else{
 
       Alert.alert(walletError)
