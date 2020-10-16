@@ -83,9 +83,11 @@ const SnowflakeState = ({ children }) => {
 
       console.log(myAccount)
       dispatch({ type: CREATE_DEFAULT_WALLET, payload: myAccount });
+
+      return myAccount
     } catch (err) {
       console.log(err.message)
-      dispatch({ type: CREATE_DEFAULT_WALLET_ERROR, payload: err.message });
+      throw Error(err?.response?.data?.message || "Something went wrong");
     }
   };
 
