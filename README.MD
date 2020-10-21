@@ -3,7 +3,7 @@
 <img src="https://www.hydrogenplatform.com/images/logo_hydro.png">
 </p>
   <p>
-    ✨ Hydro Wallet for Storing and sharing Hydro Tokens 🍕 ✨
+    Hydro Wallet for Storing and sharing Hydro Tokens
   </p>
 <p>
 <img src="https://raw.githubusercontent.com/Khay-EMMA/eltwallet/master/assets/play_store.svg" width="150" >
@@ -14,21 +14,21 @@
 
 </div>
 
-## Overview 💣💖
+## Overview
 
 This repository contains the code that powers Hydro Wallet that features Snowflake and Client-side Raindrop 🔥
 
 - [client-raindrop](./client-raindrop): Client-Side Raindrop
 - [snowflake](./snowflake): Identity Management
 
-## Demo 🥑🥑
+## Demo
 
 <p>
 <img src="https://raw.githubusercontent.com/HydroBlockchain/Wallet-Frontend/master/src/assets/images/readme1.png" />
 <img src="https://raw.githubusercontent.com/HydroBlockchain/Wallet-Frontend/master/src/assets/images/readme2.png" />
 </p>
 
-## Local development 🍐🍐
+## Local development
 
 Make sure you have `react-native-cli` installed.
 
