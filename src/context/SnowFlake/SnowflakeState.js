@@ -17,14 +17,16 @@ import {
   CREATE_SIGNATURE,
   IS_HYDRO_ID_AVAILABLE,
 } from "../types";
+import { randomBytes } from 'react-native-randombytes';
+import uuid from 'react-native-uuid'
 
 const SnowflakeState = ({ children }) => {
   const initialState = {
     ein: null,
     hydroIDAvailable: false,
     hydroAddress: null,
-    defaultWalletData:null,
-    walletError:null,
+    defaultWalletData: null,
+    walletError: null,
     signature: null,
     loading: false,
     error: null,
@@ -37,23 +39,29 @@ const SnowflakeState = ({ children }) => {
   useEffect(() => {
     w3s.initContract();
 
-    
-  }, []);
-  const generateRandomRef = () => {
-    var result = "";
-    var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.+++!!0123456789";
 
-    for (var i = 0; i < 32; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return result;
+  }, []);
+
+  const generateRandomRef = async () => {
+    // var result = "";
+    // console.log(randomBytes, "RNRandomBytes")
+    console.log(uuid.v4())
+    let data = await randomBytes(32)
+    return uuid.v4(); //data.toString('base64');
+
+    // var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.+++!!0123456789";
+
+    // for (var i = 0; i < 32; i++) {
+    //   result += characters.charAt(
+    //     Math.floor(Math.random() * characters.length)
+    //   );
+    // }
+    // return result;
   };
 
-  
-  
-  
+
+
+
 
 
   //check if hydro ID is available
@@ -77,17 +85,17 @@ const SnowflakeState = ({ children }) => {
 
   // create default address
   const createDefaultAddress = async () => {
-    let entropy = generateRandomRef()
+    let entropy = await generateRandomRef();//"1234567890123456"
     try {
+      console.log(w3s.web3.eth.accounts.wallet, "W3S");
+      console.log(entropy, "entropy");
       let myAccount = await w3s.web3.eth.accounts.wallet.create(1, entropy);
-
-      console.log(myAccount)
+      console.log(myAccount, "createDefaultAddress")
       dispatch({ type: CREATE_DEFAULT_WALLET, payload: myAccount });
-
       return myAccount
     } catch (err) {
-      console.log(err.message)
-      throw Error(err?.response?.data?.message || "Something went wrong");
+      console.log(err, "createDefaultAddress")
+      throw Error(err || "Something went wrong");
     }
   };
 
@@ -130,47 +138,47 @@ const SnowflakeState = ({ children }) => {
         ],
         address,
       },
-      (err, result) => {
-        if (result.err) {
-          return reject(err);
-        }
-  
-        const signature = result.result.substring(2);
-        const r = "0x" + signature.substring(0, 64);
-        const s = "0x" + signature.substring(64, 128);
-        const v = parseInt(signature.substring(128, 130), 16);
-  
-        const signatureObject = {};
-  
-        signatureObject.r = r;
-        signatureObject.s = s;
-        signatureObject.v = v;
-        signatureObject.from = address;
-        console.log(signatureObject)
-        return resolve(signatureObject);
-      });
+        (err, result) => {
+          if (result.err) {
+            return reject(err);
+          }
+
+          const signature = result.result.substring(2);
+          const r = "0x" + signature.substring(0, 64);
+          const s = "0x" + signature.substring(64, 128);
+          const v = parseInt(signature.substring(128, 130), 16);
+
+          const signatureObject = {};
+
+          signatureObject.r = r;
+          signatureObject.s = s;
+          signatureObject.v = v;
+          signatureObject.from = address;
+          console.log(signatureObject)
+          return resolve(signatureObject);
+        });
     });
-    
+
   }
 
   // create ethereum identity
   const createIdentity = async (timestamp, signature, hydroId, address) => {
     try {
       const myContract = await w3s.createSnowflakeContract();
-      
-  
-        const r = "0x" + signature
-        const s = "0x" + signature;
-        const v = parseInt(signature);
 
-        
-        const signatureObject = {};
-  
-        signatureObject.r = r;
-        signatureObject.s = s;
-        signatureObject.v = v;
-      
-        const response = await myContract.methods
+
+      const r = "0x" + signature
+      const s = "0x" + signature;
+      const v = parseInt(signature);
+
+
+      const signatureObject = {};
+
+      signatureObject.r = r;
+      signatureObject.s = s;
+      signatureObject.v = v;
+
+      const response = await myContract.methods
         .createIdentityDelegated(
           address,
           address,
@@ -185,7 +193,7 @@ const SnowflakeState = ({ children }) => {
           from: address,
         });
 
-        
+
       console.log(`ein : ${response}`);
       dispatch({ type: GET_IDENTITY_ADDRESS, payload: response });
     } catch (err) {
