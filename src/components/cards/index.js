@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import React, { useContext, useEffect, useRef } from "react";
+import { Text, View, TouchableOpacity, Image, Animated } from "react-native";
 import { Paragraph, Lead } from "../Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
@@ -355,6 +355,17 @@ export const WalletCard = ({ balance, address, cardName, ...props }) => {
 export const ComingSoonCard = ({ ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 4000
+    }).start();
+  })
+
+
   return (
     <View
       style={{
@@ -384,7 +395,13 @@ export const ComingSoonCard = ({ ...props }) => {
           justifyContent: 'center',
         }}>
 
-        <View style={{}}>
+        <Animated.View
+          style={[
+            {
+              opacity: fadeAnim // Bind opacity to animated value
+            }
+          ]}
+        >
           <Paragraph
             style={{
               fontWeight: 'bold',
@@ -393,7 +410,7 @@ export const ComingSoonCard = ({ ...props }) => {
             }}>
             COMING SOON...
           </Paragraph>
-        </View>
+        </Animated.View>
       </View>
     </View>
   );
