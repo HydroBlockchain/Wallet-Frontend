@@ -16,7 +16,7 @@
 
 ## Overview
 
-This repository contains the code that powers Hydro Wallet that features Snowflake and Client-side Raindrop 🔥
+This repository contains the code that powers Hydro Wallet that features Snowflake and Client-side Raindrop
 
 - [client-raindrop](./client-raindrop): Client-Side Raindrop
 - [snowflake](./snowflake): Identity Management
