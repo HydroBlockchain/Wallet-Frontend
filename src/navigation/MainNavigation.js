@@ -19,6 +19,7 @@ import WithdrawSnowflakeBalanceFrom from "../screens/SharedScreen/SnowflakeBalan
 import WithdrawSnowflakeBalanceFromVia from "../screens/SharedScreen/SnowflakeBalanceFromVia/WithdrawSnowflakeBalanceFromVia";
 import TransferSnowflakeBalanceFrom from "../screens/SharedScreen/SnowflakeBalanceFrom/TransferSnowflakeBalanceFrom";
 import TransferSnowflakeBalanceFromVia from "../screens/SharedScreen/SnowflakeBalanceFromVia/TransferSnowflakeBalanceFromVia";
+import ComingSoon from "../screens/SharedScreen/ComingSoon/ComingSoon";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,7 @@ const MainNavigation = () => {
       <Stack.Screen name="withdrawsnowflakebalancefrom" component={WithdrawSnowflakeBalanceFrom} />
       <Stack.Screen name="transfersnowflakebalancefromvia" component={TransferSnowflakeBalanceFromVia} />
       <Stack.Screen name="withdrawsnowflakebalancefromvia" component={WithdrawSnowflakeBalanceFromVia} />
+      <Stack.Screen name="comingSoon" component={ComingSoon} />
     </Stack.Navigator>
   );
 };

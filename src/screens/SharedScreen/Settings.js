@@ -39,7 +39,7 @@ const Settings = ({ navigation, route }) => {
   };
   const { toggleTheme } = useContext(ThemeContext);
 
-  const {address} = route.params
+  const { address } = route.params
 
   return (
     <SecondaryBgView>
@@ -63,6 +63,10 @@ const Settings = ({ navigation, route }) => {
         <SettingsItemCard value="Dark Mode" onPress={toggleTheme} />
         <SettingsItemCard value="Contact Card" />
         <SettingsItemCard value="Rate Us" />
+        <SettingsItemCard value="Lending" onPress={() => navigation.navigate('comingSoon')} />
+        <SettingsItemCard value="Stacking" onPress={() => navigation.navigate('comingSoon')} />
+        <SettingsItemCard value="Borrowing" onPress={() => navigation.navigate('comingSoon')} />
+        <SettingsItemCard value="Loan" onPress={() => navigation.navigate('comingSoon')} />
       </View>
     </SecondaryBgView>
   );

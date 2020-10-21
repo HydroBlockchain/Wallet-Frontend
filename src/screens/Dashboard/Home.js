@@ -194,7 +194,7 @@ const Home = ({ navigation, route }) => {
         
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
-        <View
+        {/* <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <LottieView
             source={require('../../assets/tx.json')}
@@ -203,7 +203,7 @@ const Home = ({ navigation, route }) => {
             loop
             style={{ width: '60%', height: '100%', }}
           />
-        </View>
+        </View> */}
         <Paragraph
           style={{
             textAlign: "center",

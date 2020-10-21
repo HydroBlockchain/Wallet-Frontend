@@ -192,9 +192,9 @@ export const SettingsCard = ({
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity onPress={onWalletPress}>
+          {/* <TouchableOpacity onPress={onWalletPress}>
             <Image source={require("../../assets/images/bitcoin.png")} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={onWalletPress}
             style={{ marginHorizontal: "3%" }}
@@ -286,27 +286,29 @@ export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
   );
 };
 
-export const WalletCard = ({balance, address, cardName, ...props}) => {
+export const WalletCard = ({ balance, address, cardName, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
   return (
-    <View style={{position: 'relative',
-    backgroundColor: theme.primary,
-    
-    height: 220,
-    borderRadius: 25,
-    paddingHorizontal: 30,
-    paddingVertical: 20,
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    shadowColor: '#56D5D0',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 13.35,}} {...props}>
+    <View style={{
+      position: 'relative',
+      backgroundColor: theme.primary,
+
+      height: 220,
+      borderRadius: 25,
+      paddingHorizontal: 30,
+      paddingVertical: 20,
+      marginTop: 30,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      shadowColor: '#56D5D0',
+      shadowOffset: {
+        width: 0,
+        height: 5,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 13.35,
+    }} {...props}>
       <Image
         style={{
           position: 'absolute',
@@ -324,7 +326,7 @@ export const WalletCard = ({balance, address, cardName, ...props}) => {
           alignItems: 'center',
         }}>
         <Image source={require('../../assets/images/hydro.png')} />
-        <View style={{marginLeft: '40%'}}>
+        <View style={{ marginLeft: '40%' }}>
           <Paragraph
             style={{
               fontWeight: 'bold',
@@ -336,16 +338,63 @@ export const WalletCard = ({balance, address, cardName, ...props}) => {
       </View>
       <Paragraph
         style={{
-          fontSize:21,
+          fontSize: 21,
           paddingHorizontal: 10,
-          marginBottom:'10%',
+          marginBottom: '10%',
           color: theme.white,
           textAlign: 'center',
         }}>
         {address}
       </Paragraph>
-     
-        
+
+
+    </View>
+  );
+};
+
+export const ComingSoonCard = ({ ...props }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View
+      style={{
+        backgroundColor: theme.primary,
+        height: 220,
+        borderRadius: 25,
+        paddingHorizontal: 30,
+        paddingVertical: 20,
+        marginTop: 30,
+        alignItems: 'center',
+        // justifyContent: 'space-between',
+        shadowColor: '#56D5D0',
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 13.35,
+      }}
+      {...props}
+    >
+
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+        }}>
+
+        <View style={{}}>
+          <Paragraph
+            style={{
+              fontWeight: 'bold',
+              fontSize: 25,
+              color: 'white'
+            }}>
+            COMING SOON...
+          </Paragraph>
+        </View>
+      </View>
     </View>
   );
 };

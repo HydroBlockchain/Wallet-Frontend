@@ -117,9 +117,9 @@ const Transfer = ({ navigation }) => {
             flexDirection: "row",
           }}
         >
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Image source={require("../../assets/images/bitcoin.png")} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity style={{ marginHorizontal: "3%" }}>
             <Image source={require("../../assets/images/ethereum.png")} />
           </TouchableOpacity>
