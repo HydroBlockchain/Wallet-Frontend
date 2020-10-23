@@ -146,6 +146,8 @@ export const SettingsCard = ({
   hydroAddress,
   onWalletPress,
   onIdPress,
+  onAddPress,
+  customToken,
   ...props
 }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -205,6 +207,8 @@ export const SettingsCard = ({
             <Image source={require("../../assets/images/hydro.png")} />
           </TouchableOpacity>
           <TouchableOpacity
+
+            onPress={onAddPress}
             style={{
               width: 30,
               height: 30,
@@ -235,6 +239,20 @@ export const SettingsCard = ({
           <Paragraph>{hydroAddress}</Paragraph>
         </TouchableOpacity>
       </View>
+      {customToken && Object.keys(customToken).length > 0 &&
+        <View style={{ marginTop: 10 }}>
+          <Lead>Custom Token</Lead>
+          <TouchableOpacity
+            style={{
+              padding: 5,
+              backgroundColor: theme.secondary,
+              borderRadius: 5,
+            }}
+          >
+            <Paragraph>{customToken.symbol}</Paragraph>
+          </TouchableOpacity>
+        </View>
+      }
     </View>
   );
 };

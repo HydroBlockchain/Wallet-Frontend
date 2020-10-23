@@ -20,6 +20,7 @@ import WithdrawSnowflakeBalanceFromVia from "../screens/SharedScreen/SnowflakeBa
 import TransferSnowflakeBalanceFrom from "../screens/SharedScreen/SnowflakeBalanceFrom/TransferSnowflakeBalanceFrom";
 import TransferSnowflakeBalanceFromVia from "../screens/SharedScreen/SnowflakeBalanceFromVia/TransferSnowflakeBalanceFromVia";
 import ComingSoon from "../screens/SharedScreen/ComingSoon/ComingSoon";
+import AddCustomToken from "../screens/SharedScreen/AddCustomToken/AddCustomToken";
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ const MainNavigation = () => {
       <Stack.Screen name="transfersnowflakebalancefromvia" component={TransferSnowflakeBalanceFromVia} />
       <Stack.Screen name="withdrawsnowflakebalancefromvia" component={WithdrawSnowflakeBalanceFromVia} />
       <Stack.Screen name="comingSoon" component={ComingSoon} />
+      <Stack.Screen name="addCustomToken" component={AddCustomToken} />
     </Stack.Navigator>
   );
 };

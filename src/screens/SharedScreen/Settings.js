@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { View, Image, Clipboard, ToastAndroid, ScrollView } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import { View, Image, Clipboard, ToastAndroid, AsyncStorage } from "react-native";
 import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { ThemeContext } from "../../hooks/useTheme";
 import { Paragraph } from "../../components/Typography";
@@ -13,6 +13,8 @@ const Settings = ({ navigation, route }) => {
 
   const { hydroAddress } = snowflakeContext;
   console.log(hydroAddress)
+
+  const [customToken, setCustomToken] = useState(null)
   //This function generates a random number used for the generation of qr code
   //   function generateRandomString(length) {
   //     var result = "";
@@ -33,10 +35,30 @@ const Settings = ({ navigation, route }) => {
   //     setQrValue({ valueForQRCode: initialValue });
   //   };
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getCustomToken()
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  const getCustomToken = async () => {
+    let customToken = await AsyncStorage.getItem("customToken")
+    if (customToken) {
+      customToken = JSON.parse(customToken)
+      setCustomToken(customToken)
+    }
+  }
+
   const CopyToClipboard = async () => {
     await Clipboard.setString(address);
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
+  
+  const onAddPress = async () => {
+    navigation.navigate('addCustomToken')
+  }
   const { toggleTheme } = useContext(ThemeContext);
 
   const { address } = route.params
@@ -44,7 +66,12 @@ const Settings = ({ navigation, route }) => {
   return (
     <SecondaryBgView>
       <SecondaryHeader.Back title="Settings" onBackPress={navigation.goBack} />
-      <SettingsCard hydroAddress={address} onIdPress={CopyToClipboard} />
+      <SettingsCard
+        hydroAddress={address}
+        onIdPress={CopyToClipboard}
+        onAddPress={onAddPress}
+        customToken={customToken}
+      />
 
       <View
         style={{
