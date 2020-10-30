@@ -2,7 +2,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Dashboard/Home";
-import Transfer from "../screens/SharedScreen/Transfer";
 import Notification from "../screens/SharedScreen/Notification";
 import Settings from "../screens/SharedScreen/Settings";
 import Success from "../screens/SharedScreen/Success";
@@ -11,7 +10,6 @@ import Contact from "../screens/SharedScreen/Contact";
 import Snowflake from "../screens/SharedScreen/Snowflake";
 import HydroTokenAddress from "../screens/SharedScreen/HydroTokenAddress";
 import IdentityRegistryAddress from "../screens/SharedScreen/IdentityRegistryAddress";
-import Deposits from "../screens/SharedScreen/Deposits";
 import FN from "../screens/SharedScreen/FN";
 import TransferSnowflakeBalance from "../screens/SharedScreen/SnowflakeBalance/TransferSnowflakeBalance";
 import WithdrawSnowflakeBalance from "../screens/SharedScreen/SnowflakeBalance/WithdrawSnowflakeBalance";
@@ -21,6 +19,9 @@ import TransferSnowflakeBalanceFrom from "../screens/SharedScreen/SnowflakeBalan
 import TransferSnowflakeBalanceFromVia from "../screens/SharedScreen/SnowflakeBalanceFromVia/TransferSnowflakeBalanceFromVia";
 import ComingSoon from "../screens/SharedScreen/ComingSoon/ComingSoon";
 import AddCustomToken from "../screens/SharedScreen/AddCustomToken/AddCustomToken";
+import Withdraw from "../screens/SharedScreen/Withdraw/Withdraw";
+import Deposits from "../screens/SharedScreen/Deposits/Deposits";
+import Transfer from "../screens/SharedScreen/Transfer/Transfer";
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,7 @@ const MainNavigation = () => {
       <Stack.Screen name="withdrawsnowflakebalancefromvia" component={WithdrawSnowflakeBalanceFromVia} />
       <Stack.Screen name="comingSoon" component={ComingSoon} />
       <Stack.Screen name="addCustomToken" component={AddCustomToken} />
+      <Stack.Screen name="withdraw" component={Withdraw} />
     </Stack.Navigator>
   );
 };

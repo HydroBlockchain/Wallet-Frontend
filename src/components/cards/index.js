@@ -304,21 +304,21 @@ export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
   );
 };
 
-export const WalletCard = ({ balance, address, cardName, ...props }) => {
+export const WalletCard = ({ balance, address, cardName, withdraw, transfer, deposit, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
   return (
     <View style={{
       position: 'relative',
       backgroundColor: theme.primary,
-
+      width: '100%',
       height: 220,
       borderRadius: 25,
       paddingHorizontal: 30,
       paddingVertical: 20,
       marginTop: 30,
-      alignItems: 'center',
-      justifyContent: 'space-between',
+      // alignItems: 'center',
+      // justifyContent: 'space-between',
       shadowColor: '#56D5D0',
       shadowOffset: {
         width: 0,
@@ -354,7 +354,48 @@ export const WalletCard = ({ balance, address, cardName, ...props }) => {
           </Paragraph>
         </View>
       </View>
-      <Paragraph
+      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}></View>
+        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-around' }}>
+          <View style={{
+            width: 70, height: 70, shadowColor: "#3FAC9D",
+            alignItems: "center",
+            shadowOffset: { width: 0, height: 12, },
+            shadowOpacity: 0.58,
+            shadowRadius: 16.0,
+          }}>
+            <TouchableOpacity onPress={withdraw} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
+              <Icon name="arrow-down" color={"#fff"} size={28} />
+            </TouchableOpacity>
+            <Text style={{ color: 'white' }}>Withdraw</Text>
+          </View>
+          <View style={{
+            borderRadius: 70 / 2, width: 70, height: 70, shadowColor: "#3FAC9D",
+            shadowOffset: { width: 0, height: 12, },
+            alignItems: "center",
+            shadowOpacity: 0.58,
+            shadowRadius: 16.0,
+          }}>
+            <TouchableOpacity onPress={deposit} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
+              <Icon name="arrow-up" color={"#fff"} size={28} />
+            </TouchableOpacity>
+            <Text style={{ color: 'white' }}>deposit</Text>
+          </View>
+          <View style={{
+            borderRadius: 70 / 2, width: 70, height: 70, shadowColor: "#3FAC9D",
+            shadowOffset: { width: 0, height: 12, },
+            alignItems: "center",
+            shadowOpacity: 0.58,
+            shadowRadius: 16.0,
+          }}>
+            <TouchableOpacity onPress={transfer} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
+              <Icon name="exchange-alt" color={"#fff"} size={28} />
+            </TouchableOpacity>
+            <Text style={{ color: 'white' }}>Transfer</Text>
+          </View>
+        </View>
+      </View>
+      {/* <Paragraph
         style={{
           fontSize: 21,
           paddingHorizontal: 10,
@@ -363,10 +404,10 @@ export const WalletCard = ({ balance, address, cardName, ...props }) => {
           textAlign: 'center',
         }}>
         {address}
-      </Paragraph>
+      </Paragraph> */}
 
 
-    </View>
+    </View >
   );
 };
 

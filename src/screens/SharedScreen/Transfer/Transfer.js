@@ -5,36 +5,44 @@ import {
     KeyboardAvoidingView,
     Text
 } from "react-native";
-import { LabelInput } from "../../components/Forms";
-import { BgView, Header } from "../../components/Layouts";
-import Button from "../../components/Button";
-import w3s from '../../libs/Web3Service';
+import { LabelInput } from "../../../components/Forms";
+import { BgView, Header } from "../../../components/Layouts";
+import Button from "../../../components/Button";
+import w3s from '../../../libs/Web3Service';
 
-class Deposits extends Component {
+class Transfer extends Component {
     state = {
-        uint256: "",
+        addressTo: "",
+        amount: "",
         isError: false,
         isSuccess: false,
         error: ""
     }
-    componentDidMount() {
-        w3s.initContract()
+
+    async componentDidMount() {
+        await w3s.initContract()
     }
-    deposit = async () => {
+
+    transfer = async () => {
         try {
-            if (!this.state.uint256) {
-                await this.setState({ isError: true, error: "uint256 must required!" })
+            if (!this.state.addressTo) {
+                await this.setState({ isError: true, error: "To Address must required!" })
+                return
+            }
+            else if (!this.state.amount) {
+                await this.setState({ isError: true, error: "amount must required!" })
                 return
             }
             else {
                 await this.setState({ isError: false })
             }
 
-            console.log("[LOAD TOKEN]")
-            const myContract = await w3s.createContract();
+
+            const myContract = await w3s.createHydroTokenContract();
             console.log(myContract, "myContract");
-            let token = await myContract.methods.deposits(this.state.uint256).call()
-            console.log(token)
+            let token = await myContract.methods.transfer(this.state.addressTo, this.state.amount).call()
+            console.log(token, "token")
+            this.setState({ isSuccess: true, addressTo: "", amount: "" })
         }
         catch (ex) {
             console.log(ex)
@@ -45,22 +53,27 @@ class Deposits extends Component {
 
     }
     render() {
+        // console.log(w3s)
         return (
             <BgView>
-                <Header.Back title="Deposits" onBackPress={this.props.navigation.goBack} />
+                <Header.Back title="Transfer" onBackPress={this.props.navigation.goBack} />
                 <ScrollView>
                     <KeyboardAvoidingView>
-
                         <LabelInput
-                            label="uint256"
+                            label="To Address"
+                            placeholder="To Address"
+                            value={this.state.addressTo}
+                            onChangeText={(value) => this.setState({ addressTo: value })}
+                        />
+                        <LabelInput
+                            label="amount"
                             placeholder="uint256"
-                            value={this.state.uint256}
+                            value={this.state.amount}
                             onChangeText={(value) => {
                                 console.log(value)
-                                this.setState({ uint256: value })
+                                this.setState({ amount: value })
                             }}
                         />
-
                         {this.state.isError &&
                             <Text style={{ color: 'red' }}>
                                 Error : {this.state.error}
@@ -68,7 +81,7 @@ class Deposits extends Component {
                         }
                         {this.state.isSuccess &&
                             <Text style={{ color: 'green' }}>
-                                Deposit Successfully !
+                                Transfer Successfully !
                             </Text>
                         }
                         <View
@@ -80,7 +93,7 @@ class Deposits extends Component {
                                 marginBottom: "10%",
                             }}
                         >
-                            <Button text="Deposit" onPress={this.deposit} />
+                            <Button text="Transfer" onPress={this.transfer} />
                         </View>
                     </KeyboardAvoidingView>
                 </ScrollView>
@@ -89,4 +102,4 @@ class Deposits extends Component {
     }
 }
 
-export default Deposits;
+export default Transfer;

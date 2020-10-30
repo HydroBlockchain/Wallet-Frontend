@@ -132,12 +132,12 @@ const Home = ({ navigation, route }) => {
               style={{ paddingRight: "5%" }}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("notification", {hydroId})}>
+          <TouchableOpacity onPress={() => navigation.navigate("notification", { hydroId })}>
             <Icon name="bell" color={theme.basic} solid={true} size={20} />
           </TouchableOpacity>
           <TouchableOpacity
             style={{ marginHorizontal: "5%", paddingLeft: "5%" }}
-            onPress={() => navigation.navigate("settings", {address})}
+            onPress={() => navigation.navigate("settings", { address })}
           >
             <Icon name="cog" color={theme.basic} size={20} />
           </TouchableOpacity>
@@ -151,7 +151,15 @@ const Home = ({ navigation, route }) => {
             alignItems: "center",
           }}
         >
-          <WalletCard balance="0" address={address} cardName="Hydro Card" />
+          <WalletCard
+            balance="0"
+            address={address}
+            cardName="Hydro Card"
+            withdraw={() => navigation.navigate("withdraw")}
+            transfer={() => navigation.navigate("transfer")}
+            deposit={() => navigation.navigate("deposits")}
+
+          />
         </View>
 
         {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
@@ -191,7 +199,7 @@ const Home = ({ navigation, route }) => {
             />
           </View>
         )} */}
-        
+
 
         <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
         {/* <View
@@ -228,7 +236,7 @@ const Home = ({ navigation, route }) => {
           ))}
         </View> */}
       </ScrollView>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate("transfer")}
         style={{
           display: "flex",
@@ -252,7 +260,7 @@ const Home = ({ navigation, route }) => {
         }}
       >
         <Icon name="plus" color={theme.buttonColor} size={28} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </BgView>
   );
 };
