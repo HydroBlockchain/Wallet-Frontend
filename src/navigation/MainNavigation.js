@@ -22,7 +22,7 @@ import AddCustomToken from "../screens/SharedScreen/AddCustomToken/AddCustomToke
 import Withdraw from "../screens/SharedScreen/Withdraw/Withdraw";
 import Deposits from "../screens/SharedScreen/Deposits/Deposits";
 import Transfer from "../screens/SharedScreen/Transfer/Transfer";
-
+ 
 const Stack = createStackNavigator();
 
 const MainNavigation = () => {
@@ -53,6 +53,8 @@ const MainNavigation = () => {
       <Stack.Screen name="comingSoon" component={ComingSoon} />
       <Stack.Screen name="addCustomToken" component={AddCustomToken} />
       <Stack.Screen name="withdraw" component={Withdraw} />
+
+     
     </Stack.Navigator>
   );
 };

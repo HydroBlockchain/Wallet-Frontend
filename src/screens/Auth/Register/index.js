@@ -7,6 +7,7 @@ import { ThemeContext } from "../../../hooks/useTheme";
 import Button from "../../../components/Button";
 import { Paragraph, Lead } from "../../../components/Typography";
 import AsyncStorage from "@react-native-community/async-storage";
+import bip39 from 'react-native-bip39'
 
 const Register = ({ navigation }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -38,6 +39,11 @@ const Register = ({ navigation }) => {
       });
   };
 
+  const onMnemonic = (e) => {
+    e.preventDefault();
+    navigation.navigate("mnemonic");
+  }
+
   return (
     <BgView>
       <Image
@@ -62,6 +68,18 @@ const Register = ({ navigation }) => {
       >
         <Button text="Create Wallet" onPress={onSubmit} />
       </View>
+
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "5%",
+        }}
+      >
+        <Button text="Mnemonic" onPress={onMnemonic} />
+      </View>
+
     </BgView>
   );
 };
