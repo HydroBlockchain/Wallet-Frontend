@@ -155,9 +155,9 @@ const Home = ({ navigation, route }) => {
             balance="0"
             address={address}
             cardName="Hydro Card"
-            withdraw={() => navigation.navigate("withdraw")}
+            withdraw={() => navigation.navigate("withdraw", { walletToken: address })}
             transfer={() => navigation.navigate("transfer")}
-            deposit={() => navigation.navigate("deposits")}
+            deposit={() => navigation.navigate("deposits", { walletToken: address })}
 
           />
         </View>

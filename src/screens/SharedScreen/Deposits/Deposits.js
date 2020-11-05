@@ -35,12 +35,13 @@ class Deposits extends Component {
 
             console.log("[LOAD TOKEN]")
             const myContract = await w3s.createHydroTokenContract();
-            console.log(myContract, "myContract");
+
+            console.log(myContract.methods, "myContract");
             console.log(_spender, "_spender");
             console.log(this.state.amount, "amount");
             console.log(this.state.comments, "comments");
 
-            let token = await myContract.methods.approveAndCall(_spender, this.state.amount, this.state.comments).call()
+            let token = await myContract.methods.approveAndCall(_spender, this.state.amount, this.state.comments).call(this.props.route.params.walletToken)
             console.log(token, "Deposit")
         }
         catch (ex) {
@@ -52,6 +53,7 @@ class Deposits extends Component {
 
     }
     render() {
+        console.log(this.props.route.params.walletToken, "Props")
         return (
             <BgView>
                 <Header.Back title="Deposits" onBackPress={this.props.navigation.goBack} />

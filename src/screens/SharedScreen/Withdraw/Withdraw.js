@@ -10,6 +10,10 @@ import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
 import w3s from '../../../libs/Web3Service';
 
+
+const _spender = "0xB0D5a36733886a4c5597849a05B315626aF5222E"
+
+
 class Withdraw extends Component {
     state = {
         addressTo: "",
@@ -39,9 +43,13 @@ class Withdraw extends Component {
 
 
             const myContract = await w3s.createSnowflakeContract();
-            let token = await myContract.methods.withdrawSnowflakeBalance(this.state.addressTo, this.state.amount).call()
+            console.log(myContract.methods, "myContract.methods");
+            let token = await myContract.methods.withdrawSnowflakeBalanceFrom(_spender, this.state.amount, this.state.addressTo).call()
             console.log(token, "token")
             this.setState({ isSuccess: true, addressTo: "", amount: "" })
+            setTimeout(() => {
+                this.setState({ isSuccess: false })
+            }, 5000)
         }
         catch (ex) {
             console.log(ex)
