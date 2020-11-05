@@ -1,6 +1,6 @@
 //@@dev this object stores different color properties
 
-export const lightTheme = {
+export const lightTheme = { 
   basic: "rgba(0, 0, 0, 0.7)",
   secondary: "#f5f5f5",
   background: "#ffffff",

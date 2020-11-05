@@ -8,6 +8,8 @@ import Register from "../screens/Auth/Register/index";
 import Permissions from "../screens/Auth/Register/Permissions";
 import Claim from "../screens/Auth/Register/Claim";
 
+import Mnemonic from "../screens/Mnemonic/index";
+import Validate from "../screens/Mnemonic/Validate";
 const Stack = createStackNavigator();
 
 const AuthNavigation = () => {
@@ -23,6 +25,8 @@ const AuthNavigation = () => {
       <Stack.Screen name="permissions" component={Permissions}/>
       <Stack.Screen name="claim" component={Claim}/>
       {/* <Stack.Screen name="hydro" compopnent={Hydro}/>  */}
+      <Stack.Screen name="mnemonic" component={Mnemonic}/>
+      <Stack.Screen name="validate" component={Validate}/>
     </Stack.Navigator>
   );
 };
