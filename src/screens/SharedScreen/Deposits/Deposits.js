@@ -9,6 +9,7 @@ import { LabelInput } from "../../../components/Forms";
 import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
 import w3s from '../../../libs/Web3Service';
+import { toWei } from '../../../libs/format';
 
 const _spender = "0xB0D5a36733886a4c5597849a05B315626aF5222E"
 
@@ -41,7 +42,7 @@ class Deposits extends Component {
             console.log(this.state.amount, "amount");
             console.log(this.state.comments, "comments");
 
-            let token = await myContract.methods.approveAndCall(_spender, this.state.amount, this.state.comments).call(this.props.route.params.walletToken)
+            let token = await myContract.methods.approveAndCall(_spender, toWei(this.state.amount.toString()), '0x00').send({ form: this.props.route.params.walletToken })
             console.log(token, "Deposit")
         }
         catch (ex) {

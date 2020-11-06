@@ -9,6 +9,8 @@ import { LabelInput } from "../../../components/Forms";
 import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
 import w3s from '../../../libs/Web3Service';
+import Web3 from 'web3';
+import { toWei } from '../../../libs/format';
 
 
 const _spender = "0xB0D5a36733886a4c5597849a05B315626aF5222E"
@@ -22,9 +24,16 @@ class Withdraw extends Component {
         isSuccess: false,
         error: ""
     }
-
     async componentDidMount() {
-        await w3s.initContract()
+        try {
+            await w3s.initContract()
+            if (this.props.route.params.walletToken) {
+                this.setState({ addressTo: this.props.route.params.walletToken })
+            }
+        }
+        catch (ex) {
+            console.log(ex)
+        }
     }
 
     withdraw = async () => {
@@ -43,8 +52,10 @@ class Withdraw extends Component {
 
 
             const myContract = await w3s.createSnowflakeContract();
-            console.log(myContract.methods, "myContract.methods");
-            let token = await myContract.methods.withdrawSnowflakeBalanceFrom(_spender, this.state.amount, this.state.addressTo).call()
+            console.log(toWei(this.state.amount.toString()), "myContract.methods");
+            let token = await myContract.methods.withdrawSnowflakeBalance(this.state.addressTo, toWei(this.state.amount.toString())).send({
+                from: this.state.addressTo
+            })
             console.log(token, "token")
             this.setState({ isSuccess: true, addressTo: "", amount: "" })
             setTimeout(() => {
@@ -60,7 +71,7 @@ class Withdraw extends Component {
 
     }
     render() {
-        // console.log(w3s)
+        console.log(this.props.route.params.walletToken, "Props")
         return (
             <BgView>
                 <Header.Back title="Withdraw" onBackPress={this.props.navigation.goBack} />

@@ -24,6 +24,7 @@ const protectedWalletFactoryAddress = '0xF834224699b6c1Fd5a9dF0DBbe7674Ba7C31db4
 
 class Web3Service {
     web3 = "";
+
     async initContract() {
         this.web3 = await new Web3(new Web3.providers.HttpProvider(providerURL));
     }
