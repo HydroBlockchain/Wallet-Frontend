@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Dimensions } from "react-native";
 import { BgView } from "../../components/Layouts";
 import { Paragraph } from "../../components/Typography";
 import AppIntroSlider from "react-native-app-intro-slider";
@@ -8,6 +8,7 @@ import LottieView from "lottie-react-native";
 import { ThemeContext } from "../../hooks/useTheme";
 import AsyncStorage from "@react-native-community/async-storage"
 import { styles } from "./style";
+const { height, width } = Dimensions.get('window');
 
 const { buttonContainer } = styles;
 
@@ -86,7 +87,7 @@ const Landing = ({ navigation }) => {
         />
 
         <View style={{ marginBottom: "30%" }}>
-          <Paragraph style={{ textAlign: "center", fontSize: 18 }}>
+          <Paragraph style={{ textAlign: "center", fontSize: 18, paddingHorizontal: width * 0.05 }}>
             {body}
           </Paragraph>
         </View>

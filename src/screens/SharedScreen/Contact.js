@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   Clipboard,
   ToastAndroid,
+  Dimensions,
+  Platform, StatusBar, StyleSheet
 } from "react-native";
 import { LabelInput } from "../../components/Forms";
 import { BgView, Header } from "../../components/Layouts";
@@ -12,6 +14,9 @@ import { Paragraph, Lead } from "../../components/Typography";
 import { ThemeContext } from "../../hooks/useTheme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Button from "../../components/Button";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+const { height, width } = Dimensions.get('window');
+
 
 const Contact = ({ navigation }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
@@ -40,51 +45,38 @@ const Contact = ({ navigation }) => {
 
   return (
     <BgView>
-      <Header.Back title="Contact Card" onBackPress={navigation.goBack} />
-      <View
-        style={{
-          marginTop: "10%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <Header.Back title="Contact Card" onBackPress={navigation.goBack} containerStyle={styles.header} />
+      <View style={styles.top} >
         <TouchableOpacity>
-          <Image
-            source={require("../../assets/images/emma.png")}
-            style={{ borderRadius: 50, width: 100, height: 100 }}
-          />
+          <Image source={require("../../assets/images/emma.png")} style={{ borderRadius: 50, width: 100, height: 100 }} />
         </TouchableOpacity>
-        <Lead style={{ textAlign: "center", marginTop: "5%", fontSize: 20 }}>
-          Emmanuel Njoku
-        </Lead>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "10%",
-          }}
-        >
-          <View style={{ marginVertical: "2%" }}>
+        <Lead style={styles.name}>Emmanuel Njoku</Lead>
+
+        <View style={styles.box}>
+          <View style={styles.box}>
             <Lead>HYDRO</Lead>
             <TouchableOpacity
               style={{
                 padding: 7,
                 backgroundColor: theme.secondary,
-                borderRadius: 20,
+                borderRadius: 5,
+                marginVertical: width * 0.01
               }}
               onPress={CopyHydroAddressToClipboard}
             >
               <Paragraph>{hydroAddress}</Paragraph>
             </TouchableOpacity>
           </View>
-          <View style={{ marginVertical: "2%" }}>
+
+
+          <View style={styles.box}>
             <Lead>BTC</Lead>
             <TouchableOpacity
               style={{
                 padding: 7,
                 backgroundColor: theme.secondary,
-                borderRadius: 20,
+                borderRadius: 5,
+                marginVertical: width * 0.01
               }}
               onPress={CopyBtcAddressToClipboard}
             >
@@ -93,13 +85,15 @@ const Contact = ({ navigation }) => {
               </Paragraph>
             </TouchableOpacity>
           </View>
-          <View style={{ marginVertical: "2%" }}>
+
+          <View style={styles.box}>
             <Lead>ETH</Lead>
             <TouchableOpacity
               style={{
                 padding: 7,
                 backgroundColor: theme.secondary,
-                borderRadius: 20,
+                borderRadius: 5,
+                marginVertical: width * 0.01
               }}
               onPress={CopyEthAddressToClipboard}
             >
@@ -110,12 +104,14 @@ const Contact = ({ navigation }) => {
           </View>
         </View>
       </View>
+
+
+
       <View
         style={{
           display: "flex",
           alignItems: "flex-end",
           justifyContent: "flex-end",
-          marginVertical: "20%",
           flexDirection: "row",
         }}
       >
@@ -134,5 +130,34 @@ const Contact = ({ navigation }) => {
     </BgView>
   );
 };
+
+const styles = StyleSheet.create({
+  top: {
+    marginVertical: width * 0.1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  name: {
+    textAlign: "center", marginVertical: width * 0.05, fontSize: 20
+  },
+
+  header: {
+    marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+    paddingTop: 0,
+    height: 50
+  },
+
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: width * 0.05
+  },
+
+  box: {
+    paddingTop: width * 0.03
+  }
+
+})
 
 export default Contact;

@@ -11,13 +11,14 @@ export const TextInput = (props) => {
       autoCapitalize="none"
       placeholderTextColor={theme.basic}
       style={{
-        borderRadius: 16,
+        borderRadius: 5,
         marginBottom: 15,
         backgroundColor: theme.secondary,
         fontFamily: "Rubik-Regular",
         color: theme.basic,
         fontSize: 16,
-        padding: 15,
+        padding: 10,
+        paddingRight: 15
       }}
       {...props}
     />
@@ -27,7 +28,7 @@ export const TextInput = (props) => {
 export const LabelInput = ({ label, ...props }) => {
   return (
     <View>
-      <Lead style={{ fontWeight: "300", fontSize: 14, marginBottom: 4 }}>
+      <Lead style={{ fontWeight: "300", fontSize: 14, marginBottom: 5 }}>
         {label}
       </Lead>
       <TextInput {...props} />

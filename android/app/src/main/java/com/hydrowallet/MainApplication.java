@@ -6,6 +6,8 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+//import org.reactnative.camera.RNCameraPackage;
+//import org.reactnative.camera.RNCameraPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.facebook.react.ReactInstanceManager;
@@ -14,6 +16,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.hydrowallet.generated.BasePackageList;
+
 
 import org.unimodules.adapters.react.ReactAdapterPackage;
 import org.unimodules.adapters.react.ModuleRegistryAdapter;
@@ -44,7 +47,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
+    //  new RNCameraPackage();
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
+
       return packages;
     }
 

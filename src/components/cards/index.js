@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { Text, View, TouchableOpacity, Image, Animated } from "react-native";
+import { Text, View, TouchableOpacity, Image, Animated, Dimensions } from "react-native";
 import { Paragraph, Lead } from "../Typography";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { ThemeContext } from "../../hooks/useTheme";
+const { height, width } = Dimensions.get('window');
 
 export const TxFeedCard = ({
   amount,
@@ -70,37 +71,35 @@ export const NotificationProfileCard = ({
       style={{
         backgroundColor: theme.secondaryCard,
         paddingVertical: 40,
-        width: "100%",
-        marginTop: "5%",
-        marginLeft: 10,
-        marginRight: 1,
+        width: width - width * 0.1,
+        marginTop: width * 0.05,
         alignItems: "center",
-        paddingHorizontal: 10,
-
-        display: "flex",
+        paddingHorizontal: width * 0.05,
         flexDirection: "row",
         justifyContent: "space-between",
         borderRadius: 10,
+        marginBottom: width * 0.05,
       }}
       {...props}
     >
-      <Image
-        source={image}
-        style={{ borderRadius: 50, width: 70, height: 70 }}
-      />
-      <View>
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-            width: "90%",
-          }}
-        >
-          <Lead>HYDRO-ID {hydroId}</Lead>
-          <Paragraph style={{ textAlign: "right" }}>{userInfo}</Paragraph>
-        </View>
+
+      <View style={{ flex: 0.3 }}>
+        <Image
+          source={image}
+          style={{ borderRadius: 50, width: width * 0.15, height: width * 0.15 }}
+        />
       </View>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+        }}
+      >
+        <Lead>HYDRO-ID {hydroId}</Lead>
+        <Paragraph style={{ textAlign: "right" }}>{userInfo}</Paragraph>
+      </View>
+
     </View>
   );
 };
@@ -118,10 +117,9 @@ export const NotificationCard = ({
       style={{
         backgroundColor: theme.secondaryCard,
         padding: 10,
-        width: "45%",
-        marginTop: "10%",
-        marginLeft: 10,
-        marginRight: 5,
+        width: (width - width * 0.13) / 2,
+        marginVertical: width * 0.02,
+        marginHorizontal: 5,
         borderRadius: 10,
         display: "flex",
         justifyContent: "center",
@@ -131,13 +129,13 @@ export const NotificationCard = ({
     >
       <Image
         source={image}
-        style={{ borderRadius: 50, width: 70, height: 70 }}
+        style={{ borderRadius: 50, width: width * 0.15, height: width * 0.15, marginTop: 5 }}
       />
 
-      <Lead style={{ fontSize: 15, textAlign: "center" }}>
+      <Lead style={{ fontSize: 15, textAlign: "center", paddingTop: 10 }}>
         {notificationInfo}
       </Lead>
-      <Paragraph style={{ fontSize: 14 }}>{value}</Paragraph>
+      <Paragraph style={{ fontSize: 14, marginBottom: 5 }}>{value}</Paragraph>
     </View>
   );
 };
@@ -156,35 +154,33 @@ export const SettingsCard = ({
     <View
       style={{
         backgroundColor: theme.secondaryCard,
-        paddingVertical: 20,
-        width: "100%",
-        marginTop: "5%",
-        marginLeft: 10,
-        marginRight: 1,
-        paddingHorizontal: 20,
+        paddingVertical: width * 0.05,
+        width: width - width * 0.1,
+        marginTop: width * 0.05,
+        paddingHorizontal: width * 0.05,
         borderRadius: 10,
+        marginBottom: width * 0.05,
       }}
       {...props}
     >
       <View
         style={{
-          display: "flex",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
         <Lead>Choose Wallet to configure</Lead>
-
         <TouchableOpacity>
           <Icon name="question-circle" color={theme.basic} size={18} />
         </TouchableOpacity>
       </View>
+
       <View
         style={{
           display: "flex",
           flexDirection: "row",
-          marginVertical: "10%",
+          marginVertical: width * 0.03,
           justifyContent: "space-between",
         }}
       >
@@ -194,26 +190,22 @@ export const SettingsCard = ({
             flexDirection: "row",
           }}
         >
-          {/* <TouchableOpacity onPress={onWalletPress}>
+          {/* <TouchableOpacity onPress={onWalletPress} style={{ paddingRight: width * 0.04 }}>
             <Image source={require("../../assets/images/bitcoin.png")} />
           </TouchableOpacity> */}
-          <TouchableOpacity
-            onPress={onWalletPress}
-            style={{ marginHorizontal: "3%" }}
-          >
+          <TouchableOpacity onPress={onWalletPress} style={{ paddingRight: width * 0.02 }} >
             <Image source={require("../../assets/images/ethereum.png")} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={onWalletPress}>
+          <TouchableOpacity onPress={onWalletPress} style={{ paddingHorizontal: width * 0.02 }}>
             <Image source={require("../../assets/images/hydro.png")} />
           </TouchableOpacity>
           <TouchableOpacity
-
             onPress={onAddPress}
             style={{
               width: 30,
               height: 30,
               borderRadius: 20,
-              marginHorizontal: "3%",
+              marginHorizontal: width * 0.02,
               borderColor: theme.basic,
               borderWidth: 2,
               backgroundColor: theme.background,
@@ -226,7 +218,7 @@ export const SettingsCard = ({
           </TouchableOpacity>
         </View>
       </View>
-      <View>
+      <View style={{ marginTop: 10 }}>
         <Lead>Wallet Address</Lead>
         <TouchableOpacity
           onPress={onIdPress}
@@ -234,6 +226,7 @@ export const SettingsCard = ({
             padding: 5,
             backgroundColor: theme.secondary,
             borderRadius: 5,
+            marginTop: 5
           }}
         >
           <Paragraph>{hydroAddress}</Paragraph>
@@ -256,7 +249,61 @@ export const SettingsCard = ({
     </View>
   );
 };
+export const DepositCard = ({
+  hydroAddress,
+  onWalletPress,
+  onIdPress,
+  onAddPress,
+  customToken,
+  ...props
+}) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <View
+      style={{
+        backgroundColor: theme.secondaryCard,
+        // paddingVertical: width * 0.05,
+        width: width - width * 0.1,
+        //marginTop: width * 0.05,
+        //paddingHorizontal: width * 0.05,
+        borderRadius: 10,
+        //  marginBottom: width * 0.05,
+      }}
+      {...props}
+    >
 
+      <View style={{}}>
+        <Lead>Wallet Address</Lead>
+        <TouchableOpacity
+          onPress={onIdPress}
+          style={{
+            padding: 5,
+            backgroundColor: theme.secondary,
+            borderRadius: 5,
+            // marginTop: 5
+          }}
+        >
+          <Paragraph>{hydroAddress}</Paragraph>
+        </TouchableOpacity>
+      </View>
+      {customToken && Object.keys(customToken).length > 0 &&
+        <View style={{ marginTop: 10 }}>
+          <Lead>Custom Token</Lead>
+          <TouchableOpacity
+            style={{
+              padding: 5,
+              backgroundColor: theme.secondary,
+              borderRadius: 5,
+            }}
+          >
+            <Paragraph>{customToken.symbol}</Paragraph>
+          </TouchableOpacity>
+        </View>
+      }
+    </View>
+  );
+};
 export const SettingsItemCard = ({ value, onPress, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
@@ -266,9 +313,9 @@ export const SettingsItemCard = ({ value, onPress, ...props }) => {
       style={{
         backgroundColor: theme.secondaryCard,
         padding: 10,
-        width: "45%",
-        marginTop: "4%",
-        marginLeft: 15,
+        width: (width - width * 0.13) / 2,
+        marginVertical: width * 0.02,
+        marginHorizontal: 5,
         borderRadius: 10,
         display: "flex",
         justifyContent: "center",
@@ -289,9 +336,9 @@ export const SnowflakeItemCard = ({ value, onPress, ...props }) => {
       style={{
         backgroundColor: theme.secondaryCard,
         padding: 10,
-        width: "100%",
-        marginTop: "4%",
-        marginLeft: 15,
+        width: (width - width * 0.1),
+        marginVertical: width * 0.02,
+        marginHorizontal: 5,
         borderRadius: 10,
         display: "flex",
         justifyContent: "center",
@@ -311,12 +358,12 @@ export const WalletCard = ({ balance, address, cardName, withdraw, transfer, dep
     <View style={{
       position: 'relative',
       backgroundColor: theme.primary,
-      width: '100%',
-      height: 220,
+      width: width - width * 0.10,
+      height: 200,
       borderRadius: 25,
-      paddingHorizontal: 30,
+      paddingHorizontal: 20,
       paddingVertical: 20,
-      marginTop: 30,
+      marginTop: width * 0.06,
       // alignItems: 'center',
       // justifyContent: 'space-between',
       shadowColor: '#56D5D0',
@@ -337,63 +384,37 @@ export const WalletCard = ({ balance, address, cardName, withdraw, transfer, dep
         }}
         source={require('../../assets/images/map.png')}
       />
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-        }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5 }}>
         <Image source={require('../../assets/images/hydro.png')} />
-        <View style={{ marginLeft: '40%' }}>
-          <Paragraph
-            style={{
-              fontWeight: 'bold',
-              fontSize: 20,
-            }}>
+        <View style={{ position: 'absolute', right: 10 }}>
+          <Paragraph style={{ fontWeight: 'bold', fontSize: 20 }}>
             {balance} HYDRO
           </Paragraph>
         </View>
       </View>
-      <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-end' }}>
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-around' }}></View>
-        <View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-around' }}>
-          <View style={{
-            width: 70, height: 70, shadowColor: "#3FAC9D",
-            alignItems: "center",
-            shadowOffset: { width: 0, height: 12, },
-            shadowOpacity: 0.58,
-            shadowRadius: 16.0,
-          }}>
-            <TouchableOpacity onPress={withdraw} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
-              <Icon name="arrow-down" color={"#fff"} size={28} />
-            </TouchableOpacity>
-            <Text style={{ color: 'white' }}>Withdraw</Text>
-          </View>
-          <View style={{
-            borderRadius: 70 / 2, width: 70, height: 70, shadowColor: "#3FAC9D",
-            shadowOffset: { width: 0, height: 12, },
-            alignItems: "center",
-            shadowOpacity: 0.58,
-            shadowRadius: 16.0,
-          }}>
-            <TouchableOpacity onPress={deposit} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
-              <Icon name="arrow-up" color={"#fff"} size={28} />
-            </TouchableOpacity>
-            <Text style={{ color: 'white' }}>deposit</Text>
-          </View>
-          <View style={{
-            borderRadius: 70 / 2, width: 70, height: 70, shadowColor: "#3FAC9D",
-            shadowOffset: { width: 0, height: 12, },
-            alignItems: "center",
-            shadowOpacity: 0.58,
-            shadowRadius: 16.0,
-          }}>
-            <TouchableOpacity onPress={transfer} style={{ backgroundColor: 'darkblue', marginBottom: 10, borderRadius: 70 / 2, height: '100%', width: 70, justifyContent: "center", alignItems: "center", }}>
-              <Icon name="exchange-alt" color={"#fff"} size={28} />
-            </TouchableOpacity>
-            <Text style={{ color: 'white' }}>Transfer</Text>
-          </View>
+      <View style={{ flexDirection: 'row', paddingTop: 20 }}>
+
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity underlayerColor={'red'} onPress={withdraw} style={{ backgroundColor: 'darkblue', borderRadius: 70 / 2, height: 70, width: 70, justifyContent: "center", alignItems: "center" }}>
+            <Icon name="arrow-down" color={"#fff"} size={28} />
+          </TouchableOpacity>
+          <Text style={{ color: 'white', paddingTop: 10, fontWeight: 'bold', letterSpacing: 0.8 }}>Withdraw</Text>
         </View>
+
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity onPress={deposit} style={{ backgroundColor: 'darkblue', borderRadius: 70 / 2, height: 70, width: 70, justifyContent: "center", alignItems: "center" }}>
+            <Icon name="arrow-up" color={"#fff"} size={28} />
+          </TouchableOpacity>
+          <Text style={{ color: 'white', paddingTop: 10, fontWeight: 'bold', letterSpacing: 0.8 }}>Deposit</Text>
+        </View>
+
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <TouchableOpacity onPress={transfer} style={{ backgroundColor: 'darkblue', borderRadius: 70 / 2, height: 70, width: 70, justifyContent: "center", alignItems: "center" }}>
+            <Icon name="exchange-alt" color={"#fff"} size={28} />
+          </TouchableOpacity>
+          <Text style={{ color: 'white', paddingTop: 10, fontWeight: 'bold', letterSpacing: 0.8 }}>Transfer</Text>
+        </View>
+
       </View>
       {/* <Paragraph
         style={{
@@ -428,14 +449,15 @@ export const ComingSoonCard = ({ ...props }) => {
   return (
     <View
       style={{
+        position: 'relative',
         backgroundColor: theme.primary,
-        height: 220,
+        width: width - width * 0.10,
+        height: 200,
         borderRadius: 25,
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingVertical: 20,
-        marginTop: 30,
-        alignItems: 'center',
-        // justifyContent: 'space-between',
+        marginTop: width * 0.06,
+        justifyContent: 'center', alignItems: 'center',
         shadowColor: '#56D5D0',
         shadowOffset: {
           width: 0,
@@ -446,7 +468,16 @@ export const ComingSoonCard = ({ ...props }) => {
       }}
       {...props}
     >
-
+      <Image
+        style={{
+          position: 'absolute',
+          left: 10,
+          right: 0,
+          top: 0,
+          bottom: 0,
+        }}
+        source={require('../../assets/images/map.png')}
+      />
       <View
         style={{
           flex: 1,
@@ -465,7 +496,8 @@ export const ComingSoonCard = ({ ...props }) => {
             style={{
               fontWeight: 'bold',
               fontSize: 25,
-              color: 'white'
+              color: 'white',
+              lineHeight: width * 0.15
             }}>
             COMING SOON...
           </Paragraph>

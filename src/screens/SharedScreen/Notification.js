@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView, Dimensions } from "react-native";
 import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { Paragraph } from "../../components/Typography";
 import LottieView from 'lottie-react-native';
@@ -8,10 +8,11 @@ import {
   NotificationCard,
 } from "../../components/cards";
 import Button from "../../components/Button";
+const { height, width } = Dimensions.get('window');
 
 const Notification = ({ navigation, route }) => {
 
-  const {hydroId} = route.params
+  const { hydroId } = route.params
   const NotificationDetails = [
     {
       image: require("../../assets/images/emma.png"),
@@ -53,36 +54,27 @@ const Notification = ({ navigation, route }) => {
   ];
   return (
     <SecondaryBgView>
-      <SecondaryHeader.Back
-        title="Notification"
-        onBackPress={navigation.goBack}
-      />
+      <SecondaryHeader.Back title="Notification" onBackPress={navigation.goBack} />
 
       <NotificationProfileCard
         image={require("../../assets/images/emma.png")}
         hydroId={hydroId}
         userInfo="Information about the users account"
       />
-       <View
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <LottieView
-            source={require('../../assets/notif.json')}
-            autoPlay
-            key={1}
-            loop
-            style={{ width: '40%', height: '100%', }}
-          />
-        </View>
-        <Paragraph
-          style={{
-            textAlign: "center",
-            fontWeight: "bold",
-            fontSize: 22,
-            
-          }}
-        >
+
+      <View style={{ paddingVertical: width * 0.05, justifyContent: 'center', alignItems: 'center' }}>
+        <LottieView
+          source={require('../../assets/notif.json')}
+          autoPlay
+          key={1}
+          loop
+        />
+
+        <Paragraph style={{ textAlign: "center", fontWeight: "bold", fontSize: 22, paddingTop: width * 0.5 }} >
           You have no Notification
         </Paragraph>
+      </View>
+
       {/* <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -91,6 +83,7 @@ const Notification = ({ navigation, route }) => {
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "row",
+            marginBottom: width * 0.03, 
           }}
         >
           {NotificationDetails.map((notificationItem, id) => (

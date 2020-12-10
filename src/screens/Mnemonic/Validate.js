@@ -8,23 +8,27 @@ import {
   TouchableOpacity,
   TextInput,
   TouchableWithoutFeedback,
-  Clipboard
+  Clipboard,
+  StatusBar,
+  ToastAndroid
 } from 'react-native';
 var { width, height } = Dimensions.get('window');
 
 import bip39 from 'react-native-bip39'
-import { Button, Input, Header } from "react-native-elements";
+//import {ethers,wallet} from 'ethers';
+import { Button, Input } from "react-native-elements";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
 import AsyncStorage from "@react-native-community/async-storage";
 import NetInfo from "@react-native-community/netinfo";
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Toast from 'react-native-toast-message';
-
+import { ethers } from 'ethers';
 import crypto from 'crypto'
 import { Buffer } from 'buffer'
 import axios from 'axios';
- 
+import { BgView, Header } from "../../components/Layouts";
+const wallet = ethers.Wallet.createRandom();
 
 export default class Validate extends React.Component {
   constructor(props) {
@@ -32,7 +36,7 @@ export default class Validate extends React.Component {
     this.state = {
       mnemonic: null,
       spinner: false,
-      privateKey: null,
+      privateKey: '',
       publicKey: null,
       isGenerate: false,
       mnemonicValue: '',
@@ -50,6 +54,7 @@ export default class Validate extends React.Component {
       console.log(
         'This is connection in internet check component => ',
         state.isConnected,
+
       );
       console.log(state)
       if (this.state.connection !== state.isConnected) {
@@ -63,6 +68,29 @@ export default class Validate extends React.Component {
     this._netSubscription();
   }
 
+  // generateKeys = async (value) => {                              
+  //   this.setState({ spinner: true }, async () => {
+  //     axios.post('http://takedoodles.com:8080/hdkey/', {
+  //       mnemonic: value //await bip39.generateMnemonic(128)
+  //     })
+  //       .then(response => {
+  //         if (response.data.status) {
+  //           console.log(response.data)
+  //           this.setState({
+  //             spinner: false,
+  //             isGenerate: response.data.status,
+  //             privateKey: response.data.root.xpriv,
+  //             publicKey: response.data.root.xpub
+  //           })
+  //         }
+  //       })
+  //       .catch(error => {
+  //         this.setState({ spinner: false })
+  //         alert(error);
+  //       });
+  //   })
+  // }
+
   generateKeys = async (value) => {
     this.setState({ spinner: true }, async () => {
       axios.post('http://takedoodles.com:8080/hdkey/', {
@@ -70,11 +98,12 @@ export default class Validate extends React.Component {
       })
         .then(response => {
           if (response.data.status) {
+            console.log(response.data)
             this.setState({
               spinner: false,
               isGenerate: response.data.status,
-              privateKey: response.data.root.xpriv,
-              publicKey: response.data.root.xpub
+              privateKey: wallet.privateKey,
+              publicKey: wallet.address,
             })
           }
         })
@@ -85,13 +114,13 @@ export default class Validate extends React.Component {
     })
   }
 
-  check = () => {  
+  check = () => {
     const { connection, mnemonicValue } = this.state;
-    if(!connection) {
+    if (!connection) {
       this.connectToInternet();
       return;
     }
-    
+
     if (mnemonicValue == '') {
       this.setState({ errorMessage: 'Enter BIP39 Mnemonic' });
       return;
@@ -110,11 +139,11 @@ export default class Validate extends React.Component {
 
   generateENCKeys = () => {
     const { connection, password } = this.state;
-    if(!connection) {
+    if (!connection) {
       this.connectToInternet();
       return;
     }
-    
+
     if (password == '') {
       this.setState({ errorPasswordMessage: 'Enter Password' });
       return;
@@ -125,8 +154,9 @@ export default class Validate extends React.Component {
         key: this.state.privateKey,
         password: this.state.password
       })
-        .then(response => {  
+        .then(response => {
           if (response.data.status) {
+            console.log(response.data.key)
             this.setState({
               spinner: false,
               isGenerateKey: response.data.status,
@@ -139,14 +169,19 @@ export default class Validate extends React.Component {
           alert(error);
         });
     })
-    
+
   }
 
   storeData = async () => {
     try {
+      await AsyncStorage.setItem('@private_key', this.state.privateKey)
+    } catch (error) {
+      console.log(error)
+    }
+    try {
       await AsyncStorage.setItem('@encrypted_Key', this.state.encKeyFinal)
       setTimeout(() => {
-        this.props.navigation.navigate('register');
+        this.props.navigation.navigate("permissions", { address: this.props.route.params.address });
       }, 1000)
     } catch (e) {
       console.log(e)
@@ -161,156 +196,162 @@ export default class Validate extends React.Component {
     });
   }
 
-  get_clipboard_word = async() => {
+  get_clipboard_word = async () => {
     var textHolder = await Clipboard.getString();
     this.setState({
       mnemonicValue: textHolder
     })
-  }   
+  }
+
+  CopyToClipboard = async (string) => {
+    await Clipboard.setString(string);
+    ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
+  };
 
   render() {
     const { mnemonic, isGenerateKey, encKeyFinal, secureTextEntry, privateKey, publicKey, isGenerate, mnemonicValue, password } = this.state;
     return (
-      <View style={styles.container}>
-        <Spinner
-          visible={this.state.spinner}
-          small={'small'}
-        />
-        <Header
-          barStyle="light-content"
-          centerComponent={{
-            text: 'Mnemonic Code', style: {
-              color: '#fff',
-              fontFamily: "Rubik-Bold",
-              fontSize: width * 0.05
-            }
-          }}
-          containerStyle={{
-            backgroundColor: '#2960CA'
-          }}
-        />
+      <BgView>
+        <View style={styles.container}>
+          <Spinner
+            visible={this.state.spinner}
+            small={'small'}
+            color={'#2960CA'}
+          />
 
-        {!isGenerate &&
-          <View style={styles.topContainer}>
-            <Text style={styles.label}>BIP39 Mnemonic</Text>
-            <View style={styles.containerCode}>
-              <TextInput
-                placeholder='Please enter BIP39 Mnemonic...'
-                multiline={true}
-                placeholderTextColor={'#7777'}
-                textAlignVertical={'top'}
-                style={[styles.input, { height: 100 }]}
-                returnKeyType={'done'}
-                onChangeText={value => this.setState({ mnemonicValue: value })}
-                value={mnemonicValue}
-                autoCapitalize={'none'}
-                onFocus={()=>this.setState({ mnemonicValue: null })}
-              />
-            </View>
-            {this.state.errorMessage &&
-              <Text style={styles.error}>{this.state.errorMessage}</Text>
-            }
+          <Header.Back onBackPress={() => this.props.navigation.goBack()} title="Mnemonic Code" containerStyle={styles.header} />
 
-
-
-            <View style={{
-              position: 'absolute', right: width * 0.05, bottom: 0, flexDirection:'row'
-            }}>
-              <Button
-                title={'Paste'}
-                onPress={() => this.get_clipboard_word()}
-                titleStyle={[styles.buttonTitle, { color: '#757575'}]}
-                buttonStyle={[styles.button, { marginRight: width * 0.02, backgroundColor: '#e0e0e0'}]}
-              />
-              <Button
-                disabled={!mnemonicValue ? true : false}
-                title={'Submit'}
-                onPress={() => this.check()}
-                titleStyle={styles.buttonTitle}
-                buttonStyle={styles.button}
-              />
-            </View>
-          </View>
-        }
-
-
-        <View style={styles.main}>
-          {isGenerate &&
-            <View>
-              <View style={styles.seprate} />
-              <Text style={styles.title}>Private Key</Text>
-              <Text style={styles.subtitle}>{publicKey}</Text>
-              <View style={styles.seprate} />
-              <Text style={styles.title}>Public Key</Text>
-              <Text style={styles.subtitle}>{privateKey}</Text>
-
-
-              <View style={{ marginTop: width * 0.05}}>
-                <Text style={styles.label}>Password</Text>
-                <View style={styles.inputContainer}>
-                  <View style={{ flex: 1 }}>
-                    <TextInput
-                      placeholder='Password'
-                      placeholderTextColor={'#7777'}
-                      secureTextEntry={this.state.secureTextEntry}
-                      style={styles.input}
-                      returnKeyType={'done'}
-                      onChangeText={value => this.setState({ password: value })}
-                      onFocus={()=>this.setState({ errorPasswordMessage: null })}
-                      value={password}
-                    />
-                  </View>
-                  <View style={{ flex: 0.2, height: 45, justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity onPress={() => this.setState({ secureTextEntry: !this.state.secureTextEntry })}>
-                      <Icon name={!secureTextEntry ? 'visibility-off' : 'visibility'} size={width * 0.07} color={'#9e9e9e'} />
-                    </TouchableOpacity>
-                  </View>
+          <KeyboardAwareScrollView contentContainerStyle={{ height: height - 50 - StatusBar.currentHeight }} showsVerticalScrollIndicator={false}>
+            {!isGenerate &&
+              <View style={styles.topContainer}>
+                <Text style={styles.label}>BIP39 Mnemonic</Text>
+                <View style={styles.containerCode}>
+                  <TextInput
+                    placeholder='Please enter BIP39 Mnemonic...'
+                    multiline={true}
+                    placeholderTextColor={'#7777'}
+                    textAlignVertical={'top'}
+                    style={[styles.input, { height: 100 }]}
+                    returnKeyType={'done'}
+                    onChangeText={value => this.setState({ mnemonicValue: value })}
+                    value={mnemonicValue}
+                    autoCapitalize={'none'}
+                    onFocus={() => this.setState({ mnemonicValue: null })}
+                  />
                 </View>
-                {this.state.errorPasswordMessage &&
-                  <Text style={styles.error}>{this.state.errorPasswordMessage}</Text>
+                {this.state.errorMessage &&
+                  <Text style={styles.error}>{this.state.errorMessage}</Text>
                 }
+
+
+
+                <View style={{
+                  position: 'absolute', right: width * 0.05, bottom: 0, flexDirection: 'row'
+                }}>
+                  <Button
+                    title={'Paste'}
+                    onPress={() => this.get_clipboard_word()}
+                    titleStyle={[styles.buttonTitle, { color: '#757575' }]}
+                    buttonStyle={[styles.button, { marginRight: width * 0.02, backgroundColor: '#e0e0e0' }]}
+                  />
+                  <Button
+                    disabled={!mnemonicValue ? true : false}
+                    title={'Submit'}
+                    onPress={() => this.check()}
+                    titleStyle={styles.buttonTitle}
+                    buttonStyle={styles.button}
+                  />
+                </View>
               </View>
-
-            </View>
-          }
-
-          {isGenerateKey && 
-            <View style={{ marginTop: 10}}>
-              <View style={styles.seprate} />
-              <Text style={styles.title}>Encrypted Key</Text>
-              <Text style={styles.subtitle}>{encKeyFinal}</Text>
-            </View>
-          }
-          <View style={styles.bottom}>
-          
+            }
 
 
-            <View style={[styles.box, {
-              backgroundColor: isGenerate && password ? '#2960CA' : '#e0e0e0',
-              borderColor: isGenerate && password ? '#2960CA' : '#e0e0e0'
-            }]}>
+            <View style={styles.main}>
+              {isGenerate &&
+                <View>
+                  <View style={styles.seprate} />
+                  <Text style={styles.title}>Private Key</Text>
+                  <TouchableOpacity style={styles.boxgray} onPress={() => this.CopyToClipboard(privateKey)}>
+                    <Text style={styles.subtitle}>{privateKey}</Text>
+                  </TouchableOpacity>
+
+                  <View style={styles.seprate} />
+                  <Text style={styles.title}>Public Key</Text>
+                  <TouchableOpacity style={styles.boxgray} onPress={() => this.CopyToClipboard(publicKey)}>
+                    <Text style={styles.subtitle}>{publicKey}</Text>
+                  </TouchableOpacity>
+
+
+                  <View style={{ marginTop: width * 0.05 }}>
+                    <Text style={styles.label}>Password</Text>
+                    <View style={styles.inputContainer}>
+                      <View style={{ flex: 1 }}>
+                        <TextInput
+                          placeholder='Password'
+                          placeholderTextColor={'#7777'}
+                          secureTextEntry={this.state.secureTextEntry}
+                          style={styles.input}
+                          returnKeyType={'done'}
+                          onChangeText={value => this.setState({ password: value })}
+                          onFocus={() => this.setState({ errorPasswordMessage: null })}
+                          value={password}
+                        />
+                      </View>
+                      <View style={{ flex: 0.2, height: 45, justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={() => this.setState({ secureTextEntry: !this.state.secureTextEntry })}>
+                          <Icon name={!secureTextEntry ? 'visibility-off' : 'visibility'} size={width * 0.07} color={'#9e9e9e'} />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    {this.state.errorPasswordMessage &&
+                      <Text style={styles.error}>{this.state.errorPasswordMessage}</Text>
+                    }
+                  </View>
+
+                </View>
+              }
+
               {isGenerateKey &&
-              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} 
-              onPress={() => this.storeData()}>
-                <Text style={[styles.next, { color: isGenerateKey ? '#FFFFFF' : '#757575' }]}>Save Encrypted Key</Text>
-                <Icon name='forward' size={width * 0.05} color={isGenerateKey ? '#FFFFFF' : '#757575'} style={styles.icon} />
-              </TouchableOpacity>
+                <View style={{ marginTop: 10 }}>
+                  <View style={styles.seprate} />
+                  <Text style={styles.title}>Encrypted Key</Text>
+                  <TouchableOpacity style={styles.boxgray} onPress={() => this.CopyToClipboard(encKeyFinal)}>
+                    <Text style={styles.subtitle}>{encKeyFinal}</Text>
+                  </TouchableOpacity>
+                </View>
               }
-              {!isGenerateKey &&
-              <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} 
-              onPress={isGenerate ? () => this.generateENCKeys() : () => {}}>
-                <Text style={[styles.next,{
-                  color: isGenerate && password ? '#FFFFFF' : '#757575'
-                }]}>Generate Encrypted Key</Text>
-                <Icon name='forward' size={width * 0.05} color={isGenerate && password ? '#FFFFFF' : '#757575'} style={styles.icon} />
-              </TouchableOpacity>
-              }
-            </View>
-          </View>
-        </View>
+              <View style={styles.bottom}>
 
-        <Toast ref={(ref) => Toast.setRef(ref)} />
-      </View>
+
+
+                <View style={[styles.box, {
+                  backgroundColor: isGenerate && password ? '#2960CA' : '#e0e0e0',
+                  borderColor: isGenerate && password ? '#2960CA' : '#e0e0e0'
+                }]}>
+                  {isGenerateKey &&
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
+                      onPress={() => this.storeData()}>
+                      <Text style={[styles.next, { color: isGenerateKey ? '#FFFFFF' : '#757575' }]}>Save Encrypted Key</Text>
+                      <Icon name='forward' size={width * 0.05} color={isGenerateKey ? '#FFFFFF' : '#757575'} style={styles.icon} />
+                    </TouchableOpacity>
+                  }
+                  {!isGenerateKey &&
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
+                      onPress={isGenerate ? () => this.generateENCKeys() : () => { }}>
+                      <Text style={[styles.next, {
+                        color: isGenerate && password ? '#FFFFFF' : '#757575'
+                      }]}>Generate Encrypted Key</Text>
+                      <Icon name='forward' size={width * 0.05} color={isGenerate && password ? '#FFFFFF' : '#757575'} style={styles.icon} />
+                    </TouchableOpacity>
+                  }
+                </View>
+              </View>
+            </View>
+
+            <Toast ref={(ref) => Toast.setRef(ref)} />
+          </KeyboardAwareScrollView>
+        </View>
+      </BgView>
     );
   }
 }
@@ -318,8 +359,14 @@ export default class Validate extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
   },
 
+  header: {
+    marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+    paddingTop: 0,
+    height: 50
+  },
   main: {
     paddingHorizontal: width * 0.05,
     flex: 1
@@ -362,21 +409,22 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     flex: 0.4,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 40,
   },
 
   next: {
-    fontFamily: "Rubik-Bold",
-    fontSize: width * 0.055,
+    fontFamily: "Rubik-Regular",
+    fontSize: width * 0.05,
     color: '#757575',
     paddingLeft: 15,
-    paddingVertical: 8,
+    paddingVertical: 5,
   },
 
   icon: {
     paddingTop: 2,
     paddingLeft: 5,
-    paddingRight: 8
+    paddingRight: 5
   },
 
   button: {
@@ -387,8 +435,8 @@ const styles = StyleSheet.create({
   },
 
   buttonTitle: {
-    fontFamily: "Rubik-Bold",
-    fontSize: width * 0.06,
+    fontFamily: "Rubik-Regular",
+    fontSize: width * 0.05,
   },
 
   label: {
@@ -422,9 +470,18 @@ const styles = StyleSheet.create({
   },
 
   error: {
-    color: 'red', 
+    color: 'red',
     fontFamily: "Rubik-Medium",
     paddingTop: 3
+  },
+
+  boxgray: {
+    backgroundColor: '#eee',
+    paddingVertical: 5,
+    width: width - width * 0.1,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    borderRadius: 10,
   }
 });
 

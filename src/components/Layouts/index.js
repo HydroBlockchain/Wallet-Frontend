@@ -14,8 +14,8 @@ export const Header = (props) => {
       containerStyle={{
         backgroundColor: theme.background,
         paddingHorizontal: 10,
-        height: 60,
         paddingTop: 0,
+        height: 50,
         ...props.containerStyle,
       }}
     />
@@ -31,7 +31,7 @@ export const SecondaryHeader = (props) => {
       containerStyle={{
         backgroundColor: theme.secondaryBackground,
         paddingHorizontal: 10,
-        height: 60,
+        height: 50,
         paddingTop: 0,
         ...props.containerStyle,
       }}
@@ -44,7 +44,6 @@ export const HeaderWithBack = ({ title, onBackPress, containerStyle }) => {
 
   return (
     <React.Fragment>
-      {Platform.OS !== "ios" ? <View style={{ marginTop: "10%" }} /> : null}
       <Header
         leftComponent={{
           icon: "arrow-back",
@@ -84,7 +83,6 @@ export const SecondaryHeaderWithBack = ({
 
   return (
     <React.Fragment>
-      {Platform.OS !== "ios" ? <View style={{ marginTop: "10%" }} /> : null}
       <Header
         leftComponent={{
           icon: "arrow-back",
@@ -100,7 +98,7 @@ export const SecondaryHeaderWithBack = ({
             fontSize: 18,
           },
         }}
-        containerStyle={{ backgroundColor: theme.secondaryBackground }}
+        containerStyle={{ backgroundColor: theme.secondaryBackground, marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight, }}
       />
     </React.Fragment>
   );
@@ -124,7 +122,7 @@ export const BgView = ({ children, style }) => {
         flex: 1,
         backgroundColor: theme.background,
         ...style,
-        paddingHorizontal: "5%",
+        paddingHorizontal: "1%",
       }}
     >
       <StatusBar barStyle="light-content" backgroundColor={theme.primary} />
@@ -147,7 +145,7 @@ export const SecondaryBgView = ({ children, style }) => {
         backgroundColor: theme.secondaryBackground,
         alignItems: "center",
         ...style,
-        paddingHorizontal: "5%",
+        paddingHorizontal: "1%",
       }}
     >
       <StatusBar barStyle="light-content" backgroundColor={theme.primary} />

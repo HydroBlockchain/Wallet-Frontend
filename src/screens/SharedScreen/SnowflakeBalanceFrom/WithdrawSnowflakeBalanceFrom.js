@@ -3,12 +3,18 @@ import {
     View,
     ScrollView,
     KeyboardAvoidingView,
-    Text
+    Text,
+    Dimensions,
+    StyleSheet,
+    StatusBar
 } from "react-native";
 import { LabelInput } from "../../../components/Forms";
 import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
 import w3s from '../../../libs/Web3Service';
+const { height, width } = Dimensions.get('window');
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 class WithdrawSnowflakeBalanceFrom extends Component {
     state = {
@@ -57,9 +63,10 @@ class WithdrawSnowflakeBalanceFrom extends Component {
     render() {
         return (
             <BgView>
-                <Header.Back title="Withdraw Snowflake Balance From" onBackPress={this.props.navigation.goBack} />
-                <ScrollView>
-                    <KeyboardAvoidingView>
+                <Header.Back title="Withdraw Snowflake Balance From" onBackPress={this.props.navigation.goBack} containerStyle={styles.header} />
+                <View style={styles.container}>
+                    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{ paddingVertical: width * 0.02 }} />
 
                         <LabelInput
                             label="einFrom"
@@ -99,22 +106,35 @@ class WithdrawSnowflakeBalanceFrom extends Component {
                                 Withdraw Successfully !
                             </Text>
                         }
-                        <View
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "10%",
-                                marginBottom: "10%",
-                            }}
-                        >
+                        <View style={styles.button}>
                             <Button text="Withdraw" onPress={this.withdraw} />
                         </View>
-                    </KeyboardAvoidingView>
-                </ScrollView>
+                    </KeyboardAwareScrollView>
+                </View>
             </BgView>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        paddingHorizontal: width * 0.05
+    },
+
+    header: {
+        marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+        paddingTop: 0,
+        height: 50
+    },
+
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: width * 0.05
+    }
+
+})
 
 export default WithdrawSnowflakeBalanceFrom;

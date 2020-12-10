@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import { View, Image, Clipboard, ToastAndroid, AsyncStorage } from "react-native";
+import { View, Image, Clipboard, ToastAndroid, AsyncStorage, Dimensions, Platform, StatusBar, StyleSheet, ScrollView } from "react-native";
 import { SecondaryBgView, SecondaryHeader } from "../../components/Layouts";
 import { ThemeContext } from "../../hooks/useTheme";
 import { Paragraph } from "../../components/Typography";
 import { SettingsCard, SettingsItemCard } from "../../components/cards";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
+import { add } from "lodash";
+const { height, width } = Dimensions.get('window');
 
 const Settings = ({ navigation, route }) => {
 
@@ -55,6 +57,7 @@ const Settings = ({ navigation, route }) => {
     await Clipboard.setString(address);
     ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
   };
+
   
   const onAddPress = async () => {
     navigation.navigate('addCustomToken')
@@ -66,6 +69,7 @@ const Settings = ({ navigation, route }) => {
   return (
     <SecondaryBgView>
       <SecondaryHeader.Back title="Settings" onBackPress={navigation.goBack} />
+      
       <SettingsCard
         hydroAddress={address}
         onIdPress={CopyToClipboard}
@@ -73,14 +77,14 @@ const Settings = ({ navigation, route }) => {
         customToken={customToken}
       />
 
-      <View
-        style={{
-          flex: 1,
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{  
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "center",
           flexDirection: "row",
-          marginTop: "10%",
+          paddingBottom: width * 0.05
         }}
       >
         <SettingsItemCard value="Export keys" />
@@ -88,13 +92,13 @@ const Settings = ({ navigation, route }) => {
 
         <SettingsItemCard value="Change Password" />
         <SettingsItemCard value="Dark Mode" onPress={toggleTheme} />
-        <SettingsItemCard value="Contact Card" />
+        <SettingsItemCard value="Contact Card" onPress={() => navigation.navigate('contact')}/>
         <SettingsItemCard value="Rate Us" />
         <SettingsItemCard value="Lending" onPress={() => navigation.navigate('comingSoon')} />
         <SettingsItemCard value="Stacking" onPress={() => navigation.navigate('comingSoon')} />
         <SettingsItemCard value="Borrowing" onPress={() => navigation.navigate('comingSoon')} />
         <SettingsItemCard value="Loan" onPress={() => navigation.navigate('comingSoon')} />
-      </View>
+      </ScrollView>
     </SecondaryBgView>
   );
 };

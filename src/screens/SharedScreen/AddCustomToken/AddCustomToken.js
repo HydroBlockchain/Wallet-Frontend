@@ -4,11 +4,16 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     AsyncStorage,
-    ToastAndroid
+    ToastAndroid,
+    Dimensions,
+    Platform, StatusBar, StyleSheet
 } from "react-native";
 import { LabelInput } from "../../../components/Forms";
 import { BgView, Header } from "../../../components/Layouts";
 import Button from "../../../components/Button";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+const { height, width } = Dimensions.get('window');
+
 
 class AddCustomToken extends Component {
     state = {
@@ -35,9 +40,10 @@ class AddCustomToken extends Component {
     render() {
         return (
             <BgView>
-                <Header.Back title="Add Custom Token" onBackPress={this.props.navigation.goBack} />
-                <ScrollView>
-                    <KeyboardAvoidingView>
+                <Header.Back title="Add Custom Token" onBackPress={this.props.navigation.goBack} containerStyle={styles.header} />
+                <View style={styles.container}>
+                    <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{ paddingVertical: width * 0.02 }} />
                         <LabelInput
                             label="Contact Address"
                             placeholder="Contact Address"
@@ -57,22 +63,34 @@ class AddCustomToken extends Component {
                             onChangeText={(value) => this.setState({ decimals: value })}
                         />
 
-                        <View
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                marginTop: "10%",
-                                marginBottom: "10%",
-                            }}
-                        >
+                        <View style={styles.button}>
                             <Button text="Add Token" onPress={this.addCustomToken} />
                         </View>
-                    </KeyboardAvoidingView>
-                </ScrollView>
+                    </KeyboardAwareScrollView>
+                </View>
             </BgView>
         );
     }
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        paddingHorizontal: width * 0.05
+    },
+
+    header: {
+        marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+        paddingTop: 0,
+        height: 50
+    },
+
+    button: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: width * 0.05
+    }
+
+})
 export default AddCustomToken;

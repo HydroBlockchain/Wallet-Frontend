@@ -1,0 +1,246 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.hydrowallet"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="28" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:3:3-75
+11-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:3:20-73
+12    <uses-permission android:name="android.permission.INTERNET" /> <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
+12-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:2:3-64
+12-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:2:20-62
+13    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+13-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:5:3-72
+13-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:5:20-70
+14    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+14-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:6:3-77
+14-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:6:20-75
+15    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+15-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:7:3-72
+15-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:7:20-70
+16    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+16-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:8:3-71
+16-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:8:20-69
+17    <uses-permission android:name="android.permission.VIBRATE" />
+17-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:9:3-63
+17-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:9:20-61
+18    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- These require runtime permissions on M -->
+18-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:10:3-77
+18-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:10:20-75
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:12:3-78
+19-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:12:20-76
+20    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+20-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:13:3-76
+20-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:13:20-74
+21    <uses-permission android:name="android.permission.CAMERA" />
+21-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:14:3-62
+21-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:14:20-60
+22    <uses-permission android:name="android.permission.READ_CONTACTS" />
+22-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:15:3-69
+22-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:15:20-67
+23    <uses-permission android:name="android.permission.READ_CALENDAR" />
+23-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:16:3-69
+23-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:16:20-67
+24    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+24-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:17:3-70
+24-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:17:20-68
+25    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+25-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:18:3-77
+25-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:18:20-75
+26    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+26-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:19:3-68
+26-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:19:20-66
+27    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+27-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:20:3-78
+27-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:20:20-76
+28    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+28-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:21:3-70
+28-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:21:20-68
+29    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+29-->[com.facebook.flipper:flipper:0.33.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\125a49610ed9a7656769a5fe02a895e9\jetified-flipper-0.33.1\AndroidManifest.xml:16:5-76
+29-->[com.facebook.flipper:flipper:0.33.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\125a49610ed9a7656769a5fe02a895e9\jetified-flipper-0.33.1\AndroidManifest.xml:16:22-73
+30    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+30-->[:expo-updates] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-79
+30-->[:expo-updates] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-updates\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-76
+31
+32    <uses-feature
+32-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:11:5-13:36
+33        android:name="android.hardware.camera"
+33-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:12:9-47
+34        android:required="false" />
+34-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:13:9-33
+35    <uses-feature
+35-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:14:5-16:36
+36        android:name="android.hardware.camera.autofocus"
+36-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:15:9-57
+37        android:required="false" />
+37-->[:react-native-camera] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-camera\android\build\intermediates\library_manifest\generalDebug\AndroidManifest.xml:16:9-33
+38
+39    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+39-->[:react-native-udp] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-udp\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-86
+39-->[:react-native-udp] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\react-native-udp\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-83
+40    <uses-permission android:name="android.permission.STORAGE" />
+40-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
+40-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-63
+41    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+41-->[:expo-location] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-77
+41-->[:expo-location] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-74
+42    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+42-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:15:5-98
+42-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:15:22-95
+43    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+43-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:16:5-94
+43-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:16:22-91
+44
+45    <application
+45-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:24:3-53:19
+46        android:name="com.hydrowallet.MainApplication"
+46-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:25:7-38
+47        android:allowBackup="false"
+47-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:29:7-34
+48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+48-->[androidx.core:core:1.5.0-alpha05] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\732a3e75a56d21f48f9a91eeb3b2efca\core-1.5.0-alpha05\AndroidManifest.xml:24:18-86
+49        android:debuggable="true"
+50        android:icon="@mipmap/ic_launcher"
+50-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:27:7-41
+51        android:label="@string/app_name"
+51-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:26:7-39
+52        android:roundIcon="@mipmap/ic_launcher_round"
+52-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:28:7-52
+53        android:theme="@style/AppTheme"
+53-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:30:7-38
+54        android:usesCleartextTraffic="true" >
+54-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\debug\AndroidManifest.xml:6:18-53
+55        <activity
+55-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:31:7-40:20
+56            android:name="com.hydrowallet.SplashActivity"
+56-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:32:13-43
+57            android:label="@string/app_name"
+57-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:34:13-45
+58            android:theme="@style/SplashTheme" >
+58-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:33:13-47
+59            <intent-filter>
+59-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:36:13-39:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:37:17-69
+60-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:37:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:38:17-77
+62-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:38:27-74
+63            </intent-filter>
+64        </activity>
+65
+66        <meta-data
+66-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:41:13-111
+67            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+67-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:41:24-75
+68            android:value="YOUR-APP-URL-HERE" />
+68-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:41:76-109
+69        <meta-data
+69-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:42:5-112
+70            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+70-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:42:16-68
+71            android:value="YOUR-APP-SDK-VERSION-HERE" />
+71-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:42:69-110
+72
+73        <activity
+73-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:44:7-51:18
+74            android:name="com.hydrowallet.MainActivity"
+74-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:45:9-37
+75            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+75-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:47:9-86
+76            android:exported="true"
+76-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:50:8-31
+77            android:label="@string/app_name"
+77-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:46:9-41
+78            android:launchMode="singleTask"
+78-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:48:9-40
+79            android:windowSoftInputMode="adjustResize" >
+79-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:49:9-51
+80        </activity>
+81        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+81-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:52:7-84
+81-->C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\android\app\src\main\AndroidManifest.xml:52:17-81
+82
+83        <meta-data
+83-->[:unimodules-react-native-adapter] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:9-14:91
+84            android:name="org.unimodules.core.AppLoader#react-native-headless"
+84-->[:unimodules-react-native-adapter] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-79
+85            android:value="org.unimodules.adapters.react.apploader.RNHeadlessAppLoader" />
+85-->[:unimodules-react-native-adapter] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-88
+86
+87        <provider
+87-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-27:20
+88            android:name="expo.modules.filesystem.FileSystemFileProvider"
+88-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-74
+89            android:authorities="com.hydrowallet.FileSystemFileProvider"
+89-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-74
+90            android:exported="false"
+90-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-37
+91            android:grantUriPermissions="true" >
+91-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-47
+92            <meta-data
+92-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:70
+93                android:name="android.support.FILE_PROVIDER_PATHS"
+93-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+94                android:resource="@xml/file_system_provider_paths" />
+94-->[:expo-file-system] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-67
+95        </provider>
+96
+97        <service
+97-->[:expo-location] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-18:40
+98            android:name="expo.modules.location.services.LocationTaskService"
+98-->[:expo-location] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
+99            android:exported="false" />
+99-->[:expo-location] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\Desktop\Project\Wallet-master\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+100
+101        <activity
+101-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\ac42a199c8f964ff6ec4c2255960869e\jetified-play-services-base-16.0.1\AndroidManifest.xml:23:9-26:75
+102            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+102-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\ac42a199c8f964ff6ec4c2255960869e\jetified-play-services-base-16.0.1\AndroidManifest.xml:24:13-79
+103            android:exported="false"
+103-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\ac42a199c8f964ff6ec4c2255960869e\jetified-play-services-base-16.0.1\AndroidManifest.xml:25:13-37
+104            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+104-->[com.google.android.gms:play-services-base:16.0.1] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\ac42a199c8f964ff6ec4c2255960869e\jetified-play-services-base-16.0.1\AndroidManifest.xml:26:13-72
+105
+106        <meta-data
+106-->[com.google.android.gms:play-services-basement:16.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\276dbfae9acfe09cdfbe2ef1400c0c48\jetified-play-services-basement-16.1.0\AndroidManifest.xml:23:9-25:69
+107            android:name="com.google.android.gms.version"
+107-->[com.google.android.gms:play-services-basement:16.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\276dbfae9acfe09cdfbe2ef1400c0c48\jetified-play-services-basement-16.1.0\AndroidManifest.xml:24:13-58
+108            android:value="@integer/google_play_services_version" />
+108-->[com.google.android.gms:play-services-basement:16.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\276dbfae9acfe09cdfbe2ef1400c0c48\jetified-play-services-basement-16.1.0\AndroidManifest.xml:25:13-66
+109
+110        <service
+110-->[androidx.room:room-runtime:2.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\d1dd4bffbd2ae299fbe9492b8fb3f644\room-runtime-2.1.0\AndroidManifest.xml:25:9-27:40
+111            android:name="androidx.room.MultiInstanceInvalidationService"
+111-->[androidx.room:room-runtime:2.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\d1dd4bffbd2ae299fbe9492b8fb3f644\room-runtime-2.1.0\AndroidManifest.xml:26:13-74
+112            android:exported="false" />
+112-->[androidx.room:room-runtime:2.1.0] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\d1dd4bffbd2ae299fbe9492b8fb3f644\room-runtime-2.1.0\AndroidManifest.xml:27:13-37
+113        <service
+113-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:19:9-21:40
+114            android:name="io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService"
+114-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:20:13-132
+115            android:exported="false" />
+115-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:21:13-37
+116        <service
+116-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:22:9-24:40
+117            android:name="io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService"
+117-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:23:13-127
+118            android:exported="false" />
+118-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:24:13-37
+119        <service
+119-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:25:9-27:40
+120            android:name="io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService"
+120-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:26:13-120
+121            android:exported="false" />
+121-->[io.nlopez.smartlocation:library:3.2.11] C:\Users\TEMP.LAPTOP-PHUH01RA.000.001.002\.gradle\caches\transforms-2\files-2.1\6f4811d9cf745202572ef6af837c0bf1\jetified-library-3.2.11\AndroidManifest.xml:27:13-37
+122    </application>
+123
+124</manifest>

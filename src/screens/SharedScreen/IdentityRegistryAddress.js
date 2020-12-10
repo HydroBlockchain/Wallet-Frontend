@@ -7,7 +7,11 @@ import {
   Clipboard,
   ToastAndroid,
   Text,
+  Dimensions,
+  StyleSheet,
+  StatusBar
 } from "react-native";
+const { height, width } = Dimensions.get('window');
 import { LabelInput } from "../../components/Forms";
 import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import { BgView, Header } from "../../components/Layouts";
@@ -40,16 +44,16 @@ const IdentityRegistryAddress = ({ navigation }) => {
       <Header.Back
         title="Identity Registry Address"
         onBackPress={navigation.goBack}
+        containerStyle={styles.header}
       />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: width * 0.05}}>
         <KeyboardAvoidingView>
           <View
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "10%",
-              marginBottom: "10%",
+              marginVertical: width * 0.05
             }}
           >
             <Button text="Get Address" onPress={getIdentityAddress} />
@@ -59,7 +63,7 @@ const IdentityRegistryAddress = ({ navigation }) => {
           </Lead>
           <View
             style={{
-              borderRadius: 16,
+              borderRadius: 5,
               marginBottom: 15,
               backgroundColor: theme.secondary,
               fontFamily: "Rubik-Regular",
@@ -83,5 +87,14 @@ const IdentityRegistryAddress = ({ navigation }) => {
     </BgView>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+      marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+      paddingTop: 0,
+      height: 50
+  },
+
+})
 
 export default IdentityRegistryAddress;

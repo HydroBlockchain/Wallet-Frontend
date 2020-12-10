@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, Dimensions } from "react-native";
 import { ThemeContext } from "../../hooks/useTheme";
-
+const { height, width } = Dimensions.get('window');
 const Button = ({ onPress, text, style, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
@@ -9,9 +9,10 @@ const Button = ({ onPress, text, style, ...props }) => {
     <TouchableOpacity
       style={{
         backgroundColor: theme.primary,
-        width: "75%",
-        padding: 15,
-        borderRadius: 5,
+        width: width - width * 0.10,
+        marginRight: 5,
+        padding: 10,
+        borderRadius: 2,
         ...style,
       }}
       onPress={onPress}
@@ -32,6 +33,38 @@ const Button = ({ onPress, text, style, ...props }) => {
   );
 };
 
+const TwoButton = ({ onPress, text, style, ...props }) => {
+  const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: theme.primary,
+        width: width - width * 0.6,
+        marginRight: 5,
+        padding: 10,
+        borderRadius: 2,
+        ...style,
+      }}
+      onPress={onPress}
+      {...props}
+    >
+      <Text
+        style={{
+          fontSize: 18,
+          lineHeight: 26,
+          fontFamily: "Rubik-Regular",
+          color: theme.white,
+          textAlign: "center",
+        }}
+      >
+        {text}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+
+
 const WhiteButton = ({ onPress, text, style, ...props }) => {
   const { isLightTheme, lightTheme, darkTheme } = useContext(ThemeContext);
   const theme = isLightTheme ? lightTheme : darkTheme;
@@ -39,9 +72,9 @@ const WhiteButton = ({ onPress, text, style, ...props }) => {
     <TouchableOpacity
       style={{
         backgroundColor: theme.background,
-        width: "75%",
-        padding: 15,
-        borderRadius: 5,
+        width: width - width * 0.10,
+        padding: 10,
+        borderRadius: 2,
         ...style,
       }}
       onPress={onPress}

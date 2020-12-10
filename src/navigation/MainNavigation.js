@@ -21,8 +21,9 @@ import ComingSoon from "../screens/SharedScreen/ComingSoon/ComingSoon";
 import AddCustomToken from "../screens/SharedScreen/AddCustomToken/AddCustomToken";
 import Withdraw from "../screens/SharedScreen/Withdraw/Withdraw";
 import Deposits from "../screens/SharedScreen/Deposits/Deposits";
+import scanqr from "../screens/SharedScreen/Scanqr";
 import Transfer from "../screens/SharedScreen/Transfer/Transfer";
- 
+
 const Stack = createStackNavigator();
 
 const MainNavigation = () => {
@@ -44,6 +45,7 @@ const MainNavigation = () => {
       {/* <Stack.Screen name="hydrotokenaddress" component={FN} /> */}
       <Stack.Screen name="identityregistryaddress" component={IdentityRegistryAddress} />
       <Stack.Screen name="deposits" component={Deposits} />
+      <Stack.Screen name="scanqr" component={scanqr} />
       <Stack.Screen name="transfersnowflakebalance" component={TransferSnowflakeBalance} />
       <Stack.Screen name="withdrawsnowflakebalance" component={WithdrawSnowflakeBalance} />
       <Stack.Screen name="transfersnowflakebalancefrom" component={TransferSnowflakeBalanceFrom} />
@@ -54,7 +56,7 @@ const MainNavigation = () => {
       <Stack.Screen name="addCustomToken" component={AddCustomToken} />
       <Stack.Screen name="withdraw" component={Withdraw} />
 
-     
+
     </Stack.Navigator>
   );
 };

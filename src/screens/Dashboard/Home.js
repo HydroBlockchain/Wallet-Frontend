@@ -6,6 +6,9 @@ import {
   Clipboard,
   ToastAndroid,
   TouchableOpacity,
+  Dimensions,
+  StyleSheet,
+  StatusBar
 } from "react-native";
 import { BgView, Header } from "../../components/Layouts";
 import { Paragraph, Lead } from "../../components/Typography";
@@ -16,17 +19,12 @@ import SnowflakeContext from "../../context/SnowFlake/snowflakeContext";
 import Button from "../../components/Button";
 import LottieView from 'lottie-react-native';
 
+const { height, width } = Dimensions.get('window');
+
 const Home = ({ navigation, route }) => {
   const snowflakeContext = useContext(SnowflakeContext);
-
   const { address, hydroId } = route.params;
-
   console.log(address)
-
-  // const CopyIdentityAddressClipboard = async () => {
-  //   await Clipboard.setString(identityAddress);
-  //   ToastAndroid.show("Copied To Clipboard!", ToastAndroid.SHORT);
-  // };
 
   const TxFeed = [
     {
@@ -94,63 +92,60 @@ const Home = ({ navigation, route }) => {
       id: 8,
     },
   ];
+
   const { isLightTheme, lightTheme, darkTheme, toggleTheme } = useContext(
     ThemeContext
   );
+
   const theme = isLightTheme ? lightTheme : darkTheme;
+
   return (
     <BgView>
-      <View
-        style={{
-          marginTop: "7%",
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
+
+      <Header
+        leftComponent={
+          <View style={styles.nav}>
+            <View style={styles.headerLeft}>
+              <Image style={{ resizeMode: "contain", width: width * 0.2 }} source={require("../../assets/images/logo.png")} />
+            </View>
+          </View>
+        }
+
+        rightComponent={
+          <View style={styles.nav}>
+            <TouchableOpacity onPress={toggleTheme} style={{ paddingHorizontal: width * 0.02 }}>
+              <Icon name="moon" color={theme.basic} solid={true} size={20} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => navigation.navigate("notification", { hydroId })} style={{ paddingHorizontal: width * 0.02 }}>
+              <Icon name="bell" color={theme.basic} solid={true} size={20} />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={{ paddingLeft: width * 0.02, paddingRight: '1%' }}
+              onPress={() => navigation.navigate("settings", { address })}
+            >
+              <Icon name="cog" color={theme.basic} size={20} />
+            </TouchableOpacity>
+          </View>
+        }
+
+        containerStyle={{
+          marginTop: Platform.OS == 'ios' ? 0 : StatusBar.currentHeight,
+          borderBottomWidth: 0,
+          height: Platform.OS === 'ios' ? 70 - 20 : 70 - 20,
+          paddingTop: Platform.OS === 'ios' ? - 20 : 0,
+          borderBottomWidth: 1
         }}
-      >
-        <Image
-          style={{ resizeMode: "contain", width: "20%" }}
-          source={require("../../assets/images/logo.png")}
-        />
-        <View
-          style={{
-            marginTop: "2%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            marginBottom: "10%",
-            alignItems: "center",
-          }}
-        >
-          <TouchableOpacity onPress={toggleTheme}>
-            <Icon
-              name="moon"
-              color={theme.basic}
-              solid={true}
-              size={20}
-              style={{ paddingRight: "5%" }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("notification", { hydroId })}>
-            <Icon name="bell" color={theme.basic} solid={true} size={20} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{ marginHorizontal: "5%", paddingLeft: "5%" }}
-            onPress={() => navigation.navigate("settings", { address })}
-          >
-            <Icon name="cog" color={theme.basic} size={20} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      />
+
+
+
+
+
+
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: width * 0.05 }}>
+        <View style={{ justifyContent:'center', alignItems:'center'}}>
           <WalletCard
             balance="0"
             address={address}
@@ -158,11 +153,10 @@ const Home = ({ navigation, route }) => {
             withdraw={() => navigation.navigate("withdraw", { walletToken: address })}
             transfer={() => navigation.navigate("transfer")}
             deposit={() => navigation.navigate("deposits", { walletToken: address })}
-
           />
-        </View>
 
-        {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
+          {/* <Button style={{ marginTop: "10%" }} text="Snowflake" onPress={() => navigation.navigate("snowflake")} /> */}
+        </View>
 
         {/* {identityAddress !== null ? (
           <>
@@ -201,7 +195,7 @@ const Home = ({ navigation, route }) => {
         )} */}
 
 
-        <Lead style={{ marginTop: "10%" }}>Tx Feed</Lead>
+        <Lead style={{paddingVertical: width * 0.05 }}>Tx Feed</Lead>
         {/* <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <LottieView
@@ -236,33 +230,32 @@ const Home = ({ navigation, route }) => {
           ))}
         </View> */}
       </ScrollView>
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate("transfer")}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginLeft: "80%",
-          backgroundColor: theme.primary,
-          width: 70,
-          height: 70,
-          borderRadius: 50,
-          shadowColor: "#3FAC9D",
-          shadowOffset: {
-            width: 0,
-            height: 12,
-          },
-          shadowOpacity: 0.58,
-          shadowRadius: 16.0,
-          marginTop: "-20%",
-          marginBottom: "10%",
-          elevation: 24,
-        }}
-      >
-        <Icon name="plus" color={theme.buttonColor} size={28} />
-      </TouchableOpacity> */}
+
     </BgView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  nav: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  headerLeft: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingHorizontal: width * 0.03
+  },
+
+  headerRight: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingLeft: width * 0.03
+  },
+
+})
 
 export default Home;

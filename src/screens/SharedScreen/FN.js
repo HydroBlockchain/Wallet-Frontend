@@ -18,7 +18,7 @@ class FN extends Component {
             console.log("====================================================>")
             
             const web3 = await new Web3(new Web3.providers.HttpProvider(`http://localhost:8545`));
-            console.log(web3)
+            alert(web3)
             // await new Contract.setProvider(new Contract.providers.HttpProvider('http://localhost:8545'));
             const contract = await new web3.eth.Contract(snowFlakeAbi.abi, contractAddress)
             console.log(contract)

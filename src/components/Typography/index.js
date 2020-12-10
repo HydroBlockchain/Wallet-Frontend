@@ -9,7 +9,7 @@ export const Paragraph = ({ children, style }) => {
     <Text
       style={{
         fontSize: 16,
-        lineHeight: 26,
+        lineHeight: 20,
         fontFamily: "Rubik-Regular",
         color: theme.basic,
         ...style,
@@ -30,7 +30,7 @@ export const Lead = ({ children, style }) => {
         fontFamily: "Rubik-Regular",
         color: theme.basic,
         fontSize: 16,
-        lineHeight: 26,
+        lineHeight: 20,
         ...style,
       }}
     >
